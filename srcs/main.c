@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 15:40:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/10 16:33:37 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,13 @@ int		main(void)
 		}
 		wait(&status);
 		signal_handler(status);
-		cwd = getcwd(cwd, 10000);
+		/*cwd = getcwd(cwd, 10000);
+		ft_putstr("\e[1;37m[");
+		ft_putstr(getenv("USER"));
+		ft_putstr("] \e[0;32m");
 		ft_putstr(cwd);
-		ft_putstr(" $ ");
+		ft_putstr("\e[1;37m $ \e[0;37m");*/
+		print_line();
 		get_next_line(1, &line);
 		if (!parse_command(&g_command, line))
 			continue ;

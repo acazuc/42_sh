@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   changedir.c                                        :+:      :+:    :+:   */
+/*   get_working_directory.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:25:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 16:03:09 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/10 16:28:22 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/10 16:32:52 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		changedir(char *dir)
+char	*get_working_directory()
 {
-	if (!chdir(dir))
-		return (1);
-	perror("cash");
-	return (0);
+	char	*wd;
+
+	wd = getcwd(NULL, 0);
+	return (wd);
 }

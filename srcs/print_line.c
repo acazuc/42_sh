@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   changedir.c                                        :+:      :+:    :+:   */
+/*   print_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:25:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 16:03:09 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/10 16:34:09 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		changedir(char *dir)
+void	print_line(void)
 {
-	if (!chdir(dir))
-		return (1);
-	perror("cash");
-	return (0);
+	char	*line;
+	char	*user;
+	char	*cwd;
+
+	cwd = get_working_directory();
+	user = get_username();
+	line = ft_strjoin_free2("\e[1;37m[", user);
+	line = ft_strjoin_free1(line, "] \e[0;32m");
+	line = ft_strjoin_free3(line, cwd);
+	line = ft_strjoin_free1(line, "\e[1;37m $ \e[0;37m");
+	ft_putstr(line);
 }
