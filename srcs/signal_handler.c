@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prototypes.h                                       :+:      :+:    :+:   */
+/*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 15:25:28 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/02 17:23:35 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/10 15:22:57 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROTOTYPES_H
-# define PROTOTYPES_H
+#include "sh.h"
 
-# include "command.h"
+void	signal_handler(int status)
+{
+	int		signal;
 
-void	error_quit(char *message);
-void	signal_handler(int status);
-int		parse_command(t_command *command, char *command_line);
-int		changedir(char *dir);
-
-#endif
+	if (WIFSIGNALED(status))
+	{
+		signal = WTERMSIG(status);
+		if (signal == SIGSEGV)
+			ft_putendl("Segfault happened");
+		else if (signal == SIGFPE)
+			ft_putendl("Floating point exception");
+		else if (signal == SIGILL)
+			ft_putendl("Illegal operation");
+		else if (signal == SIGBUS)
+			ft_putendl("Bus error");
+	}
+}

@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/02 16:47:10 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/10 15:30:00 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,12 @@ INCLUDES_PATH = includes/
 
 SRCS_PATH = srcs/
 
-SRCS_NAME = main.c get_next_line.c error_quit.c
+SRCS_NAME = main.c \
+			get_next_line.c \
+			error_quit.c \
+			signal_handler.c \
+			parse_command.c \
+			changedir.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

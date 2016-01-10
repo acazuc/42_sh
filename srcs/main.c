@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/02 17:25:18 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/10 15:40:46 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,36 @@ t_command	g_command;
 int		main(void)
 {
 	pid_t		pid;
+	char		*cwd;
+	char		*line;
+	int			status;
 
 	pid = 10;
+	cwd = malloc(sizeof(*cwd) * 10000);
 	while (42)
 	{
 		if (pid == 0)
 		{
-			ft_putstr("Executing \'");
-			ft_putstr(g_command.command);
-			ft_putstr("\'\n");
-			execve(g_command.command, g_command.params, g_command.env);
+			if (execve(g_command.command, g_command.params, g_command.env) == -1)
+			{
+				if (g_command.command)
+				{
+					ft_putstr("cash: ");
+					ft_putstr(g_command.command);
+					ft_putendl(": command not found");
+				}
+			}
 			return (0);
 		}
-		wait(&pid);
-		ft_putstr("%> ");
-		char	*mdr;
-		get_next_line(1, &mdr);
-		g_command.command = mdr;
-		g_command.params = NULL;
+		wait(&status);
+		signal_handler(status);
+		cwd = getcwd(cwd, 10000);
+		ft_putstr(cwd);
+		ft_putstr(" $ ");
+		get_next_line(1, &line);
+		if (!parse_command(&g_command, line))
+			continue ;
+		g_command.command = g_command.params[0];
 		g_command.env = NULL;
 		pid = fork();
 	}
