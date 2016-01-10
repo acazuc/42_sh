@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 17:11:27 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/10 17:30:28 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char	*get_username();
 char	*get_working_directory();
 void	sigint_handler(int signal);
 int		command_run(t_command *command);
+char	*get_home_directory();
 
 #endif
