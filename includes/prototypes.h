@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 16:33:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/10 17:11:27 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int		builtin_exit(char **datas, int len);
 void	print_line(void);
 char	*get_username();
 char	*get_working_directory();
+void	sigint_handler(int signal);
+int		command_run(t_command *command);
 
 #endif

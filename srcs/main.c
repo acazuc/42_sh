@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 16:33:37 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/10 17:18:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@ t_command	g_command;
 int		main(void)
 {
 	pid_t		pid;
-	char		*cwd;
 	char		*line;
 	int			status;
 
 	pid = 10;
-	cwd = malloc(sizeof(*cwd) * 10000);
+	signal(SIGINT, &sigint_handler);
 	while (42)
 	{
 		if (pid == 0)
 		{
-			if (execve(g_command.command, g_command.params, g_command.env) == -1)
+			if (!command_run(&g_command))
 			{
 				if (g_command.command)
 				{
@@ -40,12 +39,6 @@ int		main(void)
 		}
 		wait(&status);
 		signal_handler(status);
-		/*cwd = getcwd(cwd, 10000);
-		ft_putstr("\e[1;37m[");
-		ft_putstr(getenv("USER"));
-		ft_putstr("] \e[0;32m");
-		ft_putstr(cwd);
-		ft_putstr("\e[1;37m $ \e[0;37m");*/
 		print_line();
 		get_next_line(1, &line);
 		if (!parse_command(&g_command, line))
