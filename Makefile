@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/10 17:29:51 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/11 10:19:37 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRCS_NAME = main.c \
 			get_username.c \
 			sigint_handler.c \
 			command_run.c \
-			get_home_directory.c
+			get_home_directory.c \
+			get_path.c \
+			get_env_value.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

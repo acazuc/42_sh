@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_home_directory.c                               :+:      :+:    :+:   */
+/*   get_env_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 17:24:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 10:23:07 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/11 10:15:00 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/11 10:18:15 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-char	*get_home_directory()
-{
-	char	*home;
+t_env	g_env;
 
-	home = get_env_value("HOME");
-	if (!home)
-		return (ft_strdup("HOME"));
-	return (ft_strdup(home));
+char	*get_env_value(char *key)
+{
+	char	*ret;
+	int		i;
+
+	if (!key)
+		return (NULL);
+	key = ft_strjoin(key, "=");
+	i = 0;
+	while (g_env.ev[i])
+	{
+		if (ft_strstr(g_env.ev[i], key) == g_env.ev[i])
+		{
+			ret = ft_strsub(g_env.ev[i]
+			, ft_strlen(key)
+			, ft_strlen(g_env.ev[i]) - ft_strlen(key));
+			free(key);
+			return (ret);
+		}
+		i++;
+	}
+	return (NULL);
 }

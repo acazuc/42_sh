@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:41:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 16:06:52 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/11 10:13:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int		builtins(char **datas, int len)
 {
+	while (datas[len])
+		len++;
 	if (len == 0)
 		return (0);
 	if (!ft_strcmp(datas[0], "exit"))

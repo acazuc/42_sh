@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_home_directory.c                               :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 17:24:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 10:23:07 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/11 10:04:51 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/11 10:21:20 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-char	*get_home_directory()
-{
-	char	*home;
+t_env	g_env;
 
-	home = get_env_value("HOME");
-	if (!home)
-		return (ft_strdup("HOME"));
-	return (ft_strdup(home));
+char	*get_path()
+{
+	char	*path;
+
+	path = get_env_value("PATH");
+	if (!path)
+		return (ft_strdup("PATH"));
+	return (path);
 }

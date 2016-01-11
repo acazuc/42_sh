@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 09:59:40 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/11 10:13:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			command_run(t_command *command)
 	path = get_path();
 	if (path)
 	{
-		paths = ft_strsplit(path, ':');
+	paths = ft_strsplit(path, ':');
 		i = 0;
 		while (paths[i])
 		{
