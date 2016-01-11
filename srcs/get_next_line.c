@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 08:51:03 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/02 17:23:21 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/11 08:37:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	get_eol(char *data)
 	return (-1);
 }
 
-static int	get_next_line_main_part(t_env *e, char *buffer, long eol_i
+static int	get_next_line_main_part(t_gnl *e, char *buffer, long eol_i
 		, int readed)
 {
 	if (eol_i != -1)
@@ -47,7 +47,7 @@ static int	get_next_line_main_part(t_env *e, char *buffer, long eol_i
 	return (1);
 }
 
-static int	get_next_line_main(t_env *e)
+static int	get_next_line_main(t_gnl *e)
 {
 	long			eol_i;
 	int				readed;
@@ -77,7 +77,7 @@ static int	get_next_line_main(t_env *e)
 int			get_next_line(const int fd, char **line)
 {
 	static char		*start;
-	t_env			e;
+	t_gnl			e;
 	long			eol_i;
 
 	if (!line)

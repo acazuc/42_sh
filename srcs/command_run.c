@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 17:18:17 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/11 08:27:22 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ int		command_run(t_command *command)
 	while (paths[i])
 	{
 		tmp_command = ft_strjoin_free1(ft_strjoin(paths[i], "/"), command->command);
-		execve(tmp_command, command->params, NULL);
+		execve(tmp_command, command->params, command->env);
 		free(tmp_command);
 		i++;
 	}
+	execve(command->command, command->params, command->env);
 	return (0);
 }

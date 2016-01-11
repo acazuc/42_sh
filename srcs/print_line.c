@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 17:32:21 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/11 08:24:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ void				print_line(void)
 	line = ft_strjoin_free3(line, cwd);
 	line = ft_strjoin_free1(line, "\e[1;37m $ \e[0;37m");
 	ft_putstr(line);
+	free(line);
 }
