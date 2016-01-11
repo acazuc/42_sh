@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 10:19:26 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/11 12:20:20 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		changedir(char *dir);
 int		builtins(char **datas, int len);
 int		builtin_cd(char **datas, int len);
 int		builtin_exit(char **datas, int len);
+int		builtin_setenv(char **datas, int len);
+int		builtin_getenv(char **datas, int len);
 void	print_line(void);
 char	*get_username();
 char	*get_working_directory();

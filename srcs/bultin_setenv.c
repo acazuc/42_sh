@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   bultin_setenv.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:41:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 12:19:43 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/11 12:20:30 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/11 12:38:05 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		builtins(char **datas, int len)
+t_env	g_env;
+
+int		builtin_setenv(char **datas, int len)
 {
-	while (datas[len])
-		len++;
-	if (len == 0)
-		return (0);
-	if (!ft_strcmp(datas[0], "exit"))
-		return (builtin_exit(datas, len));
-	else if (!ft_strcmp(datas[0], "cd"))
-		return (builtin_cd(datas, len));
-	else if (!ft_strcmp(datas[0], "setenv"))
-		return (builtin_setenv(datas, len));
-	else if (!ft_strcmp(datas[0], "getenv"))
-		return (builtin_getenv(datas, len));
-	return (0);
+	char	*occur;
+	int		i;
+
+	if (len != 3)
+	{
+		ft_putstr("Invalid arguments");
+		return (-1);
+	}
+	occur = NULL;
+	i = 0;
+	while (g_env.ev[i])
+	{
+		if (ft_strstr(g_env.ev[i], datas[1]) == g_env.ev[i] && g_env.ev[i][ft_strlen(datas[1])] == '=')
+		{
+			//change value
+			return (1);
+		}
+	}
+	//create value
 }
