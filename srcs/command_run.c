@@ -6,31 +6,43 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 08:27:22 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/11 09:59:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		command_run(t_command *command)
+t_env			g_env;
+
+static void		print_error()
+{
+	if (g_env.command.command)
+	{
+		ft_putstr(g_env.command.command);
+		ft_putendl(": command not found");
+	}
+}
+
+void			command_run(t_command *command)
 {
 	char	*tmp_command;
 	char	**paths;
 	char	*path;
 	int		i;
 
-	path = getenv("PATH");
-	if (!path)
-		path = "/bin:/usr/bin";
-	paths = ft_strsplit(path, ':');
-	i = 0;
-	while (paths[i])
+	path = get_path();
+	if (path)
 	{
-		tmp_command = ft_strjoin_free1(ft_strjoin(paths[i], "/"), command->command);
-		execve(tmp_command, command->params, command->env);
-		free(tmp_command);
-		i++;
+		paths = ft_strsplit(path, ':');
+		i = 0;
+		while (paths[i])
+		{
+			tmp_command = ft_strjoin_free1(ft_strjoin_free1(paths[i], "/"), command->command);
+			execve(tmp_command, command->params, g_env.ev);
+			free(tmp_command);
+			i++;
+		}
 	}
-	execve(command->command, command->params, command->env);
-	return (0);
+	execve(command->command, command->params, g_env.ev);
+	print_error();
 }

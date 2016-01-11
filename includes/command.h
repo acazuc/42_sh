@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 14:58:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 15:09:30 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/11 09:54:06 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ typedef struct		s_command
 {
 	char			*command;
 	char			**params;
-	char			**env;
 }					t_command;
 
 #endif
