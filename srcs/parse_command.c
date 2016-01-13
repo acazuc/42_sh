@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 14:51:33 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 17:17:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 20:21:39 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ int		parse_command(t_command *command, char *command_line)
 	len = 0;
 	while (datas[len])
 	{
+		if (datas[len][0] == '~')
+		{
+			command->params[len] = ft_strjoin_free3(get_home_directory(), ft_strsub(datas[len], 1, ft_strlen(datas[len]) - 1));
+		}
 		command->params[len] = datas[len];
 		len++;
 	}
