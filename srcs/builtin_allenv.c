@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   changedir.c                                        :+:      :+:    :+:   */
+/*   builtin_allenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:25:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 16:03:09 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/14 11:03:52 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/14 11:11:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		changedir(char *dir)
+t_env	g_env;
+
+int		builtin_allenv(char **datas, int len)
 {
-	if (!chdir(dir))
-		return (1);
-	perror("cash");
-	return (0);
+	int		i;
+
+	i = 0;
+	while (g_env.ev[i])
+	{
+		ft_putendl(g_env.ev[i]);
+		i++;
+	}
+	(void)datas;
+	(void)len;
+	return (1);
 }

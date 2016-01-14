@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/12 08:33:11 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/14 11:10:31 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,13 @@ SRCS_NAME = main.c \
 			error_quit.c \
 			signal_handler.c \
 			parse_command.c \
-			changedir.c \
 			builtins.c \
 			builtin_cd.c \
 			builtin_exit.c \
 			builtin_getenv.c \
 			builtin_setenv.c \
+			builtin_delenv.c \
+			builtin_allenv.c \
 			print_line.c \
 			get_working_directory.c \
 			get_username.c \
@@ -36,7 +37,8 @@ SRCS_NAME = main.c \
 			command_run.c \
 			get_home_directory.c \
 			get_path.c \
-			get_env_value.c
+			get_env_value.c \
+			replace_tilde_home.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 12:20:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/14 11:09:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 void	error_quit(char *message);
 void	signal_handler(int status);
 int		parse_command(t_command *command, char *command_line);
-int		changedir(char *dir);
 int		builtins(char **datas, int len);
 int		builtin_cd(char **datas, int len);
 int		builtin_exit(char **datas, int len);
 int		builtin_setenv(char **datas, int len);
 int		builtin_getenv(char **datas, int len);
+int		builtin_delenv(char **datas, int len);
+int		builtin_allenv(char **datas, int len);
 void	print_line(void);
 char	*get_username();
 char	*get_working_directory();
@@ -32,5 +33,6 @@ void	command_run(t_command *command);
 char	*get_home_directory();
 char	*get_path();
 char	*get_env_value(char *key);
+char	*replace_tilde_home(char *str);
 
 #endif

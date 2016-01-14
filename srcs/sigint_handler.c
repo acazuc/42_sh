@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:39:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 08:32:13 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/14 10:06:53 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void	sigint_handler(int signal)
 	}
 	else
 	{
-		kill(g_env.child_pid, signal);
+		kill(g_env.child_pid, SIGKILL);
 		g_env.child_pid = 0;
 		ft_putchar('\n');
 	}
+	(void)signal;
 }

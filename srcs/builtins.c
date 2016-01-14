@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:41:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 12:19:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/14 11:08:57 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,9 @@ int		builtins(char **datas, int len)
 		return (builtin_setenv(datas, len));
 	else if (!ft_strcmp(datas[0], "getenv"))
 		return (builtin_getenv(datas, len));
+	else if (!ft_strcmp(datas[0], "delenv"))
+		return (builtin_delenv(datas, len));
+	else if (!ft_strcmp(datas[0], "allenv"))
+		return (builtin_allenv(datas, len));
 	return (0);
 }
