@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/14 11:10:31 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/14 13:44:41 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS_NAME = main.c \
 			error_quit.c \
 			signal_handler.c \
 			parse_command.c \
+			parse_command_params.c \
 			builtins.c \
 			builtin_cd.c \
 			builtin_exit.c \

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 14:51:33 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 08:42:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/14 13:49:34 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,11 @@ int		parse_command(t_command *command, char *command_line)
 	char	**datas;
 	int		len;
 
-	datas = ft_strsplit(command_line, ' ');
+	datas = parse_command_params(command_line);
 	free(command_line);
 	len = 0;
 	while (datas[len])
-	{
-		datas[len] = replace_tilde_home(datas[len]);
 		len++;
-	}
 	if (builtins(datas, len))
 		return (0);
 	if (len == 0)

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 11:09:17 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/14 13:44:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 void	error_quit(char *message);
 void	signal_handler(int status);
 int		parse_command(t_command *command, char *command_line);
+char	**parse_command_params(char *cmd);
 int		builtins(char **datas, int len);
 int		builtin_cd(char **datas, int len);
 int		builtin_exit(char **datas, int len);
