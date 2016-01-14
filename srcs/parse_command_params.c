@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 11:16:52 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 14:01:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/14 16:10:57 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,30 @@ static char		*remove_quotes(char *str)
 	return (result);
 }
 
+static char		*remove_backslashs(char *str)
+{
+	size_t	i;
+	char	*sub_1;
+	char	*sub_2;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\\')
+		{
+			if (!(sub_1 = ft_strsub(str, 0, i)))
+				error_quit("Failed to malloc parsing part");
+			if (!(sub_2 = ft_strsub(str, i + 1, ft_strlen(str) - i - 1)))
+				error_quit("Failed to malloc parsing part");
+			free(str);
+			if (!(str = ft_strjoin_free3(sub_1, sub_2)))
+				error_quit("Failed to malloc parsing part");
+		}
+		i++;
+	}
+	return (str);
+}
+
 static void		add_param(char ***tab, char *str)
 {
 	char	**new_tab;
@@ -54,6 +78,7 @@ static void		add_param(char ***tab, char *str)
 	}
 	str = replace_tilde_home(str);
 	str = remove_quotes(str);
+	str = remove_backslashs(str);
 	new_tab[len++] = str;
 	new_tab[len++] = NULL;
 	free(*tab);
@@ -80,13 +105,16 @@ char	**parse_command_params(char *cmd)
 		if (!cmd[i])
 			return (result);
 		start = i;
+		if (cmd[i] == ';' && cmd[i + 1] == ' ')
+			(void)cmd;
+			//Start new parse
 		in_dquote = 0;
 		in_squote = 0;
 		while (cmd[i] && (in_dquote || in_squote || cmd[i] != ' '))
 		{
-			if (cmd[i] == '\'' && !in_dquote)
+			if (cmd[i] == '\'' && (i == 0 || cmd[i - 1] != '\\') && !in_dquote)
 				in_squote = !in_squote;
-			if (cmd[i] == '"' && !in_squote)
+			if (cmd[i] == '"' && (i == 0 || cmd[i - 1] != '\\') && !in_squote)
 				in_dquote = !in_dquote;
 			i++;
 		}

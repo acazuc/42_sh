@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 14:51:33 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 13:49:34 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/14 14:58:34 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		parse_command(t_command *command, char *command_line)
 		command->params[len] = datas[len];
 		len++;
 	}
+	len = 0;
+	free(datas);
 	command->params[len] = NULL;
 	return (1);
 }
