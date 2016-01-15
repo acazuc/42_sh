@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 11:03:52 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 11:11:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/15 12:58:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_env	g_env;
 
-int		builtin_allenv(char **datas, int len)
+int		builtin_env(char **datas, int len)
 {
 	int		i;
 

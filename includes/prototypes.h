@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 13:44:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/15 12:57:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int		builtin_cd(char **datas, int len);
 int		builtin_exit(char **datas, int len);
 int		builtin_setenv(char **datas, int len);
 int		builtin_getenv(char **datas, int len);
-int		builtin_delenv(char **datas, int len);
-int		builtin_allenv(char **datas, int len);
+int		builtin_unsetenv(char **datas, int len);
+int		builtin_env(char **datas, int len);
 void	print_line(void);
 char	*get_username();
 char	*get_working_directory();
