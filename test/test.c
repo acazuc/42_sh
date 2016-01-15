@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 17:02:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 17:21:01 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/15 09:52:39 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-
 
 void	run_pipe()
 {
