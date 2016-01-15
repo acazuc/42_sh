@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 14:51:33 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 17:35:30 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/15 12:21:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int		parse_command(t_command *command, char *command_line)
 
 	datas = parse_command_params(command_line);
 	free(command_line);
+	ft_putendl("NEW COMMAND");
+	len = 0;
+	while (datas[len])
+		ft_putendl(datas[len++]);
+	ft_putendl("END COMMAND");
 	len = 0;
 	while (datas[len])
 		len++;

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 08:03:47 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/15 11:27:24 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/15 11:39:52 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@
 void	run_pipe(char *args[3], int pipe_type, int *pipe_in, int *pipe_out)
 {
 	pid_t	pid;
-	int		status;
 
 	pid = fork();
 	if (pid == -1)
 	{
-		//close(pdes[0]);
-		//close(pdes[1]);
 		perror("test1");
 		exit(-1);
 	}
@@ -43,7 +40,7 @@ void	run_pipe(char *args[3], int pipe_type, int *pipe_in, int *pipe_out)
 		execve(args[0], args, NULL);
 		perror("test2");
 	}
-	wait(&status);
+	wait(NULL);
 	if (pipe_type & PIPE_OUT)
 		close(pipe_out[1]);
 	if (pipe_type & PIPE_IN)
@@ -52,7 +49,7 @@ void	run_pipe(char *args[3], int pipe_type, int *pipe_in, int *pipe_out)
 
 void	set_params(char ***args, char *cmd_val, char *arg_val)
 {
-	if (!(*args = malloc(sizeof(*args) * 3)))
+	if (!(*args = malloc(sizeof(**args) * 3)))
 	{
 		perror("test3");
 		exit(-1);

@@ -1,0 +1,15 @@
+total 48
+-rwxr-xr-x   1 acazuc  2015_paris  8952 Jan 15 11:54 a.out
+drwxr-xr-x  10 acazuc  2015_paris   340 Jan 15 08:24 libft
+-rw-r--r--   1 acazuc  2015_paris     0 Jan 15 11:54 simple_redir
+-rw-r--r--   1 acazuc  2015_paris  1794 Jan 15 09:52 test.c
+-rw-r--r--   1 acazuc  2015_paris  2669 Jan 15 11:39 test2.c
+-rw-r--r--   1 acazuc  2015_paris  1902 Jan 15 11:54 test3.c
+total 64
+-rwxr-xr-x   1 acazuc  2015_paris  8952 Jan 15 12:09 a.out
+drwxr-xr-x  10 acazuc  2015_paris   340 Jan 15 08:24 libft
+-rw-r--r--   1 acazuc  2015_paris   375 Jan 15 11:54 simple_redir
+-rw-r--r--   1 acazuc  2015_paris  1794 Jan 15 09:52 test_elearning.c
+-rw-r--r--   1 acazuc  2015_paris  2669 Jan 15 11:39 test_pipe.c
+-rw-r--r--   1 acazuc  2015_paris  1777 Jan 15 12:09 test_redirect_in.c
+-rw-r--r--   1 acazuc  2015_paris  1902 Jan 15 12:02 test_redirect_out.c
