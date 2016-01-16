@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 12:20:30 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 10:57:59 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/15 13:57:57 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static int		push_new_entry(char *name, char *value)
 
 int				builtin_setenv(char **datas, int len)
 {
-	char	*occur;
 	int		i;
 
 	if (len != 3)
@@ -61,7 +60,6 @@ int				builtin_setenv(char **datas, int len)
 		ft_putendl("setenv: Invalid arguments");
 		return (-1);
 	}
-	occur = NULL;
 	i = 0;
 	while (g_env.ev[i])
 	{

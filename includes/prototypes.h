@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/15 12:57:30 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/16 18:56:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	error_quit(char *message);
 void	signal_handler(int status);
 int		parse_command(t_command *command, char *command_line);
 char	**parse_command_params(char *cmd);
+char	**parse_command_splitter(char *cmd, char *split);
 int		builtins(char **datas, int len);
 int		builtin_cd(char **datas, int len);
 int		builtin_exit(char **datas, int len);
@@ -35,5 +36,6 @@ char	*get_home_directory();
 char	*get_path();
 char	*get_env_value(char *key);
 char	*replace_tilde_home(char *str);
+char	*get_host_name(void);
 
 #endif

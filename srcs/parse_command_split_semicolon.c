@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   parse_command_split_semicolon.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/16 16:57:04 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/16 17:30:32 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/16 17:34:32 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static int	changedir(char *dir)
+char	**parse_command_split_semicolon(char *str)
 {
-	if (!dir)
-		return (0);
-	if (!chdir(dir))
-		return (1);
-	return (-1);
-}
 
-int		builtin_cd(char **datas, int len)
-{
-	if (len == 1)
-	{
-		if (changedir(get_env_value("HOME")))
-			return (1);
-		return (-1);
-	}
-	return (changedir(datas[1]));
 }

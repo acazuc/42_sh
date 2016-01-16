@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/15 12:57:41 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/16 18:53:56 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS_NAME = main.c \
 			signal_handler.c \
 			parse_command.c \
 			parse_command_params.c \
+			parse_command_splitter.c \
 			builtins.c \
 			builtin_cd.c \
 			builtin_exit.c \
@@ -39,7 +40,8 @@ SRCS_NAME = main.c \
 			get_home_directory.c \
 			get_path.c \
 			get_env_value.c \
-			replace_tilde_home.c
+			replace_tilde_home.c \
+			get_host_name.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

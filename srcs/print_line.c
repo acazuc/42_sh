@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 15:06:29 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/16 16:35:49 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,20 @@ static char		*get_home_with_tilde(char *cwd)
 
 void				print_line(void)
 {
+	char	*host;
 	char	*line;
 	char	*user;
 	char	*cwd;
 
+	host = get_host_name();
 	cwd = get_working_directory();
 	user = get_username();
 	cwd = get_home_with_tilde(cwd);
 	if (!(line = ft_strjoin_free2("\e[1;37m[", user)))
+		error_quit("Failed to malloc PS1");
+	if (!(line = ft_strjoin_free1(line, "@")))
+		error_quit("Failed to malloc PS1");
+	if (!(line = ft_strjoin_free3(line, host)))
 		error_quit("Failed to malloc PS1");
 	if (!(line = ft_strjoin_free1(line, "] \e[0;32m")))
 		error_quit("Failed to malloc PS1");

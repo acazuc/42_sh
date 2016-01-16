@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   get_host_name.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/16 16:57:04 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/16 16:18:19 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/16 16:39:54 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static int	changedir(char *dir)
+char	*get_host_name(void)
 {
-	if (!dir)
-		return (0);
-	if (!chdir(dir))
-		return (1);
-	return (-1);
-}
+	char	host_name[256];
+	char	*ret;
+	int		i;
 
-int		builtin_cd(char **datas, int len)
-{
-	if (len == 1)
+	i = 0;
+	while (i < 256)
 	{
-		if (changedir(get_env_value("HOME")))
-			return (1);
-		return (-1);
+		host_name[i] = 0;
+		i++;
 	}
-	return (changedir(datas[1]));
+	gethostname(host_name, 256);
+	i = 0;
+	while (host_name[i])
+		i++;
+	if (!(ret = malloc(sizeof(*ret) * (i + 1))))
+		error_quit("Failed to nalloc host name");
+	i = 0;
+	while (host_name[i])
+	{
+		ret[i] = host_name[i];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
 }

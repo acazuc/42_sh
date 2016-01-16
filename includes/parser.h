@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/16 16:57:04 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/16 18:37:20 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/16 18:53:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-static int	changedir(char *dir)
+typedef struct		s_parser
 {
-	if (!dir)
-		return (0);
-	if (!chdir(dir))
-		return (1);
-	return (-1);
-}
+	char			**result;
+	char			*cmd;
+	int				in_dquote;
+	int				in_squote;
+	int				p_count;
+}					t_parser;
 
-int		builtin_cd(char **datas, int len)
-{
-	if (len == 1)
-	{
-		if (changedir(get_env_value("HOME")))
-			return (1);
-		return (-1);
-	}
-	return (changedir(datas[1]));
-}
+#endif

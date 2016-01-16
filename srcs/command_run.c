@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/14 15:08:38 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/16 17:08:02 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		print_error()
 	}
 }
 
-void			command_run(t_command *command)
+static void		command_run_path(t_command *command)
 {
 	char	*tmp_command;
 	char	**paths;
@@ -33,16 +33,31 @@ void			command_run(t_command *command)
 	path = get_path();
 	if (path)
 	{
-	paths = ft_strsplit(path, ':');
+		paths = ft_strsplit(path, ':');
 		i = 0;
 		while (paths[i])
 		{
 			tmp_command = ft_strjoin_free1(ft_strjoin_free1(paths[i], "/"), command->command);
-			execve(tmp_command, command->params, g_env.ev);
+			if (!access(tmp_command, F_OK))
+				execve(tmp_command, command->params, g_env.ev);
 			free(tmp_command);
 			i++;
 		}
 	}
-	execve(command->command, command->params, g_env.ev);
 	print_error();
+}
+
+static void		command_run_relative(t_command *command)
+{
+	if (!access(command->command, F_OK))
+		execve(command->command, command->params, g_env.ev);
+	print_error();
+}
+
+void			command_run(t_command *command)
+{
+	if (ft_strchr(command->command, '/'))
+		command_run_relative(command);
+	else
+		command_run_path(command);
 }

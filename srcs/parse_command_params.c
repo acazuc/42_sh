@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 11:16:52 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/15 12:46:13 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/16 18:37:07 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,6 @@ char	**parse_command_params(char *cmd)
 		in_squote = 0;
 		while (cmd[i] && (in_dquote || in_squote || cmd[i] != ' '))
 		{
-			if ((cmd[i] == '|' || cmd[i] == ';')
-					&& (i == 0 || cmd[i - 1] != '\\') && !in_dquote && !in_squote)
-			{
-				if (!(arg = ft_strsub(cmd, start, i - start)))
-					error_quit("Failed to malloc new cmd arg");
-				add_param(&result, arg);
-				if (!(arg = ft_strsub(cmd, i, 1)))
-					error_quit("Failed to malloc new cmd arg");
-				add_param(&result, arg);
-				start = i + 1;
-			}
 			if (cmd[i] == '\'' && (i == 0 || cmd[i - 1] != '\\') && !in_dquote)
 				in_squote = !in_squote;
 			if (cmd[i] == '"' && (i == 0 || cmd[i - 1] != '\\') && !in_squote)
