@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/16 17:34:45 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/16 18:56:00 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 10:51:28 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void		check_quotes_parenthesis(t_parser *parser, int i)
 	if (parser->cmd[i] == ')' && (i == 0 || parser->cmd[i - 1] != '\\')
 		&& !(parser->in_squote) && !(parser->in_dquote))
 		parser->p_count--;
-
 }
 
 static void		check_split(t_parser *parser, int i, int *start, char *split)
@@ -66,6 +65,14 @@ static void		check_split(t_parser *parser, int i, int *start, char *split)
 	}
 }
 
+static void		parser_init(t_parser *parser, int *start, int i)
+{
+	*start = i;
+	parser->in_dquote = 0;
+	parser->in_squote = 0;
+	parser->p_count = 0;
+}
+
 char			**parse_command_splitter(char *cmd, char *split)
 {
 	t_parser	parser;
@@ -80,11 +87,9 @@ char			**parse_command_splitter(char *cmd, char *split)
 	i = 0;
 	while ((parser.cmd)[i])
 	{
-		start = i;
-		parser.in_dquote = 0;
-		parser.in_squote = 0;
-		parser.p_count = 0;
-		while (cmd[i] && (parser.p_count || parser.in_dquote || parser.in_squote))
+		parser_init(&parser, &start, i);
+		while (cmd[i] && (parser.p_count || parser.in_dquote
+					|| parser.in_squote))
 		{
 			check_quotes_parenthesis(&parser, i);
 			check_split(&parser, i, &start, split);
