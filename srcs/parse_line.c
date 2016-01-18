@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_command.c                                    :+:      :+:    :+:   */
+/*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 14:51:33 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/16 17:20:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 17:08:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		parse_command(t_command *command, char *command_line)
+int		parse_line(char *command_line)
 {
 	char	**datas;
 	int		len;
 
-	datas = parse_command_params(command_line);
-	free(command_line);
+	datas = parse_command_splitter(command_line, ";");
+	//free(command_line);
 	ft_putendl("NEW COMMAND");
 	len = 0;
 	while (datas[len])
 		ft_putendl(datas[len++]);
 	ft_putendl("END COMMAND");
-	len = 0;
+	/*len = 0;
 	while (datas[len])
 		len++;
 	if (builtins(datas, len))
@@ -40,6 +40,6 @@ int		parse_command(t_command *command, char *command_line)
 		len++;
 	}
 	command->params[len] = NULL;
-	free(datas);
+	free(datas);*/
 	return (1);
 }
