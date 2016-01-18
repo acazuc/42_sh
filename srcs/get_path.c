@@ -6,15 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 10:04:51 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 10:21:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 10:45:51 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-t_env	g_env;
-
-char	*get_path()
+char	*get_path(void)
 {
 	char	*path;
 

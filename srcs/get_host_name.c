@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/16 16:18:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/16 16:39:54 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 10:44:35 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ char	*get_host_name(void)
 
 	i = 0;
 	while (i < 256)
-	{
-		host_name[i] = 0;
-		i++;
-	}
+		host_name[i++] = 0;
 	gethostname(host_name, 256);
 	i = 0;
 	while (host_name[i])

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/16 16:57:04 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 10:44:52 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	changedir(char *dir)
 	return (-1);
 }
 
-int		builtin_cd(char **datas, int len)
+int			builtin_cd(char **datas, int len)
 {
 	if (len == 1)
 	{

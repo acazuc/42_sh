@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/16 17:08:02 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 10:46:54 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_env			g_env;
 
-static void		print_error()
+static void		print_error(void)
 {
 	if (g_env.command.command)
 	{
@@ -37,7 +37,8 @@ static void		command_run_path(t_command *command)
 		i = 0;
 		while (paths[i])
 		{
-			tmp_command = ft_strjoin_free1(ft_strjoin_free1(paths[i], "/"), command->command);
+			tmp_command = ft_strjoin_free1(ft_strjoin_free1(paths[i], "/")
+					, command->command);
 			if (!access(tmp_command, F_OK))
 				execve(tmp_command, command->params, g_env.ev);
 			free(tmp_command);

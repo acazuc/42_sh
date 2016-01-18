@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:45:32 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/10 16:01:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 10:12:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static int		exit_error()
+static int		exit_error(void)
 {
 	ft_putendl("cash: exit: Illegal exit value (int expected)");
 	return (-1);
