@@ -6,13 +6,15 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/18 16:39:55 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/19 08:54:12 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-FLAGS = -Wall -Wextra -Werror -Ofast
+CC = gcc
+
+CFLAGS = -Wall -Wextra -Werror -Ofast
 
 INCLUDES_PATH = includes/
 
@@ -58,8 +60,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@make -C libft/
 	@echo " - Making $(NAME)"
-	@gcc $(FLAGS) -o $(NAME) $^ $(LIBRARY)
-	@echo "\033[1;32m"
+	@$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBRARY)
+	@echo "\033[1;36m"
 	@echo "                                      AKEFILEMA                         (c) Tchang     "
 	@echo "                                  KEFILEMAKEFILEMAK                                    "
 	@echo "                              EFILEMAKEFILEMAKEFILEMAK                                 "
@@ -111,11 +113,11 @@ $(NAME): $(OBJS)
 	@echo "                               EMAKEFILEM                                              "
 	@echo "                                 AKEFILE                                               "
 	@echo "                                   MAK                                                 "
-	@echo "\033[1;0m"
+	@echo "\033[0;0m"
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@echo " - Compiling $<"
-	@gcc $(FLAGS) -o $@ -c $< -I$(INCLUDES_PATH)
+	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INCLUDES_PATH)
 
 .PHONY: clean fclean re
 

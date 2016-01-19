@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 14:51:33 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 17:08:30 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 17:17:37 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		parse_line(char *command_line)
 	int		len;
 
 	datas = parse_command_splitter(command_line, ";");
-	//free(command_line);
+	free(command_line);
 	ft_putendl("NEW COMMAND");
 	len = 0;
 	while (datas[len])
