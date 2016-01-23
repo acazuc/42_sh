@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:09:24 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/23 13:50:11 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	command_run_piped(t_env *env, char **args, int pipe_type)
 
 	pipe_out = env->which_pipe ? env->pipe_1 : env->pipe_2;
 	pipe_in = env->which_pipe ? env->pipe_2 : env->pipe_1;
+	env->which_pipe = !(env->which_pipe);
 	pid = fork();
 	if (pid == -1)
 		error_quit("Failed to fork");
@@ -38,6 +39,12 @@ void	command_run_piped(t_env *env, char **args, int pipe_type)
 	signal_handler(status);
 	if (pipe_type & PIPE_OUT)
 		close(pipe_out[1]);
+	else
+	{
+		close(pipe_out[0]);
+		close(pipe_out[1]);
+		pipe(pipe_out);
+	}
 	if (pipe_type & PIPE_IN)
 	{
 		close(pipe_in[0]);

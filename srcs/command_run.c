@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:46:03 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/23 13:59:34 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,13 @@ static void		command_run_relative(t_env *env, char **args)
 
 void			command_run(t_env *env, char **args)
 {
-	if (ft_strchr(args[0], '/'))
-		command_run_relative(env, args);
+	if (args[0])
+	{
+		if (ft_strchr(args[0], '/'))
+			command_run_relative(env, args);
+		else
+			command_run_path(env, args);
+	}
 	else
-		command_run_path(env, args);
+		ft_putendl("Empty");
 }

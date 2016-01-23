@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:28:23 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/23 13:32:57 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int			main(int ac, char **av, char **ev)
 	char		*line;
 
 	env.ev = dup_ev(ev);
+	pipe(env.pipe_1);
+	pipe(env.pipe_2);
 	//signal(SIGINT, &sigint_handler);
 	while (42)
 	{
