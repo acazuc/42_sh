@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   parse_command_reset.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:20:21 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/23 10:35:10 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/23 10:42:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static int	changedir(char *dir)
+void	parse_command_reset(t_parser *parser)
 {
-	if (!dir)
-		return (0);
-	if (!chdir(dir))
-		return (1);
-	return (-1);
-}
+	int		i;
 
-int			builtin_cd(t_env *env, char **datas, int len)
-{
-	if (len == 1)
-	{
-		if (changedir(get_env_value(env, "HOME")))
-			return (1);
-		return (-1);
-	}
-	return (changedir(datas[1]));
+	i = 0;
+	while (parser->result[i])
+		free(parser->result[i++]);
+	free(parser->result);
+	if (!(parser->result = malloc(sizeof(*parser->result))))
+		error_quit("Failed to malloc parser result tab");
+	parser->result[0] = NULL;
 }

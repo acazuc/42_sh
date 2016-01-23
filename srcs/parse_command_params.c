@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 11:16:52 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 16:36:05 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/23 11:45:06 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void		add_param(char ***tab, char *str)
 		new_tab[len] = (*tab)[len];
 		len++;
 	}
-	str = replace_tilde_home(str);
+	//str = replace_tilde_home(str);
 	str = remove_quotes(str);
 	str = remove_backslashs(str);
 	new_tab[len++] = str;

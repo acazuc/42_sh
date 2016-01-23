@@ -6,40 +6,21 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 14:51:33 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 17:17:37 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/23 10:12:11 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		parse_line(char *command_line)
+void		parse_line(t_env *env, char *cmd)
 {
 	char	**datas;
-	int		len;
+	int		i;
 
-	datas = parse_command_splitter(command_line, ";");
-	free(command_line);
-	ft_putendl("NEW COMMAND");
-	len = 0;
-	while (datas[len])
-		ft_putendl(datas[len++]);
-	ft_putendl("END COMMAND");
-	/*len = 0;
-	while (datas[len])
-		len++;
-	if (builtins(datas, len))
-		return (0);
-	if (len == 0)
-		return (0);
-	if (!(command->params = malloc(sizeof(*command->params) * (len + 1))))
-		return (0);
-	len = 0;
-	while (datas[len])
-	{
-		command->params[len] = datas[len];
-		len++;
-	}
-	command->params[len] = NULL;
-	free(datas);*/
-	return (1);
+	datas = parse_command_semicolon(cmd);
+	i = 0;
+	while (datas[i])
+		command_run_redirs(env, datas[i++]);
+	free(cmd);
+	free(datas);
 }

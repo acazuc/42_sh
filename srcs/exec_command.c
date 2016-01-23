@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:20:21 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/23 09:49:09 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/23 09:57:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static int	changedir(char *dir)
+void	exec_command(t_env *env, t_command *command)
 {
-	if (!dir)
-		return (0);
-	if (!chdir(dir))
-		return (1);
-	return (-1);
-}
+	t_pid	pid;
+	int		status;
 
-int			builtin_cd(t_env *env, char **datas, int len)
-{
-	if (len == 1)
+	pid = fork();
+	if (pid == -1)
 	{
-		if (changedir(get_env_value(env, "HOME")))
-			return (1);
-		return (-1);
+		error_quit("Failed to fork");	
 	}
-	return (changedir(datas[1]));
+	else if (pid == 0)
+	{
+		command_run(command);
+		return ;
+	}
+	else
+	{
+		wait(&status);
+		env->child_pid = 0;
+		signal_handler(status);
+	}
 }

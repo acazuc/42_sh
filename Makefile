@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/19 09:29:11 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/23 11:02:41 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS_NAME = main.c \
 			signal_handler.c \
 			parse_line.c \
 			parse_command_params.c \
-			parse_command_splitter.c \
+			parse_command_semicolon.c \
 			builtins.c \
 			builtin_cd.c \
 			builtin_exit.c \
@@ -43,7 +43,14 @@ SRCS_NAME = main.c \
 			get_path.c \
 			get_env_value.c \
 			replace_tilde_home.c \
-			get_host_name.c
+			get_host_name.c \
+			command_run_redirs.c \
+			parse_command_add_param.c \
+			parse_command_init.c \
+			command_run_piped.c \
+			parse_command_quotes.c \
+			parse_command_reset.c \
+			parse_command_semicolon.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
@@ -55,7 +62,7 @@ OBJS = $(addprefix $(OBJS_PATH), $(OBJS_NAME))
 
 LIBRARY = -L libft/ -lft
 
-all: $(NAME)
+all: odir $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft/
@@ -118,7 +125,8 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@echo " - Compiling $<"
 	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INCLUDES_PATH)
 
-.PHONY: clean fclean re
+odir:
+	@mkdir -p $(OBJS_PATH)
 
 clean:
 	@make -C libft/ clean
@@ -131,3 +139,5 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: clean fclean re odir

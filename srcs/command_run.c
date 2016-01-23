@@ -6,31 +6,26 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 10:46:54 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/23 11:46:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-t_env			g_env;
-
-static void		print_error(void)
+static void		print_error(char **args)
 {
-	if (g_env.command.command)
-	{
-		ft_putstr(g_env.command.command);
-		ft_putendl(": command not found");
-	}
+	ft_putstr(args[0]);
+	ft_putendl(": command not found");
 }
 
-static void		command_run_path(t_command *command)
+static void		command_run_path(t_env *env, char **args)
 {
 	char	*tmp_command;
 	char	**paths;
 	char	*path;
 	int		i;
 
-	path = get_path();
+	path = get_path(env);
 	if (path)
 	{
 		paths = ft_strsplit(path, ':');
@@ -38,27 +33,27 @@ static void		command_run_path(t_command *command)
 		while (paths[i])
 		{
 			tmp_command = ft_strjoin_free1(ft_strjoin_free1(paths[i], "/")
-					, command->command);
+					, args[0]);
 			if (!access(tmp_command, F_OK))
-				execve(tmp_command, command->params, g_env.ev);
+				execve(tmp_command, args, env->ev);
 			free(tmp_command);
 			i++;
 		}
 	}
-	print_error();
+	print_error(args);
 }
 
-static void		command_run_relative(t_command *command)
+static void		command_run_relative(t_env *env, char **args)
 {
-	if (!access(command->command, F_OK))
-		execve(command->command, command->params, g_env.ev);
-	print_error();
+	if (!access(args[0], F_OK))
+		execve(args[0], args, env->ev);
+	print_error(args);
 }
 
-void			command_run(t_command *command)
+void			command_run(t_env *env, char **args)
 {
-	if (ft_strchr(command->command, '/'))
-		command_run_relative(command);
+	if (ft_strchr(args[0], '/'))
+		command_run_relative(env, args);
 	else
-		command_run_path(command);
+		command_run_path(env, args);
 }

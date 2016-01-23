@@ -6,13 +6,11 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 12:20:30 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 10:47:56 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/23 11:24:46 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
-
-t_env	g_env;
 
 static char		*build_new_occur(char *name, char *value)
 {
@@ -25,7 +23,7 @@ static char		*build_new_occur(char *name, char *value)
 	return (result);
 }
 
-static int		push_new_entry(char *name, char *value)
+static int		push_new_entry(t_env *env, char *name, char *value)
 {
 	char	**new_tab;
 	char	*entry;
@@ -34,24 +32,24 @@ static int		push_new_entry(char *name, char *value)
 	if (!(entry = build_new_occur(name, value)))
 		error_quit("Failed to malloc new entry");
 	len = 0;
-	while (g_env.ev[len])
+	while (env->ev[len])
 		len++;
 	if (!(new_tab = malloc(sizeof(*new_tab) * (len + 2))))
 		error_quit("Failed to malloc new env tab");
 	len = 0;
-	while (g_env.ev[len])
+	while (env->ev[len])
 	{
-		new_tab[len] = g_env.ev[len];
+		new_tab[len] = env->ev[len];
 		len++;
 	}
 	new_tab[len] = entry;
 	new_tab[++len] = NULL;
-	free(g_env.ev);
-	g_env.ev = new_tab;
+	free(env->ev);
+	env->ev = new_tab;
 	return (1);
 }
 
-int				builtin_setenv(char **datas, int len)
+int				builtin_setenv(t_env *env, char **datas, int len)
 {
 	int		i;
 
@@ -61,17 +59,17 @@ int				builtin_setenv(char **datas, int len)
 		return (-1);
 	}
 	i = 0;
-	while (g_env.ev[i])
+	while (env->ev[i])
 	{
-		if (ft_strstr(g_env.ev[i], datas[1]) == g_env.ev[i]
-				&& g_env.ev[i][ft_strlen(datas[1])] == '=')
+		if (ft_strstr(env->ev[i], datas[1]) == env->ev[i]
+				&& env->ev[i][ft_strlen(datas[1])] == '=')
 		{
-			free(g_env.ev[i]);
-			if (!(g_env.ev[i] = build_new_occur(datas[1], datas[2])))
+			free(env->ev[i]);
+			if (!(env->ev[i] = build_new_occur(datas[1], datas[2])))
 				error_quit("Failed to malloc new entry");
 			return (1);
 		}
 		i++;
 	}
-	return (push_new_entry(datas[1], datas[2]));
+	return (push_new_entry(env, datas[1], datas[2]));
 }

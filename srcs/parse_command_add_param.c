@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   parse_command_add_param.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:20:21 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/22 13:17:22 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/23 11:01:07 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static int	changedir(char *dir)
+void	parse_command_add_param(char ***tab, char *str)
 {
-	if (!dir)
-		return (0);
-	if (!chdir(dir))
-		return (1);
-	return (-1);
-}
+	char	**new_tab;
+	int		len;
 
-int			builtin_cd(t_env *env, char **datas, int len)
-{
-	if (len == 1)
+	len = 0;
+	while ((*tab)[len])
+		len++;
+	if (!(new_tab = malloc(sizeof(*new_tab) * (len + 2))))
+		error_quit("Failed to malloc new cmd arg");
+	len = 0;
+	while ((*tab)[len])
 	{
-		if (changedir(get_env_value(env, "HOME")))
-			return (1);
-		return (-1);
+		new_tab[len] = (*tab)[len];
+		len++;
 	}
-	return (changedir(datas[1]));
+	new_tab[len++] = str;
+	new_tab[len++] = NULL;
+	free(*tab);
+	*tab = new_tab;
 }

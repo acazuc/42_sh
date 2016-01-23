@@ -6,18 +6,18 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 10:43:53 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/23 11:45:47 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static char		*get_home_with_tilde(char *cwd)
+static char		*get_home_with_tilde(t_env *env, char *cwd)
 {
 	char	*after_home;
 	char	*home;
 
-	home = get_home_directory();
+	home = get_home_directory(env);
 	if (ft_strstr(cwd, home) != cwd)
 	{
 		free(home);
@@ -49,7 +49,7 @@ static char			*get_host_name_before_point(void)
 	return (host);
 }
 
-void				print_line(void)
+void				print_line(t_env *env)
 {
 	char	*host;
 	char	*line;
@@ -58,8 +58,8 @@ void				print_line(void)
 
 	host = get_host_name_before_point();
 	cwd = get_working_directory();
-	user = get_username();
-	cwd = get_home_with_tilde(cwd);
+	user = get_username(env);
+	cwd = get_home_with_tilde(env, cwd);
 	if (!(line = ft_strjoin_free2("\e[1;37m[", user)))
 		error_quit("Failed to malloc PS1");
 	if (!(line = ft_strjoin_free1(line, "@")))

@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   parse_command_quotes.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:20:21 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/23 10:17:28 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/23 11:10:01 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static int	changedir(char *dir)
+void		parse_command_quotes(t_parser *parser, int i)
 {
-	if (!dir)
-		return (0);
-	if (!chdir(dir))
-		return (1);
-	return (-1);
-}
-
-int			builtin_cd(t_env *env, char **datas, int len)
-{
-	if (len == 1)
-	{
-		if (changedir(get_env_value(env, "HOME")))
-			return (1);
-		return (-1);
-	}
-	return (changedir(datas[1]));
+	if (parser->cmd[i] == '\'' && (i == 0 || parser->cmd[i - 1] != '\\')
+			&& !(parser->in_dquote))
+		parser->in_squote = !(parser->in_squote);
+	if (parser->cmd[i] == '\"' && (i == 0 || parser->cmd[i - 1] != '\\')
+			&& !(parser->in_squote))
+		parser->in_dquote = !(parser->in_dquote);
 }
