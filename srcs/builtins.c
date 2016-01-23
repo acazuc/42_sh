@@ -6,14 +6,17 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:41:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:21:22 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/23 14:35:09 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		builtins(t_env *env, char **datas, int len)
+int		builtins(t_env *env, char **datas)
 {
+	int		len;
+
+	len = 0;
 	while (datas[len])
 		len++;
 	if (len == 0)
