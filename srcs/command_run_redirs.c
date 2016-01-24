@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/22 10:40:06 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 14:35:58 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/24 11:59:44 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	command_run_redirs(t_env *env, char *cmd)
 	int			start;
 	int			i;
 
+	ft_putendl(cmd);
 	parse_command_init(&parser, cmd);
 	was_pipe = 0;
 	i = 0;
@@ -37,6 +38,7 @@ void	command_run_redirs(t_env *env, char *cmd)
 				{
 					if (!(arg = ft_strsub(cmd, start, i - start)))
 						error_quit("Failed to malloc new cmd arg");
+					ft_putendl("1");
 					parse_command_add_param(&(parser.result), arg);
 				}
 				command_run_piped(env, parser.result, was_pipe ? PIPE_IN_OUT : PIPE_OUT);
@@ -50,6 +52,7 @@ void	command_run_redirs(t_env *env, char *cmd)
 			parse_command_quotes(&parser, i);
 			i++;
 		}
+		ft_putendl("2");
 		if (!(arg = ft_strsub(cmd, start, i - start)))
 			error_quit("Failed to malloc new cmd arg");
 		parse_command_add_param(&(parser.result), arg);

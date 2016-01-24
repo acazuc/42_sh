@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:45:47 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/24 12:15:56 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static char		*get_home_with_tilde(t_env *env, char *cwd)
+static char			*get_home_with_tilde(t_env *env, char *cwd)
 {
 	char	*after_home;
 	char	*home;
@@ -23,7 +23,8 @@ static char		*get_home_with_tilde(t_env *env, char *cwd)
 		free(home);
 		return (cwd);
 	}
-	if (!(after_home = ft_strsub(cwd, ft_strlen(home), ft_strlen(cwd) - ft_strlen(home))))
+	if (!(after_home = ft_strsub(cwd, ft_strlen(home)
+					, ft_strlen(cwd) - ft_strlen(home))))
 		error_quit("Failed to malloc PS1");
 	free(cwd);
 	if (!(cwd = ft_strjoin_free2("~", after_home)))
@@ -60,17 +61,17 @@ void				print_line(t_env *env)
 	cwd = get_working_directory();
 	user = get_username(env);
 	cwd = get_home_with_tilde(env, cwd);
-	if (!(line = ft_strjoin_free2("\e[1;37m[", user)))
+	if (!(line = ft_strjoin_free2("\033[1;37m[", user)))
 		error_quit("Failed to malloc PS1");
 	if (!(line = ft_strjoin_free1(line, "@")))
 		error_quit("Failed to malloc PS1");
 	if (!(line = ft_strjoin_free3(line, host)))
 		error_quit("Failed to malloc PS1");
-	if (!(line = ft_strjoin_free1(line, "] \e[0;32m")))
+	if (!(line = ft_strjoin_free1(line, "] \033[0;32m")))
 		error_quit("Failed to malloc PS1");
 	if (!(line = ft_strjoin_free3(line, cwd)))
 		error_quit("Failed to malloc PS1");
-	if (!(line = ft_strjoin_free1(line, "\e[1;37m $ \e[0;37m")))
+	if (!(line = ft_strjoin_free1(line, "\033[1;37m $ \033[0;37m")))
 		error_quit("Failed to malloc PS1");
 	ft_putstr(line);
 	free(line);

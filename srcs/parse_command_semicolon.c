@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/16 17:34:45 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 13:11:52 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/24 12:15:22 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void		check_quotes_split(t_parser *parser, int i, int *start)
 {
 	char		*arg;
-	
+
 	parse_command_quotes(parser, i);
 	if (parser->cmd[i] == ';' && (i == 0 || parser->cmd[i - 1] != '\\')
 		&& !(parser->in_squote) && !(parser->in_dquote))
