@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/22 10:40:06 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/24 13:40:41 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/24 13:55:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,37 @@ static void		reset_pipe(char *cmd, int *was_pipe, int *i, int *start)
 	*start = *i;
 }
 
-static void		init(t_parser *parser, char *cmd, int *was_pipe, int *i)
+static void		init(t_parser *parser, char *cmd, int *was_pipe)
 {
 	parse_command_init(parser, cmd);
 	*was_pipe = 0;
-	*i = 0;
 }
 
 void			command_run_redirs(t_env *env, char *cmd)
 {
-	t_parser	parser;
+	t_parser	p;
 	int			was_pipe;
-	int			start;
-	int			i;
 
-	init(&parser, cmd, &was_pipe, &i);
-	while (cmd[i])
+	init(&p, cmd, &was_pipe);
+	while (cmd[p.i])
 	{
-		pass_spaces(cmd, &i);
-		start = i;
-		while (cmd[i] && (parser.in_dquote || parser.in_squote || cmd[i] != ' '))
+		pass_spaces(cmd, &(p.i));
+		p.start = p.i;
+		while (cmd[p.i] && (p.in_dquote || p.in_squote || cmd[p.i] != ' '))
 		{
-			if (cmd[i] == '|' && !(parser.in_squote) && !(parser.in_dquote)
-					&& (i == 0 || cmd[i - 1] != '\\'))
+			if (cmd[p.i] == '|' && !(p.in_squote) && !(p.in_dquote)
+					&& (p.i == 0 || cmd[p.i - 1] != '\\'))
 			{
-				if (i != 0 && cmd[i - 1] != ' ')
-					parse_command_push_param(&(parser.result), cmd, start, i);
-				command_run_piped(env, parser.result, was_pipe ? PIPE_IN_OUT : PIPE_OUT);
-				reset_pipe(cmd, &was_pipe, &i, &start);
-				parse_command_reset(&parser);
+				if (p.i != 0 && cmd[p.i - 1] != ' ')
+					parse_command_push_param(&(p.result), cmd, p.start, p.i);
+				command_run_piped(env, p.result, was_pipe ? PIPE_IO : PIPE_O);
+				reset_pipe(cmd, &was_pipe, &(p.i), &(p.start));
+				parse_command_reset(&p);
 			}
-			parse_command_quotes(&parser, i);
-			i++;
+			parse_command_quotes(&p, p.i++);
 		}
-		if (i > start)
-			parse_command_push_param(&(parser.result), cmd, start, i);
+		if (p.i > p.start)
+			parse_command_push_param(&(p.result), cmd, p.start, p.i);
 	}
-	command_run_piped(env, parser.result, was_pipe ? PIPE_IN : PIPE_NONE);
+	command_run_piped(env, p.result, was_pipe ? PIPE_I : PIPE_NO);
 }

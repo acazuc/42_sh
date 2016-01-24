@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/24 12:13:28 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/24 13:50:26 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		close_pipes(int pipe_type, int *pipe_in, int *pipe_out)
 {
-	if (pipe_type & PIPE_OUT)
+	if (pipe_type & PIPE_O)
 		close(pipe_out[1]);
 	else
 	{
@@ -22,7 +22,7 @@ static void		close_pipes(int pipe_type, int *pipe_in, int *pipe_out)
 		close(pipe_out[1]);
 		pipe(pipe_out);
 	}
-	if (pipe_type & PIPE_IN)
+	if (pipe_type & PIPE_I)
 	{
 		close(pipe_in[0]);
 		pipe(pipe_in);
@@ -31,9 +31,9 @@ static void		close_pipes(int pipe_type, int *pipe_in, int *pipe_out)
 
 static void		dup_pipes(int pipe_type, int *pipe_in, int *pipe_out)
 {
-	if (pipe_type & PIPE_IN)
+	if (pipe_type & PIPE_I)
 		dup2(pipe_in[0], 0);
-	if (pipe_type & PIPE_OUT)
+	if (pipe_type & PIPE_O)
 		dup2(pipe_out[1], 1);
 }
 

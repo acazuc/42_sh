@@ -6,17 +6,17 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:26:34 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:08:22 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/24 13:50:04 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_H
 # define SH_H
 
-# define PIPE_NONE 0
-# define PIPE_IN 1
-# define PIPE_OUT 2
-# define PIPE_IN_OUT 3
+# define PIPE_NO 0
+# define PIPE_I 1
+# define PIPE_O 2
+# define PIPE_IO 3
 
 # include "../libft/includes/libft.h"
 # include "get_next_line.h"
