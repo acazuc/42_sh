@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/23 11:02:41 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/24 13:31:26 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ SRCS_NAME = main.c \
 			command_run_piped.c \
 			parse_command_quotes.c \
 			parse_command_reset.c \
-			parse_command_semicolon.c
+			parse_command_semicolon.c \
+			parse_command_push_param.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

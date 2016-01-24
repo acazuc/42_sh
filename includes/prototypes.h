@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 14:35:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/24 13:31:55 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void	parse_command_quotes(t_parser *parser, int i);
 void	parse_command_init(t_parser *parser, char *cmd);
 void	parse_command_reset(t_parser *parser);
 void	command_run_piped(t_env *env, char **arg, int pipe);
+void	parse_command_push_param(char ***tab, char *cmd, int start, int i);
 
 #endif

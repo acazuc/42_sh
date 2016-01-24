@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_command_add_param.c                          :+:      :+:    :+:   */
+/*   parse_command_push_param.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 13:17:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/24 13:21:25 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/24 13:28:13 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/24 13:32:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	parse_command_add_param(char ***tab, char *str)
+void	parse_command_push_param(char ***tab, char *cmd, int start, int i)
 {
-	char	**new_tab;
-	int		len;
+	char	*arg;
 
-	len = 0;
-	while ((*tab)[len])
-		len++;
-	if (!(new_tab = malloc(sizeof(*new_tab) * (len + 2))))
-		error_quit("Failed to malloc new cmd arg");
-	len = 0;
-	while ((*tab)[len])
-	{
-		new_tab[len] = (*tab)[len];
-		len++;
-	}
-	new_tab[len++] = str;
-	new_tab[len++] = NULL;
-	free(*tab);
-	*tab = new_tab;
+	if (!(arg = ft_strsub(cmd, start, i - start)))
+		error_quit("Faild to malloc new cmd arg");
+	parse_command_add_param(tab, arg);
 }

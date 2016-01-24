@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/24 12:13:01 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/24 13:21:45 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,4 @@ void			command_run(t_env *env, char **args)
 				command_run_path(env, args);
 		}
 	}
-	else
-		ft_putendl("Empty");
 }

@@ -6,28 +6,44 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/22 10:40:06 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/24 11:59:44 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/24 13:40:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	command_run_redirs(t_env *env, char *cmd)
+static void		pass_spaces(char *cmd, int *i)
+{
+	while (cmd[*i] && cmd[*i] == ' ')
+		(*i)++;
+}
+
+static void		reset_pipe(char *cmd, int *was_pipe, int *i, int *start)
+{
+	*was_pipe = 1;
+	(*i)++;
+	pass_spaces(cmd, i);
+	*start = *i;
+}
+
+static void		init(t_parser *parser, char *cmd, int *was_pipe, int *i)
+{
+	parse_command_init(parser, cmd);
+	*was_pipe = 0;
+	*i = 0;
+}
+
+void			command_run_redirs(t_env *env, char *cmd)
 {
 	t_parser	parser;
-	char		*arg;
 	int			was_pipe;
 	int			start;
 	int			i;
 
-	ft_putendl(cmd);
-	parse_command_init(&parser, cmd);
-	was_pipe = 0;
-	i = 0;
+	init(&parser, cmd, &was_pipe, &i);
 	while (cmd[i])
 	{
-		while (cmd[i] && cmd[i] == ' ')
-			i++;
+		pass_spaces(cmd, &i);
 		start = i;
 		while (cmd[i] && (parser.in_dquote || parser.in_squote || cmd[i] != ' '))
 		{
@@ -35,28 +51,16 @@ void	command_run_redirs(t_env *env, char *cmd)
 					&& (i == 0 || cmd[i - 1] != '\\'))
 			{
 				if (i != 0 && cmd[i - 1] != ' ')
-				{
-					if (!(arg = ft_strsub(cmd, start, i - start)))
-						error_quit("Failed to malloc new cmd arg");
-					ft_putendl("1");
-					parse_command_add_param(&(parser.result), arg);
-				}
+					parse_command_push_param(&(parser.result), cmd, start, i);
 				command_run_piped(env, parser.result, was_pipe ? PIPE_IN_OUT : PIPE_OUT);
-				was_pipe = 1;
-				i++;
-				while (cmd[i] && cmd[i] == ' ')
-					i++;
-				start = i;
+				reset_pipe(cmd, &was_pipe, &i, &start);
 				parse_command_reset(&parser);
 			}
 			parse_command_quotes(&parser, i);
 			i++;
 		}
-		ft_putendl("2");
-		if (!(arg = ft_strsub(cmd, start, i - start)))
-			error_quit("Failed to malloc new cmd arg");
-		parse_command_add_param(&(parser.result), arg);
-		i++;
+		if (i > start)
+			parse_command_push_param(&(parser.result), cmd, start, i);
 	}
 	command_run_piped(env, parser.result, was_pipe ? PIPE_IN : PIPE_NONE);
 }
