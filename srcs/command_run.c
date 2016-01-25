@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/24 13:21:45 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/25 08:24:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,18 @@ static void		command_run_relative(t_env *env, char **args)
 
 void			command_run(t_env *env, char **args)
 {
+	int		i;
+
 	if (args[0])
 	{
+		i = 1;
+		while (args[i])
+		{
+			args[i] = replace_tilde_home(env, args[i]);
+			args[i] = param_remove_quotes(args[i]);
+			args[i] = param_remove_backslashs(args[i]);
+			i++;
+		}
 		if (!builtins(env, args))
 		{
 			if (ft_strchr(args[0], '/'))
