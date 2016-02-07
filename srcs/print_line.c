@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/24 12:15:56 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/07 09:42:42 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void				print_line(t_env *env)
 		error_quit("Failed to malloc PS1");
 	if (!(line = ft_strjoin_free3(line, host)))
 		error_quit("Failed to malloc PS1");
-	if (!(line = ft_strjoin_free1(line, "] \033[0;32m")))
+	if (!(line = ft_strjoin_free1(line, "] \033[0;33m")))
 		error_quit("Failed to malloc PS1");
 	if (!(line = ft_strjoin_free3(line, cwd)))
 		error_quit("Failed to malloc PS1");

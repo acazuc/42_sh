@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/25 08:29:50 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/07 13:58:07 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	**parse_command_semicolon(char *cmd);
 void	parse_command_add_param(char ***tab, char *str);
 int		builtins(t_env *env, char **datas);
 int		builtin_cd(t_env *env, char **datas, int len);
-int		builtin_exit(char **datas, int len);
 int		builtin_setenv(t_env *env, char **datas, int len);
 int		builtin_getenv(t_env *env, char **datas, int len);
 int		builtin_unsetenv(t_env *env, char **datas, int len);

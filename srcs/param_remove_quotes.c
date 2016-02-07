@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 08:20:54 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/25 08:23:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/07 11:27:51 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*param_remove_quotes(char *str)
 	{
 		if (!(result = ft_strdup(str)))
 			error_quit("Failed to remove quote of param");
-		}
+	}
 	free(str);
 	return (result);
 }
