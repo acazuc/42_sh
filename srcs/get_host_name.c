@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/16 16:18:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 10:44:35 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/14 10:52:02 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_host_name(void)
 		host_name[i++] = 0;
 	gethostname(host_name, 256);
 	i = 0;
-	while (host_name[i])
+	while (i < 256 && host_name[i])
 		i++;
 	if (!(ret = malloc(sizeof(*ret) * (i + 1))))
 		error_quit("Failed to nalloc host name");

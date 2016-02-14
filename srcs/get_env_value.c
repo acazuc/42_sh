@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 10:15:00 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:19:40 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/14 10:17:08 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char	*get_env_value(t_env *env, char *key)
 		}
 		i++;
 	}
+	free(key);
 	return (NULL);
 }

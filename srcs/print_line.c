@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/07 09:42:42 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/14 10:56:59 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ static char			*get_home_with_tilde(t_env *env, char *cwd)
 					, ft_strlen(cwd) - ft_strlen(home))))
 		error_quit("Failed to malloc PS1");
 	free(cwd);
-	if (!(cwd = ft_strjoin_free2("~", after_home)))
-		error_quit("Failed to malloc PS1");
 	free(home);
+	if (!(cwd = ft_strjoin("~", after_home)))
+		error_quit("Failed to malloc PS1");
+	free(after_home);
 	return (cwd);
 }
 
@@ -43,7 +44,7 @@ static char			*get_host_name_before_point(void)
 	if ((chr = ft_strchr(host, '.')))
 	{
 		if (!(ret = ft_strsub(host, 0, chr - host)))
-			error_quit("Failed to malloc PS1");
+			error_quit("Failed to malloc PS1 hostname");
 		free(host);
 		return (ret);
 	}
@@ -53,7 +54,6 @@ static char			*get_host_name_before_point(void)
 void				print_line(t_env *env)
 {
 	char	*host;
-	char	*line;
 	char	*user;
 	char	*cwd;
 
@@ -61,18 +61,14 @@ void				print_line(t_env *env)
 	cwd = get_working_directory();
 	user = get_username(env);
 	cwd = get_home_with_tilde(env, cwd);
-	if (!(line = ft_strjoin_free2("\033[1;37m[", user)))
-		error_quit("Failed to malloc PS1");
-	if (!(line = ft_strjoin_free1(line, "@")))
-		error_quit("Failed to malloc PS1");
-	if (!(line = ft_strjoin_free3(line, host)))
-		error_quit("Failed to malloc PS1");
-	if (!(line = ft_strjoin_free1(line, "] \033[0;33m")))
-		error_quit("Failed to malloc PS1");
-	if (!(line = ft_strjoin_free3(line, cwd)))
-		error_quit("Failed to malloc PS1");
-	if (!(line = ft_strjoin_free1(line, "\033[1;37m $ \033[0;37m")))
-		error_quit("Failed to malloc PS1");
-	ft_putstr(line);
-	free(line);
+	ft_putstr("\033[1;37m[");
+	ft_putstr(user);
+	ft_putchar('@');
+	ft_putstr(host);
+	ft_putstr("] \033[0;33m");
+	ft_putstr(cwd);
+	ft_putstr("\033[1;37m » \033[0;37m");
+	free(user);
+	free(host);
+	free(cwd);
 }

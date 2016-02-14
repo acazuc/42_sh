@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/07 13:58:07 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/14 10:20:16 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	command_run(t_env *env, char **args);
 char	*get_home_directory(t_env *env);
 char	*get_path(t_env *env);
 char	*get_env_value(t_env *env, char *key);
+void	set_env_value(t_env *env, char *key, char *value);
 char	*replace_tilde_home(t_env *env, char *str);
 char	*get_host_name(void);
 void	command_run_redirs(t_env *env, char *cmd);

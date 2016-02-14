@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/07 13:57:53 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/14 10:39:19 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ static void		dup_pipes(int pipe_type, int *pipe_in, int *pipe_out)
 		dup2(pipe_out[1], 1);
 }
 
+static void		free_args(char **args)
+{
+	int		i;
+
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+}
+
 void			command_run_piped(t_env *env, char **args, int pipe_type)
 {
 	pid_t	pid;
@@ -47,8 +59,11 @@ void			command_run_piped(t_env *env, char **args, int pipe_type)
 	pipe_out = env->which_pipe ? env->pipe_1 : env->pipe_2;
 	pipe_in = env->which_pipe ? env->pipe_2 : env->pipe_1;
 	env->which_pipe = !(env->which_pipe);
-	if (args[0] && !ft_strcmp(args[0], "exit"))
-		exit(0);
+	if (builtins(env, args))
+	{
+		free_args(args);
+		return ;
+	}
 	pid = fork();
 	if (pid == -1)
 		error_quit("Failed to fork");
@@ -58,6 +73,7 @@ void			command_run_piped(t_env *env, char **args, int pipe_type)
 		command_run(env, args);
 		exit(1);
 	}
+	free_args(args);
 	wait(&status);
 	env->child_pid = 0;
 	signal_handler(status);
