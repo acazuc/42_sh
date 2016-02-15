@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/14 09:11:00 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/14 12:38:34 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,7 @@ static void		command_run_path(t_env *env, char **args)
 			tmp_command = ft_strjoin_free1(ft_strjoin_free1(paths[i], "/")
 					, args[0]);
 			if (!access(tmp_command, F_OK))
-			{
-				i = 0;
-				while (paths[i])
-				{
-					free(paths[i]);
-					i++;
-				}
-				free(path);
 				execve(tmp_command, args, env->ev);
-			}
 			free(tmp_command);
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/14 10:57:19 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/14 12:43:28 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	error(char *dir)
 {
 	ft_putstr("cd: no such file or directory: ");
-	ft_putstr(dir);
+	ft_putendl(dir);
 	return (1);
 }
 
@@ -23,9 +23,9 @@ static int	changedir(t_env *env, char *dir)
 {
 	char	*pwd;
 
-	if (!dir)
-		return (error(dir));
-	if (!ft_strcmp(dir, "-"))
+	if (!dir && !(dir = get_env_value(env, "HOME")))
+		error_quit("Failed to get home dir");
+	else if (!ft_strcmp(dir, "-"))
 	{
 		if (!(dir = get_env_value(env, "OLDPWD")))
 			error_quit("Failed to get oldpwd");
@@ -47,7 +47,6 @@ static int	changedir(t_env *env, char *dir)
 
 int			builtin_cd(t_env *env, char **datas, int len)
 {
-	if (len == 1)
-		return (changedir(env, get_env_value(env, "HOME")));
+	(void)len;
 	return (changedir(env, datas[1]));
 }
