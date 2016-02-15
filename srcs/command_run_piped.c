@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/14 11:09:40 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/15 10:21:34 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void		free_args(char **args)
 		free(args[i]);
 		i++;
 	}
+	free(args);
 }
 
 void			command_run_piped(t_env *env, char **args, int pipe_type)
