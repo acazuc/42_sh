@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   alias_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/11 08:34:57 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 17:43:30 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/24 17:55:57 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/24 17:58:55 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "sh.h"
 
-# include "alias_list.h"
-# include "cmd_hist.h"
-
-typedef struct		s_env
+void	alias_free(t_alias_list *alias)
 {
-	t_alias_list	*aliases;
-	t_cmd_hist		*cmd_hist;
-	pid_t			child_pid;
-	char			**ev;
-	int				pipe_1[2];
-	int				pipe_2[2];
-	int				which_pipe;
-	int				hist_pos;
-}					t_env;
-
-#endif
+	free(alias->alias->alias);
+	free(alias->alias->cmd);
+	free(alias->alias);
+	free(alias);
+}

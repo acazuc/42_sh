@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/24 17:27:17 by acazuc           ###   ########.fr        #
+#    Updated: 2016/02/24 17:55:53 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,9 @@ SRCS_NAME = main.c \
 			get_next_cmd.c \
 			cmd_hist_check.c \
 			cmd_hist_add.c \
+			alias_create.c \
+			alias_remove.c \
+			alias_free.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

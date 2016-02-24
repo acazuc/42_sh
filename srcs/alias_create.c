@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   alias_create.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/11 08:34:57 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 17:43:30 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/24 17:48:28 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/24 17:53:22 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "sh.h"
 
-# include "alias_list.h"
-# include "cmd_hist.h"
-
-typedef struct		s_env
+void	alias_create(t_env *env, char *alias, char *cmd)
 {
-	t_alias_list	*aliases;
-	t_cmd_hist		*cmd_hist;
-	pid_t			child_pid;
-	char			**ev;
-	int				pipe_1[2];
-	int				pipe_2[2];
-	int				which_pipe;
-	int				hist_pos;
-}					t_env;
+	t_alias_list	*new;
 
-#endif
+	if (!(new = malloc(sizeof(*new))))
+		error_quit("Failed to create alias");
+	if (!(new->alias = malloc(sizeof(*alias))))
+		error_quit("Failed to create alias");
+	new->alias->alias = alias;
+	new->alias->cmd = cmd;
+	new->next = env->aliases;
+	env->aliases = new;
+}

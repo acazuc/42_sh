@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   alias_remove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/11 08:34:57 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 17:43:30 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/24 17:53:56 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/24 17:57:15 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "sh.h"
 
-# include "alias_list.h"
-# include "cmd_hist.h"
-
-typedef struct		s_env
+void	alias_remove(t_env *env, char *alias)
 {
-	t_alias_list	*aliases;
-	t_cmd_hist		*cmd_hist;
-	pid_t			child_pid;
-	char			**ev;
-	int				pipe_1[2];
-	int				pipe_2[2];
-	int				which_pipe;
-	int				hist_pos;
-}					t_env;
+	t_alias_list	*prv;
+	t_alias_list	*lst;
 
-#endif
+	lst = env->aliases;
+	prv = NULL;
+	while (lst)
+	{
+		if (!ft_strcmp(lst->alias->alias, alias))
+		{
+			if (!prv)
+				env->aliases = lst->next;
+			else
+				prv->next = lst->next;
+			alias_free(lst);
+			return ;
+		}
+		prv = lst;
+		lst = lst->next;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 17:28:35 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/24 17:36:27 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int			main(int ac, char **av, char **ev)
 	env.ev = dup_ev(ev);
 	env.child_pid = 0;
 	env.cmd_hist = NULL;
+	env.aliases = NULL;
 	env.hist_pos = 0;
 	pipe(env.pipe_1);
 	pipe(env.pipe_2);

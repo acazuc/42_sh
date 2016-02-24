@@ -6,13 +6,14 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 17:27:08 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/24 18:02:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROTOTYPES_H
 # define PROTOTYPES_H
 
+# include "alias_list.h"
 # include "parser.h"
 # include "env.h"
 
@@ -24,6 +25,7 @@ char	**parse_command_semicolon(char *cmd);
 void	parse_command_add_param(char ***tab, char *str);
 int		builtins(t_env *env, char **datas);
 int		builtin_cd(t_env *env, char **datas, int len);
+int		builtin_alias(t_env *env, char **datas, int len);
 int		builtin_about(t_env *env, char **datas, int len);
 int		builtin_setenv(t_env *env, char **datas, int len);
 int		builtin_getenv(t_env *env, char **datas, int len);
@@ -54,5 +56,8 @@ char	*param_remove_backslashs(char *str);
 char	*get_next_cmd(void);
 void	cmd_hist_add(t_env *env, char *cmd);
 void	cmd_hist_check(t_env *env);
+void	alias_create(t_env *env, char *alias, char *cmd);
+void	alias_remove(t_env *env, char *alias);
+void	alias_free(t_alias_list *alias);
 
 #endif
