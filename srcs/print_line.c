@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 11:43:23 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/24 13:30:09 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ static char			*get_home_with_tilde(t_env *env, char *cwd)
 		error_quit("Failed to malloc PS1");
 	free(cwd);
 	free(home);
-	if (!(cwd = ft_strjoin("~", after_home)))
+	if (!(cwd = ft_strjoin_free2("~", after_home)))
 		error_quit("Failed to malloc PS1");
-	free(after_home);
 	return (cwd);
 }
 
@@ -71,4 +70,5 @@ void				print_line(t_env *env)
 	free(user);
 	free(host);
 	free(cwd);
+	(void)env;
 }

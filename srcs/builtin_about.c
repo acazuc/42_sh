@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   builtin_about.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/07 09:06:54 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/11 08:37:11 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/24 16:01:27 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/24 16:03:53 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "sh.h"
 
-# define BUFFER_SIZE 1
-
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_gnl
+int		builtin_about(t_env *env, char **datas, int len)
 {
-	char			**line;
-	char			**start;
-	char			**buffer;
-	int				fd;
-}					t_gnl;
-
-#endif
+	(void)env;
+	(void)datas;
+	(void)len;
+	ft_putendl("==========minishell==========");
+	ft_putendl("                             ");
+	ft_putendl("By acazuc                    ");
+	return (1);
+}

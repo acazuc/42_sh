@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh.h                                               :+:      :+:    :+:   */
+/*   cmd_hist_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 13:26:34 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 15:26:02 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/24 15:32:41 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/24 15:40:45 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#include "sh.h"
 
-# define PIPE_NO 0
-# define PIPE_I 1
-# define PIPE_O 2
-# define PIPE_IO 3
+void	cmd_hist_check(t_env *env)
+{
+	t_cmd_hist	*lst;
+	t_cmd_hist	*prv;
+	int			i;
 
-# include "../libft/includes/libft.h"
-# include "cmd_hist.h"
-# include "prototypes.h"
-# include "includes.h"
-# include "parser.h"
-# include "env.h"
-
-#endif
+	lst = env->cmd_hist;
+	i = 0;
+	while (lst)
+	{
+		if (i == 100)
+		{
+			free(lst->cmd);
+			free(lst);
+			prv->next = NULL;
+		}
+		prv = lst;
+		lst = lst->next;
+		i++;
+	}
+}

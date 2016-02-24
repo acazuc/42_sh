@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/22 10:40:06 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 11:20:34 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/24 15:53:06 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,18 @@ void			command_run_redirs(t_env *env, char *cmd)
 		p.start = p.i;
 		while (cmd[p.i] && (p.in_dquote || p.in_squote || cmd[p.i] != ' '))
 		{
-			if (cmd[p.i] == '|' && !(p.in_squote) && !(p.in_dquote)
+			if (cmd[p.i] == '>' && !(p.in_squote) && !(p.in_dquote)
 					&& (p.i == 0 || cmd[p.i - 1] != '\\'))
 			{
+			}
+			else if (cmd[p.i] == '|' && !(p.in_squote) && !(p.in_dquote)
+					&& (p.i == 0 || cmd[p.i - 1] != '\\'))
+			{
+				if (p.i == 0 || cmd[p.i + 1] == '|')
+				{
+					ft_putendl("Parse error near `|'");
+					return ;
+				}
 				if (p.i != 0 && cmd[p.i - 1] != ' ')
 					parse_command_push_param(&p);
 				command_run_piped(env, p.result, was_pipe ? PIPE_IO : PIPE_O);
@@ -59,5 +68,5 @@ void			command_run_redirs(t_env *env, char *cmd)
 			parse_command_push_param(&p);
 	}
 	command_run_piped(env, p.result, was_pipe ? PIPE_I : PIPE_NO);
-	free(cmd);
+	parse_command_free(&p);
 }

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 11:29:06 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/24 17:28:35 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,19 @@ int			main(int ac, char **av, char **ev)
 	g_env = &env;
 	env.ev = dup_ev(ev);
 	env.child_pid = 0;
+	env.cmd_hist = NULL;
+	env.hist_pos = 0;
 	pipe(env.pipe_1);
 	pipe(env.pipe_2);
-	signal(SIGINT, &sigint_handler);
+	//signal(SIGINT, &sigint_handler);
 	while (42)
 	{
 		print_line(&env);
-		get_next_line(1, &line);
+		if (!(line = get_next_cmd()))
+			error_quit("Failed to get_next_line");
+		line = ft_strtrim_free(line);
+		line = parse_command_short(line);
+		cmd_hist_add(&env, line);
 		parse_line(&env, line);
 	}
 	(void)ac;

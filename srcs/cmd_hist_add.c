@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh.h                                               :+:      :+:    :+:   */
+/*   cmd_hist_add.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 13:26:34 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 15:26:02 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/24 15:28:50 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/24 15:41:01 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#include "sh.h"
 
-# define PIPE_NO 0
-# define PIPE_I 1
-# define PIPE_O 2
-# define PIPE_IO 3
+void	cmd_hist_add(t_env *env, char *cmd)
+{
+	t_cmd_hist	*new;
 
-# include "../libft/includes/libft.h"
-# include "cmd_hist.h"
-# include "prototypes.h"
-# include "includes.h"
-# include "parser.h"
-# include "env.h"
-
-#endif
+	if (!(new = malloc(sizeof(*new))))
+		error_quit("Failed to malloc new cmd hist");
+	new->cmd = cmd;
+	new->next = env->cmd_hist;
+	cmd_hist_check(env);
+}

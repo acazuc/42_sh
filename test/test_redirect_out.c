@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/15 11:28:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/15 12:09:41 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/24 15:58:42 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	set_params(char ***args, char *cmd_val, char *arg_val)
 int		main(void)
 {
 	char	**args;
-	
+
 	set_params(&args, "/bin/ls", "-l");
 	run_redir(args, "simple_redir", 0);
 }

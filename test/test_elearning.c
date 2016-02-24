@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 17:02:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/15 09:52:39 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/24 15:58:59 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void	run_pipe()
+void	run_pipe(void)
 {
 	pid_t	child;
 	char	*cmd1;
@@ -28,12 +28,10 @@ void	run_pipe()
 	args1[0] = cmd1;
 	args1[1] = "-lF";
 	args1[2] = NULL;
-
 	cmd2 = "/bin/cat";
 	args2[0] = cmd2;
 	args2[1] = "-e";
 	args2[2] = NULL;
-
 	pipe(pdes);
 	child = fork();
 	if (child == -1)

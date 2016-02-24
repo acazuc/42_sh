@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/14 10:21:40 by acazuc           ###   ########.fr        #
+#    Updated: 2016/02/24 17:27:17 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ INCLUDES_PATH = includes/
 SRCS_PATH = srcs/
 
 SRCS_NAME = main.c \
-			get_next_line.c \
 			error_quit.c \
 			signal_handler.c \
 			parse_line.c \
 			parse_command_semicolon.c \
 			builtins.c \
 			builtin_cd.c \
+			builtin_about.c \
 			builtin_getenv.c \
 			builtin_setenv.c \
 			builtin_unsetenv.c \
@@ -46,13 +46,18 @@ SRCS_NAME = main.c \
 			parse_command_add_param.c \
 			parse_command_init.c \
 			command_run_piped.c \
+			parse_command_short.c \
 			parse_command_quotes.c \
 			parse_command_reset.c \
+			parse_command_free.c \
 			parse_command_semicolon.c \
 			parse_command_push_param.c \
 			param_remove_quotes.c \
 			param_remove_backslashs.c \
 			set_env_value.c \
+			get_next_cmd.c \
+			cmd_hist_check.c \
+			cmd_hist_add.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

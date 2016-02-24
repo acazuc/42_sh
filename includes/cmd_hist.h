@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh.h                                               :+:      :+:    :+:   */
+/*   cmd_hist.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 13:26:34 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 15:26:02 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/24 15:24:20 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/24 15:25:49 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#ifndef CMD_HIST_H
+# define CMD_HIST_H
 
-# define PIPE_NO 0
-# define PIPE_I 1
-# define PIPE_O 2
-# define PIPE_IO 3
+typedef struct s_cmd_hist	t_cmd_hist;
 
-# include "../libft/includes/libft.h"
-# include "cmd_hist.h"
-# include "prototypes.h"
-# include "includes.h"
-# include "parser.h"
-# include "env.h"
+struct			s_cmd_hist
+{
+	char		*cmd;
+	t_cmd_hist	*next;
+};
 
 #endif
