@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/24 17:55:53 by acazuc           ###   ########.fr        #
+#    Updated: 2016/02/24 18:17:45 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS_NAME = main.c \
 			builtins.c \
 			builtin_cd.c \
 			builtin_about.c \
+			builtin_alias.c \
 			builtin_getenv.c \
 			builtin_setenv.c \
 			builtin_unsetenv.c \
