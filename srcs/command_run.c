@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/15 10:24:55 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/24 11:20:23 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ static void		command_run_path(t_env *env, char **args)
 					, args[0]);
 			if (!access(tmp_command, F_OK))
 				execve(tmp_command, args, env->ev);
-			free(tmp_command);
 			i++;
 		}
-		free(paths);
-		free(path);
 	}
 	print_error(args);
 }
@@ -75,6 +72,4 @@ void			command_run(t_env *env, char **args)
 				command_run_path(env, args);
 		}
 	}
-	(void)env;
-	(void)args;
 }
