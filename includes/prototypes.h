@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 15:01:38 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 16:52:15 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@
 
 void	error_quit(char *message);
 void	signal_handler(int status);
-void	parse_line(t_env *env, char *cmd);
-char	**parse_command_params(char *cmd);
-char	**parse_command_semicolon(char *cmd);
-void	parse_command_add_param(char ***tab, char *str);
 int		builtins(t_env *env, char **datas);
 int		builtin_cd(t_env *env, char **datas, int len);
 int		builtin_alias(t_env *env, char **datas, int len);
@@ -42,19 +38,17 @@ char	*get_env_value(t_env *env, char *key);
 void	set_env_value(t_env *env, char *key, char *value);
 char	*replace_tilde_home(t_env *env, char *str);
 char	*get_host_name(void);
-void	command_run_redirs(t_env *env, char *cmd);
 void	exec_command(t_env *env, char **args);
 char	*parse_command_short(char *cmd);
 void	parse_command_quotes(t_parser *parser, int i);
 char	**parse_command_split(char *cmd);
-void	parse_command_init(t_parser *parser, char *cmd);
-void	parse_command_reset(t_parser *parser);
-void	parse_command_free(t_parser *parser);
 void	command_run_piped(t_env *env, char **arg, int pipe);
 void	parse_command_push_param(t_parser *p);
 void	parse_command_unquote(char **cmd);
 void	parse_command_quotes(t_parser *parser, int i);
 void	parse_command_backslashs(char **cmd);
+void	parse_command_vars(t_env *env, char **cmd);
+void	parse_command_tilde(t_env *env, char **cmd);
 char	*get_next_cmd(void);
 void	cmd_hist_add(t_env *env, char *cmd);
 void	cmd_hist_check(t_env *env);
