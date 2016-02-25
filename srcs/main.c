@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 17:36:27 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 09:17:15 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int			main(int ac, char **av, char **ev)
 			error_quit("Failed to get_next_line");
 		line = ft_strtrim_free(line);
 		line = parse_command_short(line);
+		ft_putendl("===========Truncated===============");
+		ft_putendl(line);
 		cmd_hist_add(&env, line);
 		parse_line(&env, line);
 	}
