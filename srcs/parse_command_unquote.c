@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 12:43:05 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 13:46:41 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 15:12:35 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void		get_sub1(char **sub, char *cmd, size_t i)
 static void		get_sub2(char **sub, char *cmd, char *next_occur, size_t i)
 {
 	if (!(*sub = ft_strsub(cmd, i + 1
-			, (size_t)(next_occur - cmd) - i - 1)))
-	error_quit("Failed to sub quotes removing 2");
+					, (size_t)(next_occur - cmd) - i - 1)))
+		error_quit("Failed to sub quotes removing 2");
 }
 
 static char		*remove_quotes(char *cmd)

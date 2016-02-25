@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 13:17:28 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 15:08:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,34 +55,18 @@ int			main(int ac, char **av, char **ev)
 			error_quit("Failed to get_next_line");
 		line = ft_strtrim_free(line);
 		line = parse_command_short(line);
-		ft_putendl("===========Truncated===============");
-		ft_putendl(line);
 		char **parsed = parse_command_split(line);
-		ft_putendl("============Splitted===============");
+		parse_command_backslashs(parsed);
+		parse_command_unquote(parsed);
+		//cmd_hist_add(&env, line);
+		command_split_semicolon(&env, parsed);
 		int i = 0;
 		while (parsed[i])
 		{
-			ft_putendl(parsed[i]);
+			free(parsed[i]);
 			i++;
 		}
-		parse_command_backslashs(parsed);
-		ft_putendl("===========backslashs=============");
-		i = 0;
-		while (parsed[i])
-		{
-			ft_putendl(parsed[i]);
-			i++;
-		}
-		parse_command_unquote(parsed);
-		ft_putendl("============quotes================");
-		i = 0;
-		while (parsed[i])
-		{
-			ft_putendl(parsed[i]);
-			i++;
-		}
-		cmd_hist_add(&env, line);
-		parse_line(&env, line);
+		free(parsed);
 	}
 	(void)ac;
 	(void)av;
