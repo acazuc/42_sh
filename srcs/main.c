@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 09:17:15 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 11:03:35 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ int			main(int ac, char **av, char **ev)
 		line = parse_command_short(line);
 		ft_putendl("===========Truncated===============");
 		ft_putendl(line);
+		char **parsed = parse_command_split(line);
+		ft_putendl("============Splitted===============");
+		int i = 0;
+		while (parsed[i])
+		{
+			ft_putendl(parsed[i]);
+			i++;
+		}
 		cmd_hist_add(&env, line);
 		parse_line(&env, line);
 	}

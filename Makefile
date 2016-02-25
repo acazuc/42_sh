@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/24 18:17:45 by acazuc           ###   ########.fr        #
+#    Updated: 2016/02/25 11:02:22 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS_NAME = main.c \
 			parse_command_init.c \
 			command_run_piped.c \
 			parse_command_short.c \
+			parse_command_split.c \
 			parse_command_quotes.c \
 			parse_command_reset.c \
 			parse_command_free.c \
