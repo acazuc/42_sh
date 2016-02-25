@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 11:20:23 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 11:29:42 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void			command_run(t_env *env, char **args)
 		i = 1;
 		while (args[i])
 		{
-			args[i] = replace_tilde_home(env, args[i]);
-			args[i] = param_remove_quotes(args[i]);
-			args[i] = param_remove_backslashs(args[i]);
+			//args[i] = replace_tilde_home(env, args[i]);
+			//args[i] = param_remove_quotes(args[i]);
+			//args[i] = param_remove_backslashs(args[i]);
 			i++;
 		}
 		if (!builtins(env, args))

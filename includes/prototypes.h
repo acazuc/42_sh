@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 11:02:37 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 11:29:16 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	parse_command_free(t_parser *parser);
 void	command_run_piped(t_env *env, char **arg, int pipe);
 void	parse_command_push_param(t_parser *p);
 char	*param_remove_quotes(char *str);
-char	*param_remove_backslashs(char *str);
+void	parse_command_backslashs(char **cmd);
 char	*get_next_cmd(void);
 void	cmd_hist_add(t_env *env, char *cmd);
 void	cmd_hist_check(t_env *env);
