@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 15:08:38 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 17:01:04 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ int			main(int ac, char **av, char **ev)
 		line = ft_strtrim_free(line);
 		line = parse_command_short(line);
 		char **parsed = parse_command_split(line);
-		parse_command_backslashs(parsed);
-		parse_command_unquote(parsed);
-		//cmd_hist_add(&env, line);
+		free(line);
 		command_split_semicolon(&env, parsed);
 		int i = 0;
 		while (parsed[i])
