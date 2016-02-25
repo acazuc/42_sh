@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 15:08:55 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 17:25:18 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void			command_run_piped(t_env *env, char **args, int pipe_type)
 	pipe_out = env->which_pipe ? env->pipe_1 : env->pipe_2;
 	pipe_in = env->which_pipe ? env->pipe_2 : env->pipe_1;
 	env->which_pipe = !(env->which_pipe);
+	parse_command_tilde(env, args);
+	parse_command_backslashs(args);
+	parse_command_unquote(args);
+	parse_command_vars(env, args);
 	if (builtins(env, args))
 		return ;
 	pid = fork();

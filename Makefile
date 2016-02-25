@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/25 16:52:04 by acazuc           ###   ########.fr        #
+#    Updated: 2016/02/25 17:17:03 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS_NAME = main.c \
 			signal_handler.c \
 			builtins.c \
 			builtin_cd.c \
+			builtin_echo.c \
 			builtin_about.c \
 			builtin_alias.c \
 			builtin_getenv.c \
