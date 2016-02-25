@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 10:47:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 11:09:11 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 12:47:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		add_next_arg(t_parser *p)
 		check_quotes(p);
 		if (!p->in_squote && !p->in_dquote)
 		{
-			if (p->cmd[p->i] == '|')
+			if (p->cmd[p->i] == '|' || p->cmd[p->i] == ';')
 			{
 				if (p->i != p->start)
 					parse_command_push_param(p);
@@ -55,7 +55,7 @@ static void		init(t_parser *p, char *cmd)
 	p->i = 0;
 }
 
-char	**parse_command_split(char *cmd)
+char			**parse_command_split(char *cmd)
 {
 	t_parser	p;
 

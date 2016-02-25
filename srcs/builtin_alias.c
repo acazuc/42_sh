@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 18:03:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 18:17:23 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 13:04:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		action(t_env *env, char *val)
 	(void)val;
 }
 
-int		builtin_alias(t_env *env, char **datas, int len)
+int				builtin_alias(t_env *env, char **datas, int len)
 {
 	int		i;
 

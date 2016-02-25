@@ -6,17 +6,11 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 08:24:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 11:45:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 13:00:53 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
-
-static int	is_unescapable(char c)
-{
-	return (c == 'a' || c == 'b' || c == 'e' || c == 'E' || c == 'f'
-			|| c == 'n' || c == 'r' || c == 't' || c == 'v');
-}
 
 static char	get_unescapable(char c)
 {
@@ -39,45 +33,56 @@ static char	get_unescapable(char c)
 	return (c);
 }
 
-static char	*parse_arg_backslashs(char *arg)
+static void	disassemble_assemble(t_parser_bs *p, char **arg)
 {
 	char	*sub_1;
 	char	*sub_2;
-	int		c;
-	int		in_squote;
-	int		in_dquote;
-	int		i;
 
-	in_squote = 0;
-	in_dquote = 0;
-	i = 0;
-	while (arg[i])
+	if (p->c != -129)
 	{
-		if (arg[i] == '\'' && !in_dquote && (i == 0 || arg[i - 1] != '\\'))
-			in_squote = !in_squote;
-		if (arg[i] == '"' && !in_squote && (i == 0 || arg[i - 1] != '\\'))
-			in_dquote = !in_dquote;
-		if (arg[i] == '\\' && arg[i + 1])
+		if (!(sub_1 = ft_strsub(*arg, 0, p->i)))
+			error_quit("Failed to malloc backslash sub 1");
+		if (!(sub_1 = ft_strjoin_free1(sub_1, (char*)(&p->c))))
+			error_quit("Failed to malloc backslashs sub");
+		if (!(sub_2 = ft_strsub(*arg, p->i + 2, ft_strlen(*arg) - p->i - 2)))
+			error_quit("Failed to malloc backslash sub 2");
+		free(*arg);
+		if (!(*arg = ft_strjoin_free3(sub_1, sub_2)))
+			error_quit("Failed to malloc backslash sub join");
+	}
+}
+
+static void	check_quotes(t_parser_bs *p, char *arg)
+{
+	if (arg[p->i] == '\'' && !(p->in_dquote)
+			&& (p->i == 0 || arg[p->i - 1] != '\\'))
+		p->in_squote = !(p->in_squote);
+	if (arg[p->i] == '"' && !(p->in_squote)
+			&& (p->i == 0 || arg[p->i - 1] != '\\'))
+		p->in_dquote = !(p->in_dquote);
+}
+
+static char	*parse_arg_backslashs(char *arg)
+{
+	t_parser_bs		p;
+
+	p.in_squote = 0;
+	p.in_dquote = 0;
+	p.i = 0;
+	while (arg[p.i])
+	{
+		check_quotes(&p, arg);
+		if (arg[p.i] == '\\' && arg[p.i + 1])
 		{
-			c = -129;
-			if ((in_squote || in_dquote) && is_unescapable(arg[i + 1]))
-				c = get_unescapable(arg[i + 1]);
-			else if (!in_squote && !in_dquote)
-				c = arg[i + 1];
-			if (c != -129)
-			{
-				if (!(sub_1 = ft_strsub(arg, 0, i)))
-					error_quit("Failed to malloc backslash sub 1");
-				if (!(sub_1 = ft_strjoin_free1(sub_1, (char*)(&c))))
-					error_quit("Failed to malloc backslashs sub");
-				if (!(sub_2 = ft_strsub(arg, i + 2, ft_strlen(arg) - i - 2)))
-					error_quit("Failed to malloc backslash sub 2");
-				free(arg);
-				if (!(arg = ft_strjoin_free3(sub_1, sub_2)))
-					error_quit("Failed to malloc backslash sub join");
-			}
+			p.c = -129;
+			if ((p.in_squote || p.in_dquote)
+					&& get_unescapable(arg[p.i]) != arg[p.i + 1])
+				p.c = get_unescapable(arg[p.i + 1]);
+			else if (!(p.in_squote) && !(p.in_dquote))
+				p.c = arg[p.i + 1];
+			disassemble_assemble(&p, &arg);
 		}
-		i++;
+		p.i++;
 	}
 	return (arg);
 }

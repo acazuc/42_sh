@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/25 11:11:43 by acazuc           ###   ########.fr        #
+#    Updated: 2016/02/25 13:15:56 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,8 @@ SRCS_NAME = main.c \
 			parse_command_free.c \
 			parse_command_semicolon.c \
 			parse_command_push_param.c \
-			param_remove_quotes.c \
 			parse_command_backslashs.c \
+			parse_command_unquote.c \
 			set_env_value.c \
 			get_next_cmd.c \
 			cmd_hist_check.c \

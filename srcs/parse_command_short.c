@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 16:04:29 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 09:42:32 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 12:46:48 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ static void		init(t_parser *p, char **result, char *cmd)
 	p->i = 0;
 }
 
-char	*parse_command_short(char *cmd)
+char			*parse_command_short(char *cmd)
 {
 	t_parser	p;
-	char	*result;
+	char		*result;
 
 	init(&p, &result, cmd);
 	while (cmd[p.i])
@@ -67,7 +67,8 @@ char	*parse_command_short(char *cmd)
 		check_cmd_quotes(&p);
 		result = add_value(&p, result);
 	}
-	if (ft_strlen(result) > 0 && !(result = ft_strsub_free(result, 0, ft_strlen(result) - 1)))
+	if (ft_strlen(result) > 0
+			&& !(result = ft_strsub_free(result, 0, ft_strlen(result) - 1)))
 		error_quit("Failed to sub short cmd");
 	free(cmd);
 	return (result);

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 11:31:16 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/25 13:17:28 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,14 @@ int			main(int ac, char **av, char **ev)
 		}
 		parse_command_backslashs(parsed);
 		ft_putendl("===========backslashs=============");
+		i = 0;
+		while (parsed[i])
+		{
+			ft_putendl(parsed[i]);
+			i++;
+		}
+		parse_command_unquote(parsed);
+		ft_putendl("============quotes================");
 		i = 0;
 		while (parsed[i])
 		{
