@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 17:17:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 12:54:24 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "parser.h"
 # include "env.h"
 
-void	error_quit(char *message);
+void	error_quit(char *message, char *file, int line);
 void	signal_handler(int status);
 int		builtins(t_env *env, char **datas);
 int		builtin_cd(t_env *env, char **datas, int len);
@@ -50,6 +50,7 @@ void	parse_command_quotes(t_parser *parser, int i);
 void	parse_command_backslashs(char **cmd);
 void	parse_command_vars(t_env *env, char **cmd);
 void	parse_command_tilde(t_env *env, char **cmd);
+void	parse_command_empty(char ***cmd);
 char	*get_next_cmd(void);
 void	cmd_hist_add(t_env *env, char *cmd);
 void	cmd_hist_check(t_env *env);

@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/25 17:17:03 by acazuc           ###   ########.fr        #
+#    Updated: 2016/03/03 12:51:30 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS_NAME = main.c \
 			parse_command_push_param.c \
 			parse_command_tilde.c \
 			parse_command_vars.c \
+			parse_command_empty.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

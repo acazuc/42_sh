@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 14:40:00 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 15:07:23 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 11:34:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		sub_clear(char ***sub)
 {
 	free(*sub);
 	if (!(*sub = malloc(sizeof(*sub))))
-		error_quit("Failed to malloc sub command");
+		ERROR("Failed to malloc sub command");
 	(*sub)[0] = NULL;
 }
 
@@ -29,7 +29,7 @@ static void		sub_push(char ***sub, char *add)
 	while ((*sub)[i])
 		i++;
 	if (!(new = malloc(sizeof(*new) * (i + 2))))
-		error_quit("Failed to malloc sub command");
+		ERROR("Failed to malloc sub command");
 	i = 0;
 	while ((*sub)[i])
 	{
@@ -49,7 +49,7 @@ void			command_split_semicolon(t_env *env, char **cmd)
 
 	i = 0;
 	if (!(sub = malloc(sizeof(*sub))))
-		error_quit("Failed to malloc split sub");
+		ERROR("Failed to malloc split sub");
 	sub[0] = NULL;
 	while (cmd[i])
 	{

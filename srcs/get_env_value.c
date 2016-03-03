@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 10:15:00 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/14 10:17:08 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 11:30:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_env_value(t_env *env, char *key)
 	if (!key)
 		return (NULL);
 	if (!(key = ft_strjoin(key, "=")))
-		error_quit("Failed to malloc env key");
+		ERROR("Failed to malloc env key");
 	i = 0;
 	while (env->ev[i])
 	{
@@ -28,7 +28,7 @@ char	*get_env_value(t_env *env, char *key)
 		{
 			if (!(ret = ft_strsub(env->ev[i], ft_strlen(key)
 			, ft_strlen(env->ev[i]) - ft_strlen(key))))
-				error_quit("Failed to malloc env value");
+				ERROR("Failed to malloc env value");
 			free(key);
 			return (ret);
 		}

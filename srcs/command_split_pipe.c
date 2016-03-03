@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 14:47:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 15:19:50 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 13:44:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static void		sub_clear(char ***sub)
 {
-	free(*sub);
+	size_t	i;
+
+	i = 0;
 	if (!(*sub = malloc(sizeof(*sub))))
-		error_quit("Failed to malloc sub command");
+		ERROR("Failed to malloc sub command");
 	(*sub)[0] = NULL;
 }
 
@@ -29,7 +31,7 @@ static void		sub_push(char ***sub, char *add)
 	while ((*sub)[i])
 		i++;
 	if (!(new = malloc(sizeof(*new) * (i + 2))))
-		error_quit("Failed to malloc sub command");
+		ERROR("Failed to malloc sub command");
 	i = 0;
 	while ((*sub)[i])
 	{
@@ -51,7 +53,7 @@ void			command_split_pipe(t_env *env, char **cmd)
 	was_pipe = 0;
 	i = 0;
 	if (!(sub = malloc(sizeof(*sub))))
-		error_quit("Failed to malloc split sub");
+		ERROR("Failed to malloc split sub");
 	sub[0] = NULL;
 	while (cmd[i])
 	{
@@ -67,6 +69,4 @@ void			command_split_pipe(t_env *env, char **cmd)
 	}
 	if (sub[0])
 		command_run_piped(env, sub, was_pipe ? PIPE_I : PIPE_NO);
-	sub_clear(&sub);
-	free(sub);
 }

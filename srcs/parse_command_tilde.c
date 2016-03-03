@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 15:34:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 15:42:06 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 11:35:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,19 @@ static char		*parse_arg_tilde(t_env *env, char *arg)
 	else if (arg[1] == '\0')
 	{
 		if (!(result = get_home_directory(env)))
-			error_quit("Failed to malloc home dir");
+			ERROR("Failed to malloc home dir");
 	}
 	else if (arg[1] == '/')
 	{
 		if (!(home_dir = get_home_directory(env)))
-			error_quit("Failed to malloc home dir");
+			ERROR("Failed to malloc home dir");
 		if (!(sub = ft_strsub(arg, 1, ft_strlen(arg) - 1)))
-			error_quit("Failed to malloc home sub");
+			ERROR("Failed to malloc home sub");
 		if (!(result = ft_strjoin_free3(home_dir, sub)))
-			error_quit("Failed to malloc home param");
+			ERROR("Failed to malloc home param");
 	}
 	else
 		result = ft_strdup(arg);
-	free(arg);
 	return (result);
 }
 

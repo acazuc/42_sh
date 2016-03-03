@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 13:28:13 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 15:31:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 11:35:09 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	parse_command_add_param(char ***tab, char *str)
 	while ((*tab)[len])
 		len++;
 	if (!(new_tab = malloc(sizeof(*new_tab) * (len + 2))))
-		error_quit("Failed to malloc new cmd arg");
+		ERROR("Failed to malloc new cmd arg");
 	len = 0;
 	while ((*tab)[len])
 	{
@@ -41,6 +41,6 @@ void		parse_command_push_param(t_parser *p)
 	if (p->start >= p->i)
 		return ;
 	if (!(arg = ft_strsub(p->cmd, p->start, p->i - p->start)))
-		error_quit("Faild to malloc new cmd arg");
+		ERROR("Faild to malloc new cmd arg");
 	parse_command_add_param(&(p->result), arg);
 }

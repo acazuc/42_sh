@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 10:47:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 12:47:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 11:34:51 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void		add_next_arg(t_parser *p)
 static void		init(t_parser *p, char *cmd)
 {
 	if (!(p->result = malloc(sizeof(*p->result))))
-		error_quit("Failed to malloc splitter result");
+		ERROR("Failed to malloc splitter result");
 	p->result[0] = NULL;
 	p->cmd = cmd;
 	p->in_dquote = 0;

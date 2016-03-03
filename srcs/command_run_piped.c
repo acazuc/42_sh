@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 17:25:18 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 13:44:05 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ static void		dup_pipes(int pipe_type, int *pipe_in, int *pipe_out)
 		dup2(pipe_out[1], 1);
 }
 
+static void		free_args(char **args)
+{
+	size_t	i;
+
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
 void			command_run_piped(t_env *env, char **args, int pipe_type)
 {
 	pid_t	pid;
@@ -49,15 +62,19 @@ void			command_run_piped(t_env *env, char **args, int pipe_type)
 	pipe_out = env->which_pipe ? env->pipe_1 : env->pipe_2;
 	pipe_in = env->which_pipe ? env->pipe_2 : env->pipe_1;
 	env->which_pipe = !(env->which_pipe);
+	parse_command_vars(env, args);
 	parse_command_tilde(env, args);
 	parse_command_backslashs(args);
+	parse_command_empty(&args);
 	parse_command_unquote(args);
-	parse_command_vars(env, args);
 	if (builtins(env, args))
+	{
+		free_args(args);
 		return ;
+	}
 	pid = fork();
 	if (pid == -1)
-		error_quit("Failed to fork");
+		ERROR("Failed to fork");
 	else if (pid != 0)
 		g_env->child_pid = pid;
 	else if (pid == 0)
@@ -70,4 +87,5 @@ void			command_run_piped(t_env *env, char **args, int pipe_type)
 	env->child_pid = 0;
 	signal_handler(status);
 	close_pipes(pipe_type, pipe_in, pipe_out);
+	free_args(args);
 }

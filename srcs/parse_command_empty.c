@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_host_name.c                                    :+:      :+:    :+:   */
+/*   parse_command_empty.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/16 16:18:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 11:31:00 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/03 12:45:56 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/03 13:42:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-char	*get_host_name(void)
+void	parse_command_empty(char ***cmd)
 {
-	char	host_name[256];
-	char	*ret;
-	int		i;
+	char	**new;
+	size_t	size;
+	size_t	i;
 
 	i = 0;
-	while (i < 256)
-		host_name[i++] = 0;
-	gethostname(host_name, 256);
-	i = 0;
-	while (i < 256 && host_name[i])
-		i++;
-	if (!(ret = malloc(sizeof(*ret) * (i + 1))))
-		ERROR("Failed to nalloc host name");
-	i = 0;
-	while (host_name[i])
+	size = 0;
+	while ((*cmd)[i])
 	{
-		ret[i] = host_name[i];
+		if (ft_strcmp((*cmd)[i], ""))
+			size++;
 		i++;
 	}
-	ret[i] = '\0';
-	return (ret);
+	if (!(new = malloc(sizeof(*new) * (size + 1))))
+		ERROR("Failed to malloc new tab");
+	i = 0;
+	size = 0;
+	while ((*cmd)[i])
+	{
+		if (ft_strcmp((*cmd)[i], ""))
+			new[size++] = (*cmd)[i];
+		i++;
+	}
+	free(*cmd);
+	new[size] = NULL;
+	*cmd = new;
 }

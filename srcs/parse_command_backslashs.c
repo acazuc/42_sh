@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 08:24:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 13:00:53 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 11:32:23 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ static void	disassemble_assemble(t_parser_bs *p, char **arg)
 	if (p->c != -129)
 	{
 		if (!(sub_1 = ft_strsub(*arg, 0, p->i)))
-			error_quit("Failed to malloc backslash sub 1");
+			ERROR("Failed to malloc backslash sub 1");
 		if (!(sub_1 = ft_strjoin_free1(sub_1, (char*)(&p->c))))
-			error_quit("Failed to malloc backslashs sub");
+			ERROR("Failed to malloc backslashs sub");
 		if (!(sub_2 = ft_strsub(*arg, p->i + 2, ft_strlen(*arg) - p->i - 2)))
-			error_quit("Failed to malloc backslash sub 2");
+			ERROR("Failed to malloc backslash sub 2");
 		free(*arg);
 		if (!(*arg = ft_strjoin_free3(sub_1, sub_2)))
-			error_quit("Failed to malloc backslash sub join");
+			ERROR("Failed to malloc backslash sub join");
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/24 13:30:09 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 11:29:56 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static char			*get_home_with_tilde(t_env *env, char *cwd)
 	}
 	if (!(after_home = ft_strsub(cwd, ft_strlen(home)
 					, ft_strlen(cwd) - ft_strlen(home))))
-		error_quit("Failed to malloc PS1");
+		ERROR("Failed to malloc PS1");
 	free(cwd);
 	free(home);
 	if (!(cwd = ft_strjoin_free2("~", after_home)))
-		error_quit("Failed to malloc PS1");
+		ERROR("Failed to malloc PS1");
 	return (cwd);
 }
 
@@ -43,7 +43,7 @@ static char			*get_host_name_before_point(void)
 	if ((chr = ft_strchr(host, '.')))
 	{
 		if (!(ret = ft_strsub(host, 0, chr - host)))
-			error_quit("Failed to malloc PS1 hostname");
+			ERROR("Failed to malloc PS1 hostname");
 		free(host);
 		return (ret);
 	}

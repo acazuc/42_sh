@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:26:34 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 12:54:48 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 11:27:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@
 # include "includes.h"
 # include "parser.h"
 # include "env.h"
+
+# define ERROR(x) (error_quit(x, __FILE__, __LINE__))
 
 #endif

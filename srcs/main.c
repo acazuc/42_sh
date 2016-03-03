@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 17:01:04 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 12:44:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	**dup_ev(char **ev)
 	while (ev[len])
 		len++;
 	if (!(new = malloc(sizeof(*new) * (len + 1))))
-		error_quit("Failed to malloc new env");
+		ERROR("Failed to malloc new env");
 	len = 0;
 	while (ev[len])
 	{
@@ -52,7 +52,7 @@ int			main(int ac, char **av, char **ev)
 	{
 		print_line(&env);
 		if (!(line = get_next_cmd()))
-			error_quit("Failed to get_next_line");
+			ERROR("Failed to get_next_line");
 		line = ft_strtrim_free(line);
 		line = parse_command_short(line);
 		char **parsed = parse_command_split(line);
