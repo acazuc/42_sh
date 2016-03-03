@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 16:26:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 13:58:38 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 14:18:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static char		*parse_arg_vars(t_env *env, char *arg)
 				ERROR("Failed to get sub3");;
 			i = i + ft_strlen(sub2);
 			free(var);
+			free(arg);
 			if (!(arg = ft_strjoin_free3(sub1, sub2)))
 				ERROR("Failed to join sub1 and sub2");
 			if (!(arg = ft_strjoin_free3(arg, sub3)))

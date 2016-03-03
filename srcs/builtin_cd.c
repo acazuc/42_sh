@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 11:27:21 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 14:37:54 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	error(char *dir)
 {
-	ft_putstr("cd: no such file or directory: ");
+	ft_putstr("cash: cd: no such file or directory: ");
 	ft_putendl(dir);
 	return (1);
 }

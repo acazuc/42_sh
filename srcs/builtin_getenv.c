@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 08:33:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/14 10:55:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 14:38:04 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		builtin_getenv(t_env *env, char **datas, int len)
 
 	if (len == 1)
 	{
-		ft_putendl("getenv: Invalid arguments");
+		ft_putendl("cash: getenv: Invalid arguments");
 		return (1);
 	}
 	else

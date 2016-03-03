@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 14:47:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 13:44:41 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 14:31:10 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static void		sub_clear(char ***sub)
 {
-	size_t	i;
-
-	i = 0;
 	if (!(*sub = malloc(sizeof(*sub))))
 		ERROR("Failed to malloc sub command");
 	(*sub)[0] = NULL;
@@ -69,4 +66,5 @@ void			command_split_pipe(t_env *env, char **cmd)
 	}
 	if (sub[0])
 		command_run_piped(env, sub, was_pipe ? PIPE_I : PIPE_NO);
+	free(cmd);
 }

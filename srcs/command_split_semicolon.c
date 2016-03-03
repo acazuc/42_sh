@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 14:40:00 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 11:34:14 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/03 14:39:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void		sub_clear(char ***sub)
 {
-	free(*sub);
 	if (!(*sub = malloc(sizeof(*sub))))
 		ERROR("Failed to malloc sub command");
 	(*sub)[0] = NULL;
@@ -64,6 +63,5 @@ void			command_split_semicolon(t_env *env, char **cmd)
 	}
 	if (sub[0])
 		command_split_pipe(env, sub);
-	sub_clear(&sub);
-	free(sub);
+	free(cmd);
 }
