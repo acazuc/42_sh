@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 13:58:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 13:58:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 14:08:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void		print_missing_msg(char c)
 		ft_putstr("cursh> ");
 }
 
-char	*get_next_cmd(void)
+char			*get_next_cmd(void)
 {
 	char	*next_line;
 	char	*tmp;

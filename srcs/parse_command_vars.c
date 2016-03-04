@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 16:26:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 14:18:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 14:10:45 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static char		*parse_arg_vars(t_env *env, char *arg)
 	i = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '$' && (i == 0 || arg[i - 1] != '\\') && !is_splitter(arg[i + 1]))
+		if (arg[i] == '$' && (i == 0 || arg[i - 1] != '\\')
+				&& !is_splitter(arg[i + 1]))
 		{
 			end = ++i;
 			while (arg[end] && !is_splitter(arg[end]))
@@ -69,8 +70,9 @@ static char		*parse_arg_vars(t_env *env, char *arg)
 			sub2 = unescape(sub2);
 			if (!(sub1 = ft_strsub(arg, 0, i - 1)))
 				ERROR("Failed to get sub1");
-			if (!(sub3 = ft_strsub(arg, i + ft_strlen(var), ft_strlen(arg) - i - ft_strlen(var))))
-				ERROR("Failed to get sub3");;
+			if (!(sub3 = ft_strsub(arg, i + ft_strlen(var)
+							, ft_strlen(arg) - i - ft_strlen(var))))
+				ERROR("Failed to get sub3");
 			i = i + ft_strlen(sub2);
 			free(var);
 			free(arg);
@@ -84,7 +86,7 @@ static char		*parse_arg_vars(t_env *env, char *arg)
 	return (arg);
 }
 
-void		parse_command_vars(t_env *env, char **cmd)
+void			parse_command_vars(t_env *env, char **cmd)
 {
 	size_t		i;
 

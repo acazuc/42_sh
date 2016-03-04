@@ -6,19 +6,27 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:41:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/25 17:16:55 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 14:08:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		builtins(t_env *env, char **datas)
+static int		get_len(char **datas)
 {
 	int		len;
 
 	len = 0;
 	while (datas[len])
 		len++;
+	return (len);
+}
+
+int				builtins(t_env *env, char **datas)
+{
+	int		len;
+
+	len = get_len(datas);
 	if (len == 0)
 		return (0);
 	if (!ft_strcmp(datas[0], "exit"))
