@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/03/04 15:21:32 by acazuc           ###   ########.fr        #
+#    Updated: 2016/03/04 17:15:20 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ SRCS_NAME = main.c \
 			get_host_name.c \
 			command_run_piped.c \
 			parse_command_short.c \
-			parse_command_quotes.c \
 			parse_command_backslashs.c \
 			parse_command_unquote.c \
 			set_env_value.c \
@@ -61,6 +60,7 @@ SRCS_NAME = main.c \
 			parse_command_tilde.c \
 			parse_command_vars.c \
 			parse_command_empty.c \
+			get_bs_nb_before.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

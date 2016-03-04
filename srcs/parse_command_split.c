@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 10:47:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 11:34:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 17:07:00 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void		check_quotes(t_parser *p)
 {
 	if (p->cmd[p->i] == '\'' && !(p->in_dquote)
-			&& (p->i == 0 || p->cmd[p->i - 1] != '\\'))
+			&& (p->i == 0 || !(get_bs_nb_before(p->cmd, p->i) % 2)))
 		p->in_squote = !(p->in_squote);
 	if (p->cmd[p->i] == '"' && !(p->in_squote)
-			&& (p->i == 0 || p->cmd[p->i - 1] != '\\'))
+			&& (p->i == 0 || !(get_bs_nb_before(p->cmd, p->i) % 2)))
 		p->in_dquote = !(p->in_dquote);
 }
 

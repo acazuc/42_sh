@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 14:36:58 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 15:49:01 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void		print_error(char **args)
 
 static void		command_run_path(t_env *env, char **args)
 {
-	char	*tmp_command;
-	char	**paths;
-	char	*path;
-	int		i;
+	char			*tmp_command;
+	char			**paths;
+	char			*path;
+	int				i;
 
 	path = get_path(env);
 	if (path)
@@ -35,7 +35,7 @@ static void		command_run_path(t_env *env, char **args)
 		{
 			tmp_command = ft_strjoin_free1(ft_strjoin_free1(paths[i], "/")
 					, args[0]);
-			if (!access(tmp_command, F_OK))
+			if (!access(tmp_command, X_OK))
 				execve(tmp_command, args, env->ev);
 			i++;
 		}
@@ -45,7 +45,7 @@ static void		command_run_path(t_env *env, char **args)
 
 static void		command_run_relative(t_env *env, char **args)
 {
-	if (!access(args[0], F_OK))
+	if (!access(args[0], X_OK))
 		execve(args[0], args, env->ev);
 	print_error(args);
 }

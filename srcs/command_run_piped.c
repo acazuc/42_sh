@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 15:10:01 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 15:48:58 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,22 @@ void			command_run_piped(t_env *env, char **args, int pipe_type)
 	int		*pipe_in;
 
 	init(env, &args, &pipe_in, &pipe_out);
-	if (!builtins(env, args))
+	if (args[0] && !ft_strcmp(args[0], "exit"))
+		exit(-1);
+	pid = fork();
+	if (pid == -1)
+		ERROR("Failed to fork");
+	else if (pid != 0)
+		g_env->child_pid = pid;
+	else if (pid == 0)
 	{
-		pid = fork();
-		if (pid == -1)
-			ERROR("Failed to fork");
-		else if (pid != 0)
-			g_env->child_pid = pid;
-		else if (pid == 0)
-		{
-			dup_pipes(pipe_type, pipe_in, pipe_out);
-			command_run(env, args);
-			exit(1);
-		}
-		wait(&status);
-		env->child_pid = 0;
-		signal_handler(status);
-		close_pipes(pipe_type, pipe_in, pipe_out);
+		dup_pipes(pipe_type, pipe_in, pipe_out);
+		command_run(env, args);
+		exit(1);
 	}
+	wait(&status);
+	env->child_pid = 0;
+	signal_handler(status);
+	close_pipes(pipe_type, pipe_in, pipe_out);
 	free_args(args);
 }

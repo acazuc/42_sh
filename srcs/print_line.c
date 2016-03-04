@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 11:29:56 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 16:42:01 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,4 @@ void				print_line(t_env *env)
 	free(user);
 	free(host);
 	free(cwd);
-	(void)env;
 }

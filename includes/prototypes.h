@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 13:24:02 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 17:04:18 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	alias_remove(t_env *env, char *alias);
 void	alias_free(t_alias_list *alias);
 void	command_split_semicolon(t_env *env, char **cmd);
 void	command_split_pipe(t_env *env, char **cmd);
+int		get_bs_nb_before(char *str, size_t i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 16:26:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 15:06:12 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 17:25:59 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static char		*unescape(char *var)
 	i = 0;
 	while (var[i])
 	{
-		if ((var[i] == '\'' || var[i] == '"') && (i == 0 || var[i - 1] != '\\'))
+		if ((var[i] == '\'' || var[i] == '"' || var[i] == '$')
+				&& (i == 0 || !(get_bs_nb_before(var, i) % 2)))
 		{
 			if (!(tmp1 = ft_strsub(var, 0, i)))
 				ERROR("Failed to sub");
@@ -56,7 +57,7 @@ static char		*parse_arg_vars(t_env *env, char *arg)
 	i = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '$' && (i == 0 || arg[i - 1] != '\\')
+		if (arg[i] == '$' && (i == 0 || !(get_bs_nb_before(arg, i) % 2))
 				&& !is_splitter(arg[i + 1]))
 		{
 			end = ++i;

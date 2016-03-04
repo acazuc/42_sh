@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 13:58:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 15:22:08 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 17:22:35 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		check_parser(t_line_parser *p, char *str, size_t i)
 {
-	if (i != 0 && str[i - 1] == '\\')
+	if (i != 0 && (get_bs_nb_before(str, i) % 2))
 		return ;
 	if (str[i] == '"' && !p->squote && !p->bquote)
 		p->dquote = !p->dquote;

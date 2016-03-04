@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 13:58:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 13:23:14 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 17:00:21 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ char			*read_next_line(void)
 		free(line);
 		return (NULL);
 	}
+	else if (rd == 0 && !(line = ft_strjoin_free1(line, "\n")))
+		return (NULL);
 	return (line);
 }
