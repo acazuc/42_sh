@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/03/03 12:51:30 by acazuc           ###   ########.fr        #
+#    Updated: 2016/03/04 13:55:54 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS_NAME = main.c \
 			parse_command_unquote.c \
 			set_env_value.c \
 			get_next_cmd.c \
+			read_next_line.c \
 			cmd_hist_check.c \
 			cmd_hist_add.c \
 			alias_create.c \

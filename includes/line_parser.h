@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh.h                                               :+:      :+:    :+:   */
+/*   line_parser.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 13:26:34 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 13:43:00 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/04 13:39:44 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/04 13:50:11 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#ifndef LINE_PARSER_H
+# define LINE_PARSER_H
 
-# define PIPE_NO 0
-# define PIPE_I 1
-# define PIPE_O 2
-# define PIPE_IO 3
-
-# include "../libft/includes/libft.h"
-# include "cmd_hist.h"
-# include "parser_bs.h"
-# include "line_parser.h"
-# include "prototypes.h"
-# include "includes.h"
-# include "parser.h"
-# include "env.h"
-
-# define ERROR(x) (error_quit(x, __FILE__, __LINE__))
+typedef struct		s_line_parser
+{
+	int				dquote;
+	int				squote;
+	int				bquote;
+	int				subsh;
+	int				bracket;
+	int				cursh;
+}					t_line_parser;
 
 #endif
