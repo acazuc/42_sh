@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 08:24:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 17:38:45 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/04 18:00:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ static void	disassemble_assemble(t_parser_bs *p, char **arg)
 
 static void	check_quotes(t_parser_bs *p, char *arg)
 {
-	if (arg[p->i] == '\'' && !(p->in_dquote)
-			&& (p->i == 0 || !(get_bs_nb_before(arg, p->i) % 2)))
+	if (arg[p->i] == '\'' && !(p->in_dquote))
 		p->in_squote = !(p->in_squote);
-	if (arg[p->i] == '"' && !(p->in_squote)
-			&& (p->i == 0 || !(get_bs_nb_before(arg, p->i) % 2)))
+	if (arg[p->i] == '"' && !(p->in_squote))
 		p->in_dquote = !(p->in_dquote);
 }
 
