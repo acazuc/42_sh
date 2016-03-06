@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 14:47:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 14:31:10 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 13:03:47 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void			command_split_pipe(t_env *env, char **cmd)
 			sub_push(&sub, cmd[i]);
 		i++;
 	}
-	if (sub[0])
-		command_run_piped(env, sub, was_pipe ? PIPE_I : PIPE_NO);
+	command_run_piped(env, sub, was_pipe ? PIPE_I : PIPE_NO);
 	free(cmd);
 }

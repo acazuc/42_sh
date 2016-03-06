@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 13:58:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 17:22:35 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 13:10:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ static void		check_parser(t_line_parser *p, char *str, size_t i)
 {
 	if (i != 0 && (get_bs_nb_before(str, i) % 2))
 		return ;
-	if (str[i] == '"' && !p->squote && !p->bquote)
+	if (str[i] == '"' && !p->squote)
 		p->dquote = !p->dquote;
-	if (str[i] == '\'' && !p->dquote && !p->bquote)
+	if (str[i] == '\'' && !p->dquote)
 		p->squote = !p->squote;
 	if (str[i] == '`' && !p->dquote && !p->squote)
 		p->bquote = !p->bquote;
-	if (str[i] == '[' && !p->dquote && !p->squote && !p->bquote)
+	if (str[i] == '[' && !p->dquote && !p->squote)
 		p->bracket++;
-	if (str[i] == ']' && !p->dquote && !p->squote && !p->bquote)
+	if (str[i] == ']' && !p->dquote && !p->squote)
 		p->bracket--;
-	if (str[i] == '{' && !p->dquote && !p->squote && !p->bquote)
+	if (str[i] == '{' && !p->dquote && !p->squote)
 		p->cursh++;
-	if (str[i] == '}' && !p->dquote && !p->squote && !p->bquote)
+	if (str[i] == '}' && !p->dquote && !p->squote)
 		p->cursh--;
-	if (str[i] == '(' && !p->dquote && !p->squote && !p->bquote)
+	if (str[i] == '(' && !p->dquote && !p->squote)
 		p->subsh++;
-	if (str[i] == ')' && !p->dquote && !p->squote && !p->bquote)
+	if (str[i] == ')' && !p->dquote && !p->squote)
 		p->subsh--;
 }
 
