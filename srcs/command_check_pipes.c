@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_split_pipe.c                               :+:      :+:    :+:   */
+/*   command_check_pipes.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/25 14:47:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 16:48:47 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/06 16:50:02 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/06 16:54:23 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void			command_split_pipe(t_env *env, char **cmd)
+int		command_check_pipes(char **args)
 {
 	size_t	i;
-	char	**sub;
-	int		was_pipe;
 
-	was_pipe = 0;
 	i = 0;
-	if (!(sub = malloc(sizeof(*sub))))
-		ERROR("Failed to malloc split sub");
-	sub[0] = NULL;
-	while (cmd[i])
+	while (args[i])
 	{
-		if (!(ft_strcmp(cmd[i], "|")))
+		if (!ft_strcmp(args[i], "|"))
 		{
-			command_run_piped(env, sub, was_pipe ? PIPE_IO : PIPE_O);
-			was_pipe = 1;
-			command_split_clear(&sub);
+			if (!args[i] || !ft_strcmp(args[i], "|"))
+			{
+				ft_putendl("cash: parse error near `|'");
+				return (0);
+			}
 		}
-		else
-			command_split_push(&sub, cmd[i]);
 		i++;
 	}
-	command_run_piped(env, sub, was_pipe ? PIPE_I : PIPE_NO);
-	free(cmd);
+	return (1);
 }

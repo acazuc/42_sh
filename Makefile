@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/03/06 13:37:45 by acazuc           ###   ########.fr        #
+#    Updated: 2016/03/06 16:54:35 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,6 @@ SRCS_NAME = main.c \
 			get_env_value.c \
 			get_host_name.c \
 			command_run_piped.c \
-			parse_command_short.c \
-			parse_command_backslashs.c \
-			parse_command_unquote.c \
 			set_env_value.c \
 			get_next_cmd.c \
 			get_next_cmd_missing.c \
@@ -54,15 +51,24 @@ SRCS_NAME = main.c \
 			alias_create.c \
 			alias_remove.c \
 			alias_free.c \
+			command_split_push.c \
+			command_split_clear.c \
 			command_split_semicolon.c \
 			command_split_pipe.c \
+			command_split_redirs.c \
 			parse_command_split.c \
+			parse_command_split_push_redir.c \
 			parse_command_push_param.c \
 			parse_command_tilde.c \
 			parse_command_vars.c \
 			parse_command_empty.c \
 			parse_command_unescape.c \
+			parse_command_short.c \
+			parse_command_backslashs.c \
+			parse_command_unquote.c \
 			get_bs_nb_before.c \
+			command_check_pipes.c \
+			command_check_redirs.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

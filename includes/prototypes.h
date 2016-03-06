@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 13:37:37 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 16:56:54 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ void	set_env_value(t_env *env, char *key, char *value);
 char	*replace_tilde_home(t_env *env, char *str);
 char	*get_host_name(void);
 void	exec_command(t_env *env, char **args);
-char	*parse_command_short(char *cmd);
-void	parse_command_quotes(t_parser *parser, int i);
-char	**parse_command_split(char *cmd);
 void	command_run_piped(t_env *env, char **arg, int pipe);
 void	parse_command_push_param(t_parser *p);
 void	parse_command_unquote(char **cmd);
@@ -51,7 +48,11 @@ void	parse_command_backslashs(char **cmd);
 void	parse_command_vars(t_env *env, char **cmd);
 void	parse_command_tilde(t_env *env, char **cmd);
 void	parse_command_empty(char ***cmd);
+char	*parse_command_short(char *cmd);
+void	parse_command_quotes(t_parser *parser, int i);
+char	**parse_command_split(char *cmd);
 char	*parse_command_unescape(char *var);
+void	parse_command_split_push_redir(t_parser *p);
 char	*read_next_line(void);
 char	*get_next_cmd(void);
 char	get_next_cmd_missing(char *str);
@@ -60,8 +61,13 @@ void	cmd_hist_check(t_env *env);
 void	alias_create(t_env *env, char *alias, char *cmd);
 void	alias_remove(t_env *env, char *alias);
 void	alias_free(t_alias_list *alias);
+void	command_split_push(char ***sub, char *add);
+void	command_split_clear(char ***sub);
 void	command_split_semicolon(t_env *env, char **cmd);
 void	command_split_pipe(t_env *env, char **cmd);
+void	command_split_redirs(t_env *env, char **cmd, int pipe_type);
 int		get_bs_nb_before(char *str, size_t i);
+int		command_check_pipes(char **args);
+int		command_check_redirs(char **args);
 
 #endif

@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_split_semicolon.c                          :+:      :+:    :+:   */
+/*   command_split_push.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/25 14:40:00 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 16:09:47 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/06 15:59:58 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/06 16:00:58 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void			command_split_semicolon(t_env *env, char **cmd)
+void		command_split_push(char ***sub, char *add)
 {
 	size_t	i;
-	char	**sub;
+	char	**new;
 
 	i = 0;
-	if (!(sub = malloc(sizeof(*sub))))
-		ERROR("Failed to malloc split sub");
-	sub[0] = NULL;
-	while (cmd[i])
+	while ((*sub)[i])
+		i++;
+	if (!(new = malloc(sizeof(*new) * (i + 2))))
+		ERROR("Failed to malloc sub command");
+	i = 0;
+	while ((*sub)[i])
 	{
-		if (!ft_strcmp(cmd[i], ";"))
-		{
-			command_split_pipe(env, sub);
-			command_split_clear(&sub);
-		}
-		else
-			command_split_push(&sub, cmd[i]);
+		new[i] = (*sub)[i];
 		i++;
 	}
-	if (sub[0])
-		command_split_pipe(env, sub);
-	free(cmd);
+	new[i++] = add;
+	new[i++] = NULL;
+	free(*sub);
+	*sub = new;
 }

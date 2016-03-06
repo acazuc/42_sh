@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_split_semicolon.c                          :+:      :+:    :+:   */
+/*   parse_command_split_push_redir.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/25 14:40:00 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 16:09:47 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/06 15:03:32 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/06 16:30:00 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void			command_split_semicolon(t_env *env, char **cmd)
+void			parse_command_split_push_redir(t_parser *p)
 {
-	size_t	i;
-	char	**sub;
-
-	i = 0;
-	if (!(sub = malloc(sizeof(*sub))))
-		ERROR("Failed to malloc split sub");
-	sub[0] = NULL;
-	while (cmd[i])
+	if (p->i != p->start + 1 || !ft_isdigit(p->cmd[p->i - 1]))
 	{
-		if (!ft_strcmp(cmd[i], ";"))
-		{
-			command_split_pipe(env, sub);
-			command_split_clear(&sub);
-		}
-		else
-			command_split_push(&sub, cmd[i]);
-		i++;
+		if (p->i != p->start)
+			parse_command_push_param(p);
+		p->start = p->i;
 	}
-	if (sub[0])
-		command_split_pipe(env, sub);
-	free(cmd);
+	if (p->cmd[p->i + 1] == p->cmd[p->i])
+		p->i++;
+	if (p->cmd[p->i + 1] == '&')
+	{
+		if (p->cmd[p->i + 2] == '-' || ft_isdigit(p->cmd[p->i + 2]))
+			p->i += 2;
+		else
+			p->i++;
+	}
+	p->i++;
+	parse_command_push_param(p);
+	p->start = p->i;
 }

@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirs.h                                           :+:      :+:    :+:   */
+/*   command_split_clear.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 14:37:44 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/24 12:12:18 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/06 16:05:21 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/06 16:05:39 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRS_H
-# define REDIRS_H
+#include "sh.h"
 
-#endif
+void		command_split_clear(char ***sub)
+{
+	if (!(*sub = malloc(sizeof(*sub))))
+		ERROR("Failed to malloc sub command");
+	(*sub)[0] = NULL;
+}

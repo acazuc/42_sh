@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 14:24:41 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 16:55:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void	loop(t_env *env)
 		line = parse_command_short(line);
 		parsed = parse_command_split(line);
 		free(line);
-		command_split_semicolon(env, parsed);
+		if (command_check_pipes(parsed) && command_check_redirs(parsed))
+			command_split_semicolon(env, parsed);
 	}
 }
 

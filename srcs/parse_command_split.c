@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 10:47:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 13:09:06 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 15:48:01 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ static void		check_quotes(t_parser *p)
 		p->in_dquote = !(p->in_dquote);
 }
 
+static void		push_simple(t_parser *p)
+{
+	if (p->i != p->start)
+		parse_command_push_param(p);
+	p->start = p->i++;
+	parse_command_push_param(p);
+	p->start = p->i;
+}
+
 static void		add_next_arg(t_parser *p)
 {
 	while (p->cmd[p->i] && (p->in_squote || p->in_dquote
@@ -30,15 +39,18 @@ static void		add_next_arg(t_parser *p)
 		check_quotes(p);
 		if (!p->in_squote && !p->in_dquote)
 			if (!(get_bs_nb_before(p->cmd, p->i) % 2))
-				if (p->cmd[p->i] == '|' || p->cmd[p->i] == ';')
+			{
+				if (p->cmd[p->i] == '>' || p->cmd[p->i] == '<')
 				{
-					if (p->i != p->start)
-						parse_command_push_param(p);
-					p->start = p->i++;
-					parse_command_push_param(p);
-					p->start = p->i;
+					parse_command_split_push_redir(p);
 					return ;
 				}
+				else if (p->cmd[p->i] == '|' || p->cmd[p->i] == ';')
+				{
+					push_simple(p);
+					return ;
+				}
+			}
 		p->i++;
 	}
 }

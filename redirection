@@ -1,0 +1,25 @@
+================
+     OUTPUT
+================
+
+[fd]>[file]			Redirect fd1 output to file
+--------
+[fd1]>&[fd2]		Redirect fd1 output to fd2 output
+--------
+[fd]>&-				Close fd output
+
+
+===============
+     INPUT
+===============
+
+<[fd]				Redirection fd to 0
+--------
+[fd1]<&[fd2]		Redirect fd2 into fd1
+--------
+[fd1]<&-			Close fd1
+
+
+
+
+No order has to be specified
