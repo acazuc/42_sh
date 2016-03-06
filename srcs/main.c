@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 11:17:42 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 13:41:31 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			main(int ac, char **av, char **ev)
 	env.hist_pos = 0;
 	pipe(env.pipe_1);
 	pipe(env.pipe_2);
-	signal(SIGINT, &sigint_handler);
+	//signal(SIGINT, &sigint_handler);
 	while (42)
 		loop(&env);
 	(void)ac;
