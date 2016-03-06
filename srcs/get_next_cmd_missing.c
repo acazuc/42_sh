@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:16:10 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 14:32:14 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 14:49:05 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void		simplify(t_line_parser *p)
 		{
 			if (!(tmp = ft_memalloc(sizeof(*tmp) * (ft_strlen(s) - 2 + 1))))
 				ERROR("Failed to malloc tmp");
-			t_strcat(ft_strncat(tmp, s, i), s + i + 2);
+			ft_strcat(ft_strncat(tmp, s, i), s + i + 2);
 			free(s);
 			s = tmp;
 			i -= 2;
