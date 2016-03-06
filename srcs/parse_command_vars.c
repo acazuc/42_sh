@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 16:26:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 17:25:59 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 11:43:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,23 @@ static int		is_splitter(char c)
 			|| c == '\'' || c == '"');
 }
 
+static char		*get_sub_2(t_env *env, char *arg, size_t i, size_t end)
+{
+	char	*sub2;
+	char	*var;
+
+	if (!(var = ft_strsub(arg, i, end - i + 1)))
+		ERROR("Failed to get var type");
+	if (!(sub2 = get_env_value(env, var)))
+		sub2 = ft_strnew(0);
+	free(var);
+	return (unescape(sub2));
+}
+
 static char		*parse_arg_vars(t_env *env, char *arg)
 {
 	size_t		i;
 	size_t		end;
-	char		*var;
 	char		*sub1;
 	char		*sub2;
 	char		*sub3;
@@ -58,29 +70,22 @@ static char		*parse_arg_vars(t_env *env, char *arg)
 	while (arg[i])
 	{
 		if (arg[i] == '$' && (i == 0 || !(get_bs_nb_before(arg, i) % 2))
-				&& !is_splitter(arg[i + 1]))
+				&& arg[i + 1] && !is_splitter(arg[i + 1]))
 		{
 			end = ++i;
 			while (arg[end] && !is_splitter(arg[end]))
 				end++;
 			end--;
-			if (!(var = ft_strsub(arg, i, end - i + 1)))
-				ERROR("Failed to get var type");
-			if (!(sub2 = get_env_value(env, var)))
-				sub2 = ft_strnew(0);
-			sub2 = unescape(sub2);
+			sub2 = get_sub_2(env, arg, i, end);
 			if (!(sub1 = ft_strsub(arg, 0, i - 1)))
 				ERROR("Failed to get sub1");
-			if (!(sub3 = ft_strsub(arg, i + ft_strlen(var)
-							, ft_strlen(arg) - i - ft_strlen(var))))
+			i += ft_strlen(sub2);
+			if (!(sub3 = ft_strsub(arg + end + 1, 0, ft_strlen(arg))))
 				ERROR("Failed to get sub3");
-			i = i + ft_strlen(sub2);
-			free(var);
 			free(arg);
-			if (!(arg = ft_strjoin_free3(sub1, sub2)))
-				ERROR("Failed to join sub1 and sub2");
-			if (!(arg = ft_strjoin_free3(arg, sub3)))
-				ERROR("Failed to join sub2 ans sub3");
+			if (!(arg = ft_strjoin_free3(sub1, sub2))
+					|| !(arg = ft_strjoin_free3(arg, sub3)))
+				ERROR("Failed to join sub1, sub2 ans sub3");
 		}
 		i++;
 	}
