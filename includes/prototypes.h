@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 17:04:18 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 12:51:32 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	parse_command_backslashs(char **cmd);
 void	parse_command_vars(t_env *env, char **cmd);
 void	parse_command_tilde(t_env *env, char **cmd);
 void	parse_command_empty(char ***cmd);
+char	*parse_command_unescape(char *var);
 char	*read_next_line(void);
 char	*get_next_cmd(void);
 void	cmd_hist_add(t_env *env, char *cmd);
