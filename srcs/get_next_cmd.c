@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 13:58:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 13:56:03 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 14:28:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static void		print_missing_msg(char c)
+static int		print_missing_msg(char c)
 {
 	if (c == '"')
 		ft_putstr("dquote> ");
@@ -26,6 +26,20 @@ static void		print_missing_msg(char c)
 		ft_putstr("bracket> ");
 	else if (c == '{')
 		ft_putstr("cursh> ");
+	else
+	{
+		ft_putendl("parse error");
+		return (0);
+	}
+	return (1);
+}
+
+static void		init(char **next_line, char *missing)
+{
+	*missing = 'a';
+	if (!(*next_line = malloc(sizeof(**next_line))))
+		ERROR("Failed to malloc line");
+	(*next_line)[0] = '\0';
 }
 
 char			*get_next_cmd(void)
@@ -34,10 +48,7 @@ char			*get_next_cmd(void)
 	char	*tmp;
 	char	missing;
 
-	missing = 'a';
-	if (!(next_line = malloc(sizeof(*next_line))))
-		ERROR("Failed to malloc line");
-	next_line[0] = '\0';
+	init(&next_line, &missing);
 	while (missing)
 	{
 		if (!(tmp = read_next_line()))
@@ -50,7 +61,11 @@ char			*get_next_cmd(void)
 		if (missing != 'a')
 			if (!(next_line = ft_strjoin_free1(next_line, "\n")))
 				ERROR("Failed to append \\n to next_line");
-		print_missing_msg(missing);
+		if (!(print_missing_msg(missing)))
+		{
+			free(next_line);
+			return (NULL);
+		}
 	}
 	return (next_line);
 }

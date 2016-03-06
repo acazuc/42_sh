@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 13:41:31 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 14:24:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ static void	loop(t_env *env)
 	char	*line;
 
 	print_line(env);
-	if (!(line = get_next_cmd()))
-		ERROR("Failed to get_next_line");
-	line = ft_strtrim_free(line);
-	line = parse_command_short(line);
-	parsed = parse_command_split(line);
-	free(line);
-	command_split_semicolon(env, parsed);
+	if ((line = get_next_cmd()))
+	{
+		line = ft_strtrim_free(line);
+		line = parse_command_short(line);
+		parsed = parse_command_split(line);
+		free(line);
+		command_split_semicolon(env, parsed);
+	}
 }
 
 int			main(int ac, char **av, char **ev)

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:16:10 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 13:56:16 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 14:32:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ static void		simplify(t_line_parser *p)
 				|| (s[i] == '"' && s[i + 1] == '"')
 				|| (s[i] == '`' && s[i + 1] == '`'))
 		{
-			if (!(tmp = malloc(sizeof(*tmp) * (ft_strlen(s) - 2 + 1))))
+			if (!(tmp = ft_memalloc(sizeof(*tmp) * (ft_strlen(s) - 2 + 1))))
 				ERROR("Failed to malloc tmp");
-			tmp[0] = '\0';
-			ft_strncat(tmp, s, i);
-			ft_strcat(tmp, s + i + 2);
+			t_strcat(ft_strncat(tmp, s, i), s + i + 2);
 			free(s);
 			s = tmp;
-			i--;
+			i -= 2;
 		}
 		i++;
 	}
@@ -67,20 +65,12 @@ static void		check_parser(t_line_parser *p, char *str, size_t i)
 		append(p, '\'');
 		p->squote = !p->squote;
 	}
-	if (str[i] == '`' && !p->dquote && !p->squote)
-		append(p, '`');
-	if (str[i] == '[' && !p->dquote && !p->squote)
-		append(p, '[');
-	if (str[i] == ']' && !p->dquote && !p->squote)
-		append(p, ']');
-	if (str[i] == '{' && !p->dquote && !p->squote)
-		append(p, '{');
-	if (str[i] == '}' && !p->dquote && !p->squote)
-		append(p, '}');
-	if (str[i] == '(' && !p->dquote && !p->squote)
-		append(p, '(');
-	if (str[i] == ')' && !p->dquote && !p->squote)
-		append(p, ')');
+	if (!p->dquote && !p->squote)
+	{
+		if (str[i] == '`' || str[i] == '[' || str[i] == ']' || str[i] == '{'
+				|| str[i] == '}' || str[i] == '(' || str[i] == ')')
+			append(p, str[i]);
+	}
 }
 
 static void		parser_init(t_line_parser *p)
@@ -92,7 +82,7 @@ static void		parser_init(t_line_parser *p)
 	p->squote = 0;
 }
 
-char		get_next_cmd_missing(char *str)
+char			get_next_cmd_missing(char *str)
 {
 	t_line_parser	p;
 	size_t			i;
@@ -104,11 +94,7 @@ char		get_next_cmd_missing(char *str)
 		check_parser(&p, str, i);
 		i++;
 	}
-	ft_putendl("SPLIFIYING");
-	ft_putendl(p.result);
 	simplify(&p);
-	ft_putendl("SPLIFIED");
-	ft_putendl(p.result);
 	if (!p.result[0])
 		return ('\0');
 	return (p.result[ft_strlen(p.result) - 1]);
