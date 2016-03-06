@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 18:00:40 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 10:02:34 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,43 @@
 
 t_env	*g_env;
 
-static void		close_pipes(int pipe_type, int *pipe_in, int *pipe_out)
+static void		close_pipes(int pipe_type, t_pipe_manager *m)
 {
 	if (pipe_type & PIPE_O)
-		close(pipe_out[1]);
+	{
+		close(m->pipe_out[1]);
+		dup2(m->origin_stdout, 1);
+		close(m->origin_stdout);
+	}
 	else
 	{
-		close(pipe_out[0]);
-		close(pipe_out[1]);
-		pipe(pipe_out);
+		close(m->pipe_out[0]);
+		close(m->pipe_out[1]);
+		pipe(m->pipe_out);
 	}
 	if (pipe_type & PIPE_I)
 	{
-		close(pipe_in[0]);
-		pipe(pipe_in);
+		close(m->pipe_in[0]);
+		dup2(m->origin_stdin, 0);
+		close(m->origin_stdin);
+		pipe(m->pipe_in);
 	}
 }
 
-static void		dup_pipes(int pipe_type, int *pipe_in, int *pipe_out)
+static void		dup_pipes(int pipe_type, t_pipe_manager *m)
 {
 	if (pipe_type & PIPE_I)
-		dup2(pipe_in[0], 0);
+	{
+		m->origin_stdin = dup(0);
+		close(0);
+		dup2(m->pipe_in[0], 0);
+	}
 	if (pipe_type & PIPE_O)
-		dup2(pipe_out[1], 1);
+	{
+		m->origin_stdout = dup(1);
+		close(1);
+		dup2(m->pipe_out[1], 1);
+	}
 }
 
 static void		free_args(char **args)
@@ -52,10 +66,10 @@ static void		free_args(char **args)
 	free(args);
 }
 
-static void		init(t_env *env, char ***args, int **pipe_in, int **pipe_out)
+static void		init(t_env *env, char ***args, t_pipe_manager *m)
 {
-	*pipe_out = env->which_pipe ? env->pipe_1 : env->pipe_2;
-	*pipe_in = env->which_pipe ? env->pipe_2 : env->pipe_1;
+	m->pipe_out = env->which_pipe ? env->pipe_1 : env->pipe_2;
+	m->pipe_in = env->which_pipe ? env->pipe_2 : env->pipe_1;
 	env->which_pipe = !env->which_pipe;
 	parse_command_vars(env, *args);
 	parse_command_tilde(env, *args);
@@ -66,28 +80,25 @@ static void		init(t_env *env, char ***args, int **pipe_in, int **pipe_out)
 
 void			command_run_piped(t_env *env, char **args, int pipe_type)
 {
-	pid_t	pid;
-	int		status;
-	int		*pipe_out;
-	int		*pipe_in;
+	t_pipe_manager	manager;
+	pid_t			pid;
+	int				status;
 
-	init(env, &args, &pipe_in, &pipe_out);
-	if (args[0] && !ft_strcmp(args[0], "exit"))
-		exit(-1);
-	pid = fork();
-	if (pid == -1)
-		ERROR("Failed to fork");
-	else if (pid != 0)
-		g_env->child_pid = pid;
-	else if (pid == 0)
+	init(env, &args, &manager);
+	dup_pipes(pipe_type, &manager);
+	if (!(builtins(env, args)))
 	{
-		dup_pipes(pipe_type, pipe_in, pipe_out);
-		command_run(env, args);
-		exit(1);
+		pid = fork();
+		if (pid == -1)
+			ERROR("Failed to fork");
+		else if (pid != 0)
+			g_env->child_pid = pid;
+		else if (pid == 0)
+			command_run(env, args);
+		wait(&status);
+		env->child_pid = 0;
+		signal_handler(status);
 	}
-	wait(&status);
-	env->child_pid = 0;
-	signal_handler(status);
-	close_pipes(pipe_type, pipe_in, pipe_out);
+	close_pipes(pipe_type, &manager);
 	free_args(args);
 }

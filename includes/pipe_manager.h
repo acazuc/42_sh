@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh.h                                               :+:      :+:    :+:   */
+/*   pipe_manager.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 13:26:34 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 09:51:23 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/06 09:48:02 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/06 09:59:24 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#ifndef PIPE_MANAGER_H
+# define PIPE_MANAGER_H
 
-# define PIPE_NO 0
-# define PIPE_I 1
-# define PIPE_O 2
-# define PIPE_IO 3
-
-# include "../libft/includes/libft.h"
-# include "cmd_hist.h"
-# include "pipe_manager.h"
-# include "parser_bs.h"
-# include "line_parser.h"
-# include "prototypes.h"
-# include "includes.h"
-# include "parser.h"
-# include "env.h"
-
-# define ERROR(x) (error_quit(x, __FILE__, __LINE__))
+typedef struct		s_pipe_manager
+{
+	int				origin_stdin;
+	int				origin_stdout;
+	int				*pipe_in;
+	int				*pipe_out;
+	int				pipe_type;
+}					t_pipe_manager;
 
 #endif

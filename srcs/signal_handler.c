@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:23:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/04 16:38:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/06 09:34:44 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,12 @@ static void		handle_3(int signal)
 		ft_putendl("user defined signal 1");
 	else if (signal == SIGUSR2)
 		ft_putendl("user defined signal 2");
-	else
-		ft_putendl("Unknown signal error");
 }
 
 static void		handle_2(int signal)
 {
 	if (signal == SIGFPE)
 		ft_putendl("floating-point exception");
-	else if (signal == SIGKILL)
-		ft_putendl("kill program");
 	else if (signal == SIGBUS)
 		ft_putendl("bus error");
 	else if (signal == SIGSEGV)
