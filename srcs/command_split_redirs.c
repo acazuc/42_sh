@@ -6,15 +6,11 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 15:56:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 18:09:13 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/07 11:51:55 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
-
-/*
- * HAS TO DIRECTLY OPEN, DUP AND PIPE FD ! NO STOCKING THEN (OPEN, DUP, PIPE)ING !
- */
 
 static void		init(t_redir_manager *m)
 {
@@ -23,75 +19,54 @@ static void		init(t_redir_manager *m)
 	i = 0;
 	while (i < 10)
 	{
+		m->old_fd[i] = 0;
 		m->closed[i] = 0;
-		m->do_redir[i] = 0;
-		m->to_redir[i] = i;
-		m->is_append[i] = 0;
+		m->has_changed[i] = 0;
 		i++;
 	}
 }
 
-static void		do_append(t_redir_manager *m, int fd, int *j)
-{
-	if (fd == '&' - '0')
-	{
-		m->is_append[0] = 1;
-		m->is_append[1] = 1;
-	}
-	else
-		m->is_append[fd] = 1;
-	(*j)++;
-}
-
-static int		do_open_file(t_redir_manager *m, char *cmd, int fd)
-{
-	int		tmpfd;
-
-	/*
-	** HAS TO PARSE THIS (DQUOTE, SQUOTE)
-	**/
-	if ((tmpfd = open(cmd[i + 1])) == -1)
-		return (0);
-	if (fd == '&' - '0')
-	{
-		m->to_redir[0] = tmpfd;
-		m->to_redir[1] = tmpfd;
-	}
-	else
-		m->to_redir[fd] = tmpfd;
-	return (1);
-}
-
 static int		operate_redir_out(t_redir_manager *m, char **cmd, size_t i)
 {
+	int		append;
 	int		fd;
 	int		j;
 
+	append = 0;
 	fd = 1;
 	j = 0;
 	if (cmd[i][j] != '>')
 		fd = cmd[i][j++] - '0';
 	if (cmd[i][j] == '>' && cmd[i][j + 1] == '>')
-		do_append(m, fd, &j);
+		append = 1;
 	j++;
 	if (cmd[i][j] == '&' && cmd[i][j + 1] == '-')
-		m->closed[fd] = 1;
+		redir_close(m, fd);
 	else if (cmd[i][j] == '&' && ft_isdigit(cmd[i][j + 1]))
-	{
-		m->do_redir[fd] = 1;
-		m->to_redir[fd] = cmd[i][j + 1] - '0';
-	}
+		redir_add(m, fd, cmd[i][j + 1] - '0', 0);
 	else
-		return (do_open_file(m, cmd, fd));
+	{
+		if (fd == '&' - '0')
+		{
+			if (!redir_out_add_file(m, 1, append, cmd[i + 1])
+					|| !redir_out_add_file(m, 2, append, cmd[i + 1]))
+				return (0);
+		}
+		else if (!redir_out_add_file(m, fd, append, cmd[i + 1]))
+			return (0);
+	}
 	return (1);
 }
 
-static void		operate_redir_out(t_redir_manager *m, char **cmd, size_t i)
+static int		operate_redir_in(t_redir_manager *m, char **cmd, size_t i)
 {
-	//mdr;
+	(void)m;
+	(void)cmd;
+	(void)i;
+	return (0);
 }
 
-void			command_split_redirs(t_env *env, char **cmd, int pipe_type)
+int			command_split_redirs(t_env *env, char **cmd, int pipe_type)
 {
 	t_redir_manager		m;
 	size_t				i;
@@ -115,7 +90,7 @@ void			command_split_redirs(t_env *env, char **cmd, int pipe_type)
 		else if (cmd[i][0] == '<' || (ft_isdigit(cmd[i][0]) && cmd[i][1] == '<'))
 		{
 			has_redired = 1;
-			if (!(operate_redir_in(&m, cmd, i)))
+			if (!operate_redir_in(&m, cmd, i))
 				return (0);
 		}
 		else if (has_redired)
@@ -124,5 +99,7 @@ void			command_split_redirs(t_env *env, char **cmd, int pipe_type)
 			command_split_push(&sub, cmd[i]);
 		i++;
 	}
+	if (has_redired)
+		redir_reset(&m);
 	return (1);
 }

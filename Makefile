@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/03/06 16:54:35 by acazuc           ###   ########.fr        #
+#    Updated: 2016/03/07 10:46:56 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ SRCS_NAME = main.c \
 			get_bs_nb_before.c \
 			command_check_pipes.c \
 			command_check_redirs.c \
+			redirs_functions.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
