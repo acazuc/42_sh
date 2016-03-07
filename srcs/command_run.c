@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 10:02:44 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/07 14:57:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void		print_error(char **args)
 
 static void		command_run_path(t_env *env, char **args)
 {
-	char			*tmp_command;
-	char			**paths;
-	char			*path;
-	int				i;
+	char		*tmp_command;
+	char		**paths;
+	char		*path;
+	int			i;
 
 	path = get_path(env);
 	if (path)
@@ -52,15 +52,34 @@ static void		command_run_relative(t_env *env, char **args)
 
 void			command_run(t_env *env, char **args)
 {
+	pid_t		pid;
+	int			status;
+
 	if (args[0])
 	{
+		parse_command_vars(env, args);
+		parse_command_tilde(env, args);
+		parse_command_backslashs(args);
+		parse_command_empty(&args);
+		parse_command_unquote(args);
 		if (!builtins(env, args))
 		{
-			if (ft_strchr(args[0], '/'))
-				command_run_relative(env, args);
+			pid = fork();
+			if (pid == -1)
+				ERROR("Failed to fork");
+			else if (pid != 0)
+				env->child_pid = pid;
 			else
-				command_run_path(env, args);
+			{
+				if (ft_strchr(args[0], '/'))
+					command_run_relative(env, args);
+				else
+					command_run_path(env, args);
+				exit(0);
+			}
+			wait(&status);
+			env->child_pid = 0;
+			signal_handler(status);
 		}
 	}
-	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/07 11:51:06 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/07 13:52:05 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	command_split_push(char ***sub, char *add);
 void	command_split_clear(char ***sub);
 void	command_split_semicolon(t_env *env, char **cmd);
 void	command_split_pipe(t_env *env, char **cmd);
-int		command_split_redirs(t_env *env, char **cmd, int pipe_type);
+int		command_split_redirs(t_env *env, char **cmd);
 int		get_bs_nb_before(char *str, size_t i);
 int		command_check_pipes(char **args);
 int		command_check_redirs(char **args);

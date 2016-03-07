@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 16:17:13 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/07 14:56:27 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void		dup_pipes(int pipe_type, t_pipe_manager *m)
 	}
 }
 
-static void		free_args(char **args)
+/*static void		free_args(char **args)
 {
 	size_t	i;
 
@@ -64,41 +64,16 @@ static void		free_args(char **args)
 		i++;
 	}
 	free(args);
-}
-
-static void		init(t_env *env, char ***args, t_pipe_manager *m)
-{
-	m->pipe_out = env->which_pipe ? env->pipe_1 : env->pipe_2;
-	m->pipe_in = env->which_pipe ? env->pipe_2 : env->pipe_1;
-	env->which_pipe = !env->which_pipe;
-	parse_command_vars(env, *args);
-	parse_command_tilde(env, *args);
-	parse_command_backslashs(*args);
-	parse_command_empty(args);
-	parse_command_unquote(*args);
-}
+}*/
 
 void			command_run_piped(t_env *env, char **args, int pipe_type)
 {
 	t_pipe_manager	manager;
-	pid_t			pid;
-	int				status;
 
-	init(env, &args, &manager);
+	manager.pipe_out = env->which_pipe ? env->pipe_1 : env->pipe_2;
+	manager.pipe_in = env->which_pipe ? env->pipe_2 : env->pipe_1;
+	env->which_pipe = !env->which_pipe;
 	dup_pipes(pipe_type, &manager);
-	if (!(builtins(env, args)))
-	{
-		pid = fork();
-		if (pid == -1)
-			ERROR("Failed to fork");
-		else if (pid != 0)
-			g_env->child_pid = pid;
-		else if (pid == 0)
-			command_run(env, args);
-		wait(&status);
-		env->child_pid = 0;
-		signal_handler(status);
-	}
+	command_split_redirs(env, args);
 	close_pipes(pipe_type, &manager);
-	free_args(args);
 }

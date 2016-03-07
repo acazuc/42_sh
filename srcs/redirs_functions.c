@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 09:10:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/07 11:46:39 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/07 15:12:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	redir_add(t_redir_manager *m, int fd_in, int fd_out, int from_file)
 		dup2(fd_in, m->old_fd[fd_in]);
 		m->has_changed[fd_in] = 1;
 	}
-	if (from_file && !m->has_changed[fd_out])
+	if (!from_file && !m->has_changed[fd_out])
 	{
-		dup(fd_out, m->old_fd[fd_out]);
-		m->haschanged[fd_out] = 1;
+		dup2(fd_out, m->old_fd[fd_out]);
+		m->has_changed[fd_out] = 1;
 	}
 	dup2(fd_out, fd_in);
 	close(fd_out);
@@ -48,9 +48,13 @@ int		redir_in_add_file(t_redir_manager *m, int fd, char *file)
 	int		flags;
 
 	flags = O_RDONLY;
-	if ((file_id = open(file, flags, 0666)) = -1)
+	if ((file_fd = open(file, flags, 0666)) == -1)
+	{
+		ft_putstr("cash: no such file or directory: ");
+		ft_putendl(file);
 		return (0);
-	redirs_out_add(m, fd, file_fd, 1);
+	}
+	redir_add(m, fd, file_fd, 1);
 	return (1);
 }
 
@@ -65,8 +69,12 @@ int		redir_out_add_file(t_redir_manager *m, int fd, int append, char *file)
 	else
 		flags |= O_TRUNC;
 	if ((file_fd = open(file, flags, 0666)) == -1)
+	{
+		ft_putstr("cash: no such file or directory: ");
+		ft_putendl(file);
 		return (0);
-	redirs_out_add(m, fd, file_fd, 1);
+	}
+	redir_add(m, fd, file_fd, 1);
 	return (1);
 }
 
