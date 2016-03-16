@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 15:56:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/07 14:56:17 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 10:21:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,15 @@ static int		operate_redir_out(t_redir_manager *m, char **cmd, size_t *i)
 		append = 1;
 	j++;
 	if (cmd[*i][j] == '&' && cmd[*i][j + 1] == '-')
-		redir_close(m, fd);
+	{
+		if (!redir_close(m, fd))
+			return (0);
+	}
 	else if (cmd[*i][j] == '&' && ft_isdigit(cmd[*i][j + 1]))
-		redir_add(m, fd, cmd[*i][j + 1] - '0', 0);
+	{
+		if (!redir_add(m, fd, cmd[*i][j + 1] - '0', 0))
+			return (0);
+	}
 	else
 	{
 		(*i)++;
@@ -70,9 +76,15 @@ static int		operate_redir_in(t_redir_manager *m, char **cmd, size_t *i)
 		fd = cmd[*i][j++] - '0';
 	j++;
 	if (cmd[*i][j] == '&' && cmd[*i][j + 1] == '-')
-		redir_close(m, fd);
+	{
+		if (!redir_close(m, fd))
+			return (0);
+	}
 	else if (cmd[*i][j] == '&' && ft_isdigit(cmd[*i][j + 1]))
-		redir_add(m, fd, cmd[*i][j + 1] - '0', 0);
+	{
+		if (!redir_add(m, fd, cmd[*i][j + 1] - '0', 0))
+			return (0);
+	}
 	else if (!((*i)++) || !redir_in_add_file(m, fd, cmd[*i]))
 		return (0);
 	return (1);

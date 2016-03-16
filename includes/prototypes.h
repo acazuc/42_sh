@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/07 13:52:05 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 10:21:51 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int		command_split_redirs(t_env *env, char **cmd);
 int		get_bs_nb_before(char *str, size_t i);
 int		command_check_pipes(char **args);
 int		command_check_redirs(char **args);
-void	redir_add(t_redir_manager *m, int fd_in, int fd_out, int from_file);
-void	redir_close(t_redir_manager *m, int fd);
+int		redir_add(t_redir_manager *m, int fd_in, int fd_out, int from_file);
+int		redir_close(t_redir_manager *m, int fd);
 int		redir_in_add_file(t_redir_manager *m, int fd, char *file);
 int		redir_out_add_file(t_redir_manager *m, int fd, int append, char *file);
 void	redir_reset(t_redir_manager *m);

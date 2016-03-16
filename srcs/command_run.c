@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/07 14:57:17 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 10:23:08 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		print_error(char **args)
 {
-	ft_putstr("cash: command not found: ");
-	ft_putendl(args[0]);
+	ft_putstr_fd("cash: command not found: ", 2);
+	ft_putendl_fd(args[0], 2);
 }
 
 static void		command_run_path(t_env *env, char **args)

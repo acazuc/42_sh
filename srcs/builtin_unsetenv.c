@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 10:47:20 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 14:38:37 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 10:25:12 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				builtin_unsetenv(t_env *env, char **datas, int len)
 
 	if (len != 2)
 	{
-		ft_putendl("cash: unsetenv: Invalid arguments");
+		ft_putendl_fd("cash: unsetenv: Invalid arguments", 2);
 		return (1);
 	}
 	i = 0;
@@ -57,8 +57,8 @@ int				builtin_unsetenv(t_env *env, char **datas, int len)
 			return (delete_entry(env, i));
 		i++;
 	}
-	ft_putstr("cash: unsetenv: Unknown env entry \"");
-	ft_putstr(datas[1]);
-	ft_putendl("\"");
+	ft_putstr_fd("cash: unsetenv: Unknown env entry \"", 2);
+	ft_putstr_fd(datas[1], 2);
+	ft_putendl_fd("\"", 2);
 	return (-1);
 }

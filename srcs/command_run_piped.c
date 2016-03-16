@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/07 14:56:27 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 10:01:35 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,6 @@ static void		dup_pipes(int pipe_type, t_pipe_manager *m)
 		dup2(m->pipe_out[1], 1);
 	}
 }
-
-/*static void		free_args(char **args)
-{
-	size_t	i;
-
-	i = 0;
-	while (args[i])
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
-}*/
 
 void			command_run_piped(t_env *env, char **args, int pipe_type)
 {

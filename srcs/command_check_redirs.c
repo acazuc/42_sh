@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 16:54:43 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/07 12:57:26 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 10:00:26 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ static int	is_redir(char *arg)
 	return ((arg[0] == '<' || arg[0] == '>')
 			|| ((arg[0] == '&' || ft_isdigit(arg[0]))
 				&& (arg[1] == '<' || arg[1] == '>')));
-
 }
 
-int		command_check_redirs(char **args)
+int			command_check_redirs(char **args)
 {
 	size_t		i;
 

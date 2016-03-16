@@ -6,40 +6,48 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 09:10:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/07 15:12:17 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 10:21:45 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	redir_add(t_redir_manager *m, int fd_in, int fd_out, int from_file)
+int		redir_add(t_redir_manager *m, int fd_in, int fd_out, int from_file)
 {
 	if (!m->has_changed[fd_in])
 	{
-		dup2(fd_in, m->old_fd[fd_in]);
+		if (dup2(fd_in, m->old_fd[fd_in]) == -1)
+			return (0);
 		m->has_changed[fd_in] = 1;
 	}
 	if (!from_file && !m->has_changed[fd_out])
 	{
-		dup2(fd_out, m->old_fd[fd_out]);
+		if (dup2(fd_out, m->old_fd[fd_out]) == -1)
+			return (0);
 		m->has_changed[fd_out] = 1;
 	}
-	dup2(fd_out, fd_in);
-	close(fd_out);
+	if (dup2(fd_out, fd_in) == -1)
+		return (0);
+	if (close(fd_out) == -1)
+		return (0);
+	return (1);
 }
 
-void	redir_close(t_redir_manager *m, int fd)
+int		redir_close(t_redir_manager *m, int fd)
 {
 	if (!m->closed[fd])
 	{
 		if (!m->has_changed[fd])
 		{
-			dup2(fd, m->old_fd[fd]);
+			if (dup2(fd, m->old_fd[fd]) == -1)
+				return (0);
 			m->has_changed[fd] = 1;
 		}
-		close(fd);
+		if (close(fd) == -1)
+			return (0);
 		m->closed[fd] = 1;
 	}
+	return (1);
 }
 
 int		redir_in_add_file(t_redir_manager *m, int fd, char *file)
@@ -54,8 +62,7 @@ int		redir_in_add_file(t_redir_manager *m, int fd, char *file)
 		ft_putendl(file);
 		return (0);
 	}
-	redir_add(m, fd, file_fd, 1);
-	return (1);
+	return (redir_add(m, fd, file_fd, 1));
 }
 
 int		redir_out_add_file(t_redir_manager *m, int fd, int append, char *file)
@@ -74,8 +81,7 @@ int		redir_out_add_file(t_redir_manager *m, int fd, int append, char *file)
 		ft_putendl(file);
 		return (0);
 	}
-	redir_add(m, fd, file_fd, 1);
-	return (1);
+	return (redir_add(m, fd, file_fd, 1));
 }
 
 void	redir_reset(t_redir_manager *m)
@@ -87,8 +93,10 @@ void	redir_reset(t_redir_manager *m)
 	{
 		if (m->has_changed[i])
 		{
-			dup2(m->old_fd[i], i);
-			close(m->old_fd[i]);
+			if (dup2(m->old_fd[i], i) == -1)
+				ERROR("Can't reset old fd, better quit");
+			if (close(m->old_fd[i]) == -1)
+				ERROR("Can't close old fd, better quit");
 		}
 		i++;
 	}
