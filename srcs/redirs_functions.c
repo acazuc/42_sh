@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 09:10:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 10:21:45 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 10:50:53 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int		redir_in_add_file(t_redir_manager *m, int fd, char *file)
 	flags = O_RDONLY;
 	if ((file_fd = open(file, flags, 0666)) == -1)
 	{
-		ft_putstr("cash: no such file or directory: ");
-		ft_putendl(file);
+		ft_putstr_fd("cash: no such file or directory: ", 2);
+		ft_putendl_fd(file, 2);
 		return (0);
 	}
 	return (redir_add(m, fd, file_fd, 1));
@@ -77,8 +77,8 @@ int		redir_out_add_file(t_redir_manager *m, int fd, int append, char *file)
 		flags |= O_TRUNC;
 	if ((file_fd = open(file, flags, 0666)) == -1)
 	{
-		ft_putstr("cash: no such file or directory: ");
-		ft_putendl(file);
+		ft_putstr_fd("cash: no such file or directory: ", 2);
+		ft_putendl_fd(file, 2);
 		return (0);
 	}
 	return (redir_add(m, fd, file_fd, 1));

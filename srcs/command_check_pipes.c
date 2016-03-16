@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 16:50:02 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 16:54:23 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 11:03:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int		command_check_pipes(char **args)
 	{
 		if (!ft_strcmp(args[i], "|"))
 		{
-			if (!args[i] || !ft_strcmp(args[i], "|"))
+			if (!args[i + 1] || !ft_strcmp(args[i + 1], "|"))
 			{
-				ft_putendl("cash: parse error near `|'");
+				ft_putendl_fd("cash: parse error near `|'", 2);
 				return (0);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 16:54:43 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 10:00:26 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/16 10:51:56 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int			command_check_redirs(char **args)
 					|| ft_strstr(args[i], "&>&") == args[i]
 					|| ft_strstr(args[i], "&>>&") == args[i])
 			{
-				ft_putstr("cash: parse error near ");
+				ft_putstr_fd("cash: parse error near ", 2);
 				if (ft_isdigit(args[i][0]))
-					ft_putchar(args[i][1]);
+					ft_putchar_fd(args[i][1], 2);
 				else
-					ft_putchar(args[i][0]);
-				ft_putchar('\n');
+					ft_putchar_fd(args[i][0], 2);
+				ft_putchar_fd('\n', 2);
 				return (0);
 			}
 		}
