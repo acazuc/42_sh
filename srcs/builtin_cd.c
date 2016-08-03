@@ -6,15 +6,19 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 10:24:10 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/07/12 21:52:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
+#include <errno.h>
 
 static int	error(char *dir)
 {
-	ft_putstr_fd("cash: cd: no such file or directory: ", 2);
+	if (errno == EPERM)
+		ft_putstr_fd("cash: cd: You don't have permission: ", 2);
+	else
+		ft_putstr_fd("cash: cd: no such file or directory: ", 2);
 	ft_putendl_fd(dir, 2);
 	return (1);
 }

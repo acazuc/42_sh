@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 09:10:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 10:50:53 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/08/03 21:49:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int		redir_in_add_file(t_redir_manager *m, int fd, char *file)
 	int		flags;
 
 	flags = O_RDONLY;
-	if ((file_fd = open(file, flags, 0666)) == -1)
+	if ((file_fd = open(file, flags)) == -1)
 	{
-		ft_putstr_fd("cash: no such file or directory: ", 2);
+		ft_putstr_fd("cash: can't open: ", 2);
 		ft_putendl_fd(file, 2);
 		return (0);
 	}
@@ -75,9 +75,9 @@ int		redir_out_add_file(t_redir_manager *m, int fd, int append, char *file)
 		flags |= O_APPEND;
 	else
 		flags |= O_TRUNC;
-	if ((file_fd = open(file, flags, 0666)) == -1)
+	if ((file_fd = open(file, flags, 0644)) == -1)
 	{
-		ft_putstr_fd("cash: no such file or directory: ", 2);
+		ft_putstr_fd("cash: can't open: ", 2);
 		ft_putendl_fd(file, 2);
 		return (0);
 	}
@@ -94,9 +94,9 @@ void	redir_reset(t_redir_manager *m)
 		if (m->has_changed[i])
 		{
 			if (dup2(m->old_fd[i], i) == -1)
-				ERROR("Can't reset old fd, better quit");
+				ERROR("Failed to dup2");
 			if (close(m->old_fd[i]) == -1)
-				ERROR("Can't close old fd, better quit");
+				ERROR("Failed to dup2");
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:23:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 09:34:44 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/07/12 21:49:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void			signal_handler(int status)
 			ft_putendl("trace trap");
 		else if (signal == SIGABRT)
 			ft_putendl("abort program");
-		else if (signal == SIGEMT)
-			ft_putendl("emulate instruction executed");
 		else
 			handle_2(signal);
 	}

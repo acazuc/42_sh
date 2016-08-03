@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 10:01:09 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/08/03 21:42:52 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int			main(int ac, char **av, char **ev)
 	env.cmd_hist = NULL;
 	env.aliases = NULL;
 	env.hist_pos = 0;
-	pipe(env.pipe_1);
-	pipe(env.pipe_2);
+	if (pipe(env.pipe_1) == -1)
+		ERROR("Failed to pipe");
+	if (pipe(env.pipe_2) == -1)
+		ERROR("Failed to pipe");
 	//signal(SIGINT, &sigint_handler);
 	while (42)
 		loop(&env);

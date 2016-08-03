@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/23 10:51:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 10:01:35 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/08/03 21:44:12 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ static void		close_pipes(int pipe_type, t_pipe_manager *m)
 	{
 		close(m->pipe_out[0]);
 		close(m->pipe_out[1]);
-		pipe(m->pipe_out);
+		if (pipe(m->pipe_out))
+			ERROR("Failed to pipe");
 	}
 	if (pipe_type & PIPE_I)
 	{
 		close(m->pipe_in[0]);
 		dup2(m->origin_stdin, 0);
 		close(m->origin_stdin);
-		pipe(m->pipe_in);
+		if (pipe(m->pipe_in) == -1)
+			ERROR("Failed to pipe");
 	}
 }
 
@@ -41,15 +43,19 @@ static void		dup_pipes(int pipe_type, t_pipe_manager *m)
 {
 	if (pipe_type & PIPE_I)
 	{
-		m->origin_stdin = dup(0);
+		if ((m->origin_stdin = dup(0)) == -1)
+			ERROR("Failed to dup");
 		close(0);
-		dup2(m->pipe_in[0], 0);
+		if (dup2(m->pipe_in[0], 0) == -1)
+			ERROR("Failed to dup2");
 	}
 	if (pipe_type & PIPE_O)
 	{
-		m->origin_stdout = dup(1);
+		if ((m->origin_stdout = dup(1)) == -1)
+			ERROR("Failed to dup");
 		close(1);
-		dup2(m->pipe_out[1], 1);
+		if (dup2(m->pipe_out[1], 1) == -1)
+			ERROR("Failed to dup2");
 	}
 }
 
