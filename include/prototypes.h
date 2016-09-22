@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 10:21:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 13:24:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		builtin_about(t_env *env, char **datas, int len);
 int		builtin_setenv(t_env *env, char **datas, int len);
 int		builtin_getenv(t_env *env, char **datas, int len);
 int		builtin_unsetenv(t_env *env, char **datas, int len);
+int		builtin_unalias(t_env *env, char **datas, int len);
 int		builtin_env(t_env *env, char **datas, int len);
 void	print_line(t_env *env);
 char	*get_username(t_env *env);

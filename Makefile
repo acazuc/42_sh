@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/22 12:08:28 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/22 13:23:42 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS_NAME = main.c \
 			builtin_getenv.c \
 			builtin_setenv.c \
 			builtin_unsetenv.c \
+			builtin_unalias.c \
 			builtin_env.c \
 			print_line.c \
 			get_working_directory.c \

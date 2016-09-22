@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alias_create.c                                     :+:      :+:    :+:   */
+/*   builtin_unalias.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/24 17:48:28 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 13:21:14 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/22 13:22:17 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/22 13:24:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	alias_create(t_env *env, char *alias, char *cmd)
+int			builtin_unalias(t_env *env, char **datas, int len)
 {
-	t_alias_list	*new;
-
-	if (!(new = malloc(sizeof(*new))))
-		ERROR("Failed to create alias");
-	if (!(new->alias = malloc(sizeof(*alias))))
-		ERROR("Failed to create alias");
-	new->alias->alias = alias;
-	new->alias->cmd = cmd;
-	new->next = env->aliases;
-	env->aliases = new;
+	(void)env;
+	(void)datas;
+	(void)len;
+	return (1);
 }
