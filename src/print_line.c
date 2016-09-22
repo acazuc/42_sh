@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 11:07:36 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 12:11:37 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void				print_line(t_env *env)
 	ft_putstr(user);
 	ft_putchar('@');
 	ft_putstr(host);
-	ft_putstr("] \033[0;36m");
+	ft_putstr("] \033[0;31m");
 	ft_putstr(cwd);
 	ft_putstr("\033[1;37m » \033[0;37m");
 	free(user);

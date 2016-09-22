@@ -6,26 +6,34 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 18:03:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 11:16:22 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 12:19:54 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static void		action(t_env *env, char *val)
+static int		action(t_env *env, char *val)
 {
+	char	*equals;
+
+	equals = ft_strchr(val, '=');
+	if (!equals)
+		return (1);
 	(void)env;
-	(void)val;
+	ft_putstr("alias: ");
+	ft_putendl(val);
+	return (1);
 }
 
 int				builtin_alias(t_env *env, char **datas, int len)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	while (i < len)
 	{
-		action(env, datas[i]);
+		if (!action(env, datas[i]))
+			return (0);
 		i++;
 	}
 	return (1);
