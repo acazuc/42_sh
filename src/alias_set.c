@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alias_remove.c                                     :+:      :+:    :+:   */
+/*   alias_set.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/24 17:53:56 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 16:04:05 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/22 16:13:53 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/22 16:21:44 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		alias_remove(t_env *env, char *alias)
+void	alias_set(t_env *env, char *alias, char *cmd)
 {
-	t_alias_list	*prv;
 	t_alias_list	*lst;
 
 	lst = env->aliases;
-	prv = NULL;
 	while (lst)
 	{
 		if (!ft_strcmp(lst->alias->alias, alias))
 		{
-			if (!prv)
-				env->aliases = lst->next;
-			else
-				prv->next = lst->next;
-			alias_free(lst);
-			return (1);
+			lst->alias->cmd = cmd;
+			return ;
 		}
-		prv = lst;
 		lst = lst->next;
 	}
-	return (0);
+	alias_create(env, alias, cmd);
 }

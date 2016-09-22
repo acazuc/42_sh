@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/22 15:24:00 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/22 16:21:56 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,8 @@ SRCS_NAME = main.c \
 			alias_create.c \
 			alias_remove.c \
 			alias_free.c \
+			alias_set.c \
+			alias_exists.c \
 			command_split_push.c \
 			command_split_clear.c \
 			command_split_semicolon.c \

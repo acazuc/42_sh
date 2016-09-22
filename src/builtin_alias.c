@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 18:03:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 14:20:01 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:22:04 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		action(t_env *env, char *value)
 		return (action_undo(equals, tmp, "cash: alias: invalid alias key"));
 	if (!equals[1])
 		return (action_undo(equals, tmp, "cash: alias: invalis alias value"));
-	alias_create(env, key, val);
+	alias_set(env, key, val);
 	equals[0] = tmp;
 	return (1);
 }
@@ -71,6 +71,7 @@ static void		print_aliases(t_env *env)
 		ft_putstr("\"=\"");
 		print_alias_escaped(lst->alias->cmd);
 		ft_putstr("\"\n");
+		lst = lst->next;
 	}
 }
 
