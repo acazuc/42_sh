@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 12:23:53 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 14:23:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,31 @@ static void		command_run_relative(t_env *env, char **args)
 	print_error(args);
 }
 
-void			command_run(t_env *env, char **args)
+static void		do_run(t_env *env, char **args)
 {
 	pid_t		pid;
 	int			status;
 
+	pid = fork();
+	if (pid == -1)
+		ERROR("Failed to fork");
+	else if (pid != 0)
+		env->child_pid = pid;
+	else
+	{
+		if (ft_strchr(args[0], '/'))
+			command_run_relative(env, args);
+		else
+			command_run_path(env, args);
+		exit(0);
+	}
+	wait(&status);
+	env->child_pid = 0;
+	signal_handler(status);
+}
+
+void			command_run(t_env *env, char **args)
+{
 	if (args[0])
 	{
 		parse_command_vars(env, args);
@@ -64,22 +84,7 @@ void			command_run(t_env *env, char **args)
 		parse_command_unquote(args);
 		if (!builtins(env, args))
 		{
-			pid = fork();
-			if (pid == -1)
-				ERROR("Failed to fork");
-			else if (pid != 0)
-				env->child_pid = pid;
-			else
-			{
-				if (ft_strchr(args[0], '/'))
-					command_run_relative(env, args);
-				else
-					command_run_path(env, args);
-				exit(0);
-			}
-			wait(&status);
-			env->child_pid = 0;
-			signal_handler(status);
+			do_run(env, args);
 		}
 	}
 }

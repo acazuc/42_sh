@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 10:47:20 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 10:25:12 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 14:00:05 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				builtin_unsetenv(t_env *env, char **datas, int len)
 	if (len != 2)
 	{
 		ft_putendl_fd("cash: unsetenv: Invalid arguments", 2);
-		return (1);
+		return (-1);
 	}
 	i = 0;
 	while (env->ev[i])

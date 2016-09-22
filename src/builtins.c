@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:41:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 13:24:10 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 14:21:06 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ static int		get_len(char **datas)
 	while (datas[len])
 		len++;
 	return (len);
+}
+
+static int		builtins_0(t_env *env, char **datas, int len)
+{
+	if (!ft_strcmp(datas[0], "env"))
+		return (builtin_env(env, datas, len));
+	return (0);
 }
 
 int				builtins(t_env *env, char **datas)
@@ -47,7 +54,5 @@ int				builtins(t_env *env, char **datas)
 		return (builtin_getenv(env, datas, len));
 	else if (!ft_strcmp(datas[0], "unsetenv"))
 		return (builtin_unsetenv(env, datas, len));
-	else if (!ft_strcmp(datas[0], "env"))
-		return (builtin_env(env, datas, len));
-	return (0);
+	return (builtins_0(env, datas, len));
 }

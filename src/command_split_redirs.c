@@ -6,131 +6,95 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 15:56:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 10:21:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 14:55:52 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-static void		init(t_redir_manager *m)
+static void		init(t_redir_manager *m, size_t *i, int *has_redired
+		, char ***sub)
 {
-	int					i;
-	
-	i = 0;
-	while (i < 10)
+	int					j;
+
+	j = 0;
+	while (j < 10)
 	{
-		m->old_fd[i] = 0;
-		m->closed[i] = 0;
-		m->has_changed[i] = 0;
-		i++;
+		m->old_fd[j] = 0;
+		m->closed[j] = 0;
+		m->has_changed[j] = 0;
+		j++;
 	}
+	*i = 0;
+	*has_redired = 0;
+	if (!(*sub = malloc(sizeof(**sub))))
+		ERROR("Failed to malloc split sub");
+	(*sub)[0] = NULL;
 }
 
-static int		operate_redir_out(t_redir_manager *m, char **cmd, size_t *i)
+static int		command_split_test_out(t_redir_manager *m, char **cmd
+		, size_t *i, int *has_redired)
 {
-	int		append;
-	int		fd;
-	int		j;
-
-	append = 0;
-	fd = 1;
-	j = 0;
-	if (cmd[*i][j] != '>')
-		fd = cmd[*i][j++] - '0';
-	if (cmd[*i][j] == '>' && cmd[*i][j + 1] == '>')
-		append = 1;
-	j++;
-	if (cmd[*i][j] == '&' && cmd[*i][j + 1] == '-')
+	if (cmd[*i][0] == '>' || ((cmd[*i][0] == '&' || ft_isdigit(cmd[*i][0]))
+				&& cmd[*i][1] == '>'))
 	{
-		if (!redir_close(m, fd))
-			return (0);
-	}
-	else if (cmd[*i][j] == '&' && ft_isdigit(cmd[*i][j + 1]))
-	{
-		if (!redir_add(m, fd, cmd[*i][j + 1] - '0', 0))
-			return (0);
-	}
-	else
-	{
-		(*i)++;
-		if (fd == '&' - '0')
+		*has_redired = 1;
+		if (!(command_split_redirs_out(m, cmd, i)))
 		{
-			if (!redir_out_add_file(m, 1, append, cmd[*i])
-					|| !redir_out_add_file(m, 2, append, cmd[*i]))
-				return (0);
+			redir_reset(m);
+			return (0);
 		}
-		else if (!redir_out_add_file(m, fd, append, cmd[*i]))
-			return (0);
+		return (-1);
 	}
 	return (1);
 }
 
-static int		operate_redir_in(t_redir_manager *m, char **cmd, size_t *i)
+static int		command_split_test_in(t_redir_manager *m, char **cmd
+		, size_t *i, int *has_redired)
 {
-	int		fd;
-	int		j;
-
-	fd = 0;
-	j = 0;
-	if (cmd[*i][j] != '<')
-		fd = cmd[*i][j++] - '0';
-	j++;
-	if (cmd[*i][j] == '&' && cmd[*i][j + 1] == '-')
+	if (cmd[*i][0] == '<' || (ft_isdigit(cmd[*i][0]) && cmd[*i][1] == '<'))
 	{
-		if (!redir_close(m, fd))
+		*has_redired = 1;
+		if (!command_split_redirs_in(m, cmd, i))
+		{
+			redir_reset(m);
 			return (0);
+		}
+		return (-1);
 	}
-	else if (cmd[*i][j] == '&' && ft_isdigit(cmd[*i][j + 1]))
-	{
-		if (!redir_add(m, fd, cmd[*i][j + 1] - '0', 0))
-			return (0);
-	}
-	else if (!((*i)++) || !redir_in_add_file(m, fd, cmd[*i]))
-		return (0);
 	return (1);
 }
 
-int			command_split_redirs(t_env *env, char **cmd)
+static int		command_split_end(t_env *env, char **sub
+		, t_redir_manager *m)
+{
+	if (sub[0])
+		command_run(env, sub);
+	redir_reset(m);
+	return (1);
+}
+
+int				command_split_redirs(t_env *env, char **cmd)
 {
 	t_redir_manager		m;
 	size_t				i;
 	char				**sub;
 	int					has_redired;
+	int					ret;
 
-	init(&m);
-	i = 0;
-	has_redired = 0;
-	if (!(sub = malloc(sizeof(*sub))))
-		ERROR("Failed to malloc split sub");
-	sub[0] = NULL;
+	init(&m, &i, &has_redired, &sub);
 	while (cmd[i])
 	{
-		if (cmd[i][0] == '>' || ((cmd[i][0] == '&' || ft_isdigit(cmd[i][0])) && cmd[i][1] == '>'))
-		{
-			has_redired = 1;
-			if (!(operate_redir_out(&m, cmd, &i)))
-			{
-				redir_reset(&m);
-				return (0);
-			}
-		}
-		else if (cmd[i][0] == '<' || (ft_isdigit(cmd[i][0]) && cmd[i][1] == '<'))
-		{
-			has_redired = 1;
-			if (!operate_redir_in(&m, cmd, &i))
-			{
-				redir_reset(&m);
-				return (0);
-			}
-		}
-		else if (has_redired)
+		if (!(ret = command_split_test_out(&m, cmd, &i, &has_redired)))
+			return (0);
+		else if (ret != -1 && !(ret = command_split_test_in(&m, cmd, &i
+						, &has_redired)))
+			return (0);
+		else if (ret != -1 && has_redired)
 			command_run(env, sub);
-		else
+		else if (ret != -1)
 			command_split_push(&sub, cmd[i]);
 		i++;
 	}
-	if (sub[0])
-		command_run(env, sub);
-	redir_reset(&m);
-	return (1);
+	return (command_split_end(env, sub, &m));
 }

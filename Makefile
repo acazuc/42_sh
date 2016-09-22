@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/22 13:23:42 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/22 14:28:04 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,8 @@ SRCS_NAME = main.c \
 			command_split_semicolon.c \
 			command_split_pipe.c \
 			command_split_redirs.c \
+			command_split_redirs_in.c \
+			command_split_redirs_out.c \
 			parse_command_split.c \
 			parse_command_split_push_redir.c \
 			parse_command_push_param.c \
