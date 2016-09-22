@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 13:58:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 15:42:02 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 15:59:23 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ static int		init(char **line, char **buff)
 	(*buff)[0] = '\0';
 	(*buff)[1] = '\0';
 	return (1);
+}
+
+static char		*do_return(ssize_t rd, char *line)
+{
+	if (rd == -1)
+	{
+		free(line);
+		return (NULL);
+	}
+	else if (rd == 0 && !(line = ft_strjoin_free1(line, "\n")))
+		return (NULL);
+	return (line);
 }
 
 char			*read_next_line(int fd, ssize_t *readed)
@@ -47,12 +59,5 @@ char			*read_next_line(int fd, ssize_t *readed)
 	}
 	*readed += rd;
 	free(buff);
-	if (rd == -1)
-	{
-		free(line);
-		return (NULL);
-	}
-	else if (rd == 0 && !(line = ft_strjoin_free1(line, "\n")))
-		return (NULL);
-	return (line);
+	return (do_return(rd, line));
 }
