@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 16:08:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 16:12:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 23:13:10 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		alias_exists(t_env *env, char *alias)
 	lst = env->aliases;
 	while (lst)
 	{
-		if (!ft_strcmp(lst->alias->alias, alias))
+		if (!ft_strcmp(lst->alias.alias, alias))
 			return (1);
 	}
 	return (0);

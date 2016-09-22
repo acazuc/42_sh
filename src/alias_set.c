@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 16:13:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 16:21:44 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 23:12:58 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	alias_set(t_env *env, char *alias, char *cmd)
 	lst = env->aliases;
 	while (lst)
 	{
-		if (!ft_strcmp(lst->alias->alias, alias))
+		if (!ft_strcmp(lst->alias.alias, alias))
 		{
-			lst->alias->cmd = cmd;
+			lst->alias.cmd = cmd;
 			return ;
 		}
 		lst = lst->next;
