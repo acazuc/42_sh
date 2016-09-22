@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:24:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/14 09:12:27 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:56:51 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ char	*get_username(t_env *env)
 {
 	char	*env_name;
 
-	env_name = get_env_value(env, "USER");
+	env_name = env_value_get(env, "USER");
 	if (!env_name)
-		return (ft_strdup("USER"));
+	{
+		if (!(env_name = ft_strnew(0)))
+			ERROR("strdup failed");
+		return (env_name);
+	}
 	return (env_name);
 }

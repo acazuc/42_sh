@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 08:33:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 13:59:41 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:40:57 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		builtin_getenv(t_env *env, char **datas, int len)
 		{
 			ft_putstr(datas[i]);
 			ft_putchar('=');
-			if (!(value = get_env_value(env, datas[i])))
+			if (!(value = env_value_get(env, datas[i])))
 				ft_putendl("");
 			else
 				ft_putendl(value);

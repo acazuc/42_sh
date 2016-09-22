@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:41:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 15:23:24 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:29:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int		builtins_0(t_env *env, char **datas, int len)
 		return (builtin_env(env, datas, len));
 	else if (!ft_strcmp(datas[0], "source"))
 		return (builtin_source(env, datas, len));
+	else if (!ft_strcmp(datas[0], "export"))
+		return (builtin_export(env, datas, len));
 	return (0);
 }
 

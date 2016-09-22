@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 10:04:51 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/23 11:43:44 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:56:47 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ char	*get_path(t_env *env)
 {
 	char	*path;
 
-	path = get_env_value(env, "PATH");
+	path = env_value_get(env, "PATH");
 	if (!path)
-		return (ft_strdup("PATH"));
+	{
+		if (!(path = ft_strnew(0)))
+			ERROR("strdup failed");
+		return (path);
+	}
 	return (path);
 }

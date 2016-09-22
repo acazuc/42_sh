@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 15:06:28 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:40:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ static int	changedir(t_env *env, char *dir)
 {
 	char	*pwd;
 
-	if (!dir && !(dir = get_env_value(env, "HOME")))
+	if (!dir && !(dir = env_value_get(env, "HOME")))
 		ERROR("Failed to get home dir");
 	else if (!ft_strcmp(dir, "-"))
 	{
-		if (!(dir = get_env_value(env, "OLDPWD")))
+		if (!(dir = env_value_get(env, "OLDPWD")))
 			ERROR("Failed to get oldpwd");
 	}
 	if (!chdir(dir))
 	{
-		if (!(pwd = get_env_value(env, "PWD")))
+		if (!(pwd = env_value_get(env, "PWD")))
 			ERROR("Failed to get current pwd");
-		set_env_value(env, "OLDPWD", pwd);
+		env_value_set(env, "OLDPWD", pwd);
 		free(pwd);
 		if (!(pwd = get_working_directory()))
 			ERROR("Failed to get current pwd");
-		set_env_value(env, "PWD", pwd);
+		env_value_set(env, "PWD", pwd);
 		free(pwd);
 		return (1);
 	}

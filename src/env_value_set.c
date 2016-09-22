@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_env_value.c                                    :+:      :+:    :+:   */
+/*   env_value_set.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/14 09:22:37 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/03 11:33:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:57:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void		push_new_entry(t_env *env, char *name, char *value)
 	env->ev = new_tab;
 }
 
-void			set_env_value(t_env *env, char *key, char *value)
+void			env_value_set(t_env *env, char *key, char *value)
 {
 	int		i;
 

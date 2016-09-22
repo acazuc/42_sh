@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 16:26:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 12:51:45 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:57:04 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ static char		*get_sub_2(t_env *env, char *arg, size_t i, size_t end)
 
 	if (!(var = ft_strsub(arg, i, end - i + 1)))
 		ERROR("Failed to get var type");
-	if (!(sub2 = get_env_value(env, var)))
-		sub2 = ft_strnew(0);
+	if (!(sub2 = env_value_get(env, var)))
+		if (!(sub2 = ft_strnew(0)))
+			ERROR("strnew failed");
 	free(var);
 	return (parse_command_unescape(sub2));
 }

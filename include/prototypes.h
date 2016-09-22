@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 16:13:48 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:40:13 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		builtin_unsetenv(t_env *env, char **datas, int len);
 int		builtin_unalias(t_env *env, char **datas, int len);
 int		builtin_env(t_env *env, char **datas, int len);
 int		builtin_source(t_env *env, char **datas, int len);
+int		builtin_export(t_env *env, char **datas, int len);
 void	print_line(t_env *env);
 char	*get_username(t_env *env);
 char	*get_working_directory(void);
@@ -38,8 +39,10 @@ void	sigint_handler(int signal);
 void	command_run(t_env *env, char **args);
 char	*get_home_directory(t_env *env);
 char	*get_path(t_env *env);
-char	*get_env_value(t_env *env, char *key);
-void	set_env_value(t_env *env, char *key, char *value);
+void	env_value_set(t_env *env, char *key, char *value);
+void	env_value_remove(t_env *env, char *key);
+int		env_value_exists(t_env *env, char *key);
+char	*env_value_get(t_env *env, char *key);
 char	*replace_tilde_home(t_env *env, char *str);
 char	*get_host_name(void);
 void	exec_command(t_env *env, char **args);

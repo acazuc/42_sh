@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/22 16:21:56 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/22 16:55:40 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS_NAME = main.c \
 			builtin_unalias.c \
 			builtin_env.c \
 			builtin_source.c \
+			builtin_export.c \
 			print_line.c \
 			get_working_directory.c \
 			get_username.c \
@@ -42,10 +43,12 @@ SRCS_NAME = main.c \
 			command_run.c \
 			get_home_directory.c \
 			get_path.c \
-			get_env_value.c \
 			get_host_name.c \
 			command_run_piped.c \
-			set_env_value.c \
+			env_value_set.c \
+			env_value_remove.c \
+			env_value_exists.c \
+			env_value_get.c \
 			get_next_cmd.c \
 			get_next_cmd_missing.c \
 			read_next_line.c \

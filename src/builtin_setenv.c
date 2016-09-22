@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 12:20:30 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 13:59:48 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 16:41:15 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ int				builtin_setenv(t_env *env, char **datas, int len)
 		ft_putendl_fd("cash: setenv: Invalid arguments", 2);
 		return (-1);
 	}
-	set_env_value(env, datas[1], datas[2]);
+	env_value_set(env, datas[1], datas[2]);
 	return (1);
 }

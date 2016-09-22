@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_home_directory.c                               :+:      :+:    :+:   */
+/*   env_value_exists.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 17:24:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 16:56:36 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/22 16:37:30 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/22 16:38:48 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-char	*get_home_directory(t_env *env)
+int		env_value_exists(t_env *env, char *key)
 {
-	char	*home;
+	int		i;
 
-	home = env_value_get(env, "HOME");
-	if (!home)
+	i = 0;
+	while (env->ev[i])
 	{
-		if (!(home = ft_strnew(0)))
-			ERROR("strdup failed");
-		return (home);
+		if (ft_strstr(env->ev[i], key) == env->ev[i]
+				&& env->ev[i][ft_strlen(key)] == '=')
+			return (1);
 	}
-	return (home);
+	return (0);
 }
