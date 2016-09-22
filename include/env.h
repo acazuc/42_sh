@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 08:34:57 by acazuc            #+#    #+#             */
-/*   Updated: 2016/05/21 17:24:15 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 14:57:23 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_env
 	t_cmd_hist		*cmd_hist;
 	pid_t			child_pid;
 	char			**ev;
+	char			*cwd;
 	int				pipe_1[2];
 	int				pipe_2[2];
 	int				which_pipe;

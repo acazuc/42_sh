@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/22 14:28:04 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/22 15:11:27 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cash
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -Ofast
+CFLAGS = -Wall -Wextra -Werror -Ofast -g
 
 INCLUDES_PATH = include/
 
@@ -36,6 +36,7 @@ SRCS_NAME = main.c \
 			print_line.c \
 			get_working_directory.c \
 			get_username.c \
+			get_home_with_tilde.c \
 			sigint_handler.c \
 			command_run.c \
 			get_home_directory.c \

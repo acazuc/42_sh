@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:41:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 14:21:06 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 15:06:20 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int				builtins(t_env *env, char **datas)
 	if (len == 0)
 		return (0);
 	if (!ft_strcmp(datas[0], "exit"))
-		exit(1);
+		exit(EXIT_SUCCESS);
 	else if (!ft_strcmp(datas[0], "about"))
 		return (builtin_about(env, datas, len));
 	else if (!ft_strcmp(datas[0], "cd"))

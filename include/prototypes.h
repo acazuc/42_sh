@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 14:28:26 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 15:00:39 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		builtin_env(t_env *env, char **datas, int len);
 void	print_line(t_env *env);
 char	*get_username(t_env *env);
 char	*get_working_directory(void);
+char	*get_home_with_tilde(t_env *env, char *cwd);
 void	sigint_handler(int signal);
 void	command_run(t_env *env, char **args);
 char	*get_home_directory(t_env *env);

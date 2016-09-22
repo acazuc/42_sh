@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/08/03 21:42:52 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 15:01:00 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,18 @@ int			main(int ac, char **av, char **ev)
 {
 	t_env		env;
 
+	ft_bzero(&env, sizeof(env));
 	g_env = &env;
 	env.ev = dup_ev(ev);
-	env.child_pid = 0;
-	env.cmd_hist = NULL;
-	env.aliases = NULL;
-	env.hist_pos = 0;
 	if (pipe(env.pipe_1) == -1)
 		ERROR("Failed to pipe");
 	if (pipe(env.pipe_2) == -1)
 		ERROR("Failed to pipe");
 	//signal(SIGINT, &sigint_handler);
+	if (!(env.cwd = get_working_directory()))
+		ERROR("Failed to get current working directory");
+	if (!(env.cwd = get_home_with_tilde(&env, env.cwd)))
+		ERROR("Failed to get current working directory with tilde");
 	while (42)
 		loop(&env);
 	(void)ac;
