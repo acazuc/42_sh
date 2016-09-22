@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:16:10 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 14:49:05 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 22:40:16 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char			get_next_cmd_missing(char *str)
 {
 	t_line_parser	p;
 	size_t			i;
+	char			c;
 
 	parser_init(&p);
 	i = 0;
@@ -96,6 +97,12 @@ char			get_next_cmd_missing(char *str)
 	}
 	simplify(&p);
 	if (!p.result[0])
+	{
+		free(p.result);
 		return ('\0');
-	return (p.result[ft_strlen(p.result) - 1]);
+	}
+	
+	c = p.result[ft_strlen(p.result) - 1];
+	free(p.result);
+	return (c);
 }

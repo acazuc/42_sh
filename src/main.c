@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 15:48:19 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 22:56:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	loop(t_env *env)
 	if ((line = get_next_cmd()))
 	{
 		command_execute(env, line);
+		free(line);
 	}
 }
 
@@ -63,9 +64,7 @@ static void	check_cashrc(t_env *env)
 		return ;
 	}
 	free(str);
-	if (!(str = ft_strdup("source ~/.cashrc")))
-		return ;
-	command_execute(env, str);
+	command_execute(env, "source ~/.cashrc");
 }
 
 int			main(int ac, char **av, char **ev)
