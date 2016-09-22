@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 15:15:52 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 15:40:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		builtin_getenv(t_env *env, char **datas, int len);
 int		builtin_unsetenv(t_env *env, char **datas, int len);
 int		builtin_unalias(t_env *env, char **datas, int len);
 int		builtin_env(t_env *env, char **datas, int len);
+int		builtin_source(t_env *env, char **datas, int len);
 void	print_line(t_env *env);
 char	*get_username(t_env *env);
 char	*get_working_directory(void);
@@ -55,7 +56,7 @@ void	parse_command_quotes(t_parser *parser, int i);
 char	**parse_command_split(char *cmd);
 char	*parse_command_unescape(char *var);
 void	parse_command_split_push_redir(t_parser *p);
-char	*read_next_line(int fd);
+char	*read_next_line(int fd, ssize_t *readed);
 char	*get_next_cmd(void);
 char	get_next_cmd_missing(char *str);
 void	cmd_hist_add(t_env *env, char *cmd);
@@ -78,5 +79,6 @@ int		redir_close(t_redir_manager *m, int fd);
 int		redir_in_add_file(t_redir_manager *m, int fd, char *file);
 int		redir_out_add_file(t_redir_manager *m, int fd, int append, char *file);
 void	redir_reset(t_redir_manager *m);
+void	command_execute(t_env *env, char *line);
 
 #endif

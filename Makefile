@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/22 15:11:27 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/22 15:24:00 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS_NAME = main.c \
 			builtin_unsetenv.c \
 			builtin_unalias.c \
 			builtin_env.c \
+			builtin_source.c \
 			print_line.c \
 			get_working_directory.c \
 			get_username.c \
@@ -74,6 +75,7 @@ SRCS_NAME = main.c \
 			command_check_pipes.c \
 			command_check_redirs.c \
 			redirs_functions.c \
+			command_execute.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
