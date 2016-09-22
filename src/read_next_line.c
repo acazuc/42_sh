@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 13:58:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/07 14:23:47 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 15:15:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		init(char **line, char **buff)
 	return (1);
 }
 
-char			*read_next_line(void)
+char			*read_next_line(int fd)
 {
 	char	*line;
 	char	*buff;
@@ -35,7 +35,7 @@ char			*read_next_line(void)
 
 	if (!init(&line, &buff))
 		return (NULL);
-	while ((rd = read(1, buff, 1)) > 0 && buff[0] != '\n')
+	while ((rd = read(fd, buff, 1)) > 0 && buff[0] != '\n')
 	{
 		if (!(line = ft_strjoin_free1(line, buff)))
 		{

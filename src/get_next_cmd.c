@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 13:58:22 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 14:57:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/22 15:16:01 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char			*get_next_cmd(void)
 	init(&next_line, &missing);
 	while (missing)
 	{
-		if (!(tmp = read_next_line()))
+		if (!(tmp = read_next_line(1)))
 			ERROR("Failed to read line");
 		if (!(next_line = ft_strjoin_free3(next_line, tmp)))
 			ERROR("Failed to join lines");
