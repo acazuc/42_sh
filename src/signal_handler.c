@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:23:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 15:58:15 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 18:33:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void			signal_handler(int status, char *cmd)
 
 	if (WIFSIGNALED(status))
 	{
-		ft_putstr_fd("cash: ", 2);
 		signal = WTERMSIG(status);
+		ft_putstr_fd("cash: ", 2);
 		if (signal == SIGHUP)
 			ft_putstr_fd("terminal line hangup", 2);
 		else if (signal == SIGQUIT)

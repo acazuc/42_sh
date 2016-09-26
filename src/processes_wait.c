@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 15:32:56 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 15:54:34 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 18:34:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void	processes_wait(t_env *env)
 	while (env->processes)
 	{
 		waitpid(env->processes->process.pid, &status, 0);
-		signal_handler(status, env->processes->process.cmd);
+		if (!env->sigint)
+			signal_handler(status, env->processes->process.cmd);
 		free(env->processes->process.cmd);
 		lst = env->processes;
 		env->processes = lst->next;
 		free(lst);
 	}
+	env->sigint = 0;
 }

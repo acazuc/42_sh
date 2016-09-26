@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:22:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 22:56:14 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 18:20:07 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int			main(int ac, char **av, char **ev)
 		ERROR("Failed to pipe");
 	if (pipe(env.pipe_2) == -1)
 		ERROR("Failed to pipe");
-	//signal(SIGINT, &sigint_handler);
+	signal(SIGINT, &sigint_handler);
 	if (!(env.cwd = get_working_directory()))
 		ERROR("Failed to get current working directory");
 	if (!(env.cwd = get_home_with_tilde(&env, env.cwd)))

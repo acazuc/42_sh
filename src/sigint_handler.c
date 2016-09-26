@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:39:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 15:56:45 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 18:35:10 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@ t_env	*g_env;
 
 void	sigint_handler(int signal)
 {
-	/*if (g_env->child_pid)
-	{
-		kill(g_env->child_pid, SIGKILL);
-		ft_putchar('\n');
-		g_env->child_pid = 0;
-	}
-	else
+	t_process_list	*lst;
+
+	lst = g_env->processes;
+	if (!lst)
 	{
 		ft_putchar('\n');
 		print_line(g_env);
-	}*/
+		return ;
+	}
+	g_env->sigint = 1;
+	while (lst)
+	{
+		kill(lst->process.pid, SIGKILL);
+		ft_putchar('\n');
+		lst = lst->next;
+	}
 	(void)signal;
 }

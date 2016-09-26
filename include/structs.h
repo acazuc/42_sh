@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 15:28:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 16:38:16 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 18:34:59 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ struct							s_env
 	int							pipe_2[2];
 	int							which_pipe;
 	int							hist_pos;
+	int							sigint;
 };
 
 struct							s_alias
