@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/26 17:13:56 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/26 17:38:44 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS_NAME = main.c \
 			builtin_env.c \
 			builtin_source.c \
 			builtin_export.c \
+			builtin_exit.c \
 			print_line.c \
 			get_working_directory.c \
 			get_username.c \

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 16:33:29 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 17:32:06 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 17:59:50 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ static void		push_alias(char ***cmd, int i, char **rep)
 	{
 		if (c == i)
 		{
-			free((*cmd)[i]);
+			free((*cmd)[c]);
 			push_rep(new, &c, rep, rep_len);
 			continue;
 		}
 		new[c++] = (*cmd)[k++];
 	}
-	new[c] = NULL;
 	free(*cmd);
 	*cmd = new;
 }
@@ -87,14 +86,18 @@ void			command_replace_alias(t_env *env, char ***cmd)
 	int		replaced;
 	int		i;
 
-	i = 0;
 	replaced = 1;
 	while (replaced)
 	{
 		replaced = 0;
+		i = 0;
 		while ((*cmd)[i])
 		{
-			if (i == 0 || !ft_strcmp((*cmd)[i], "|") || !ft_strcmp((*cmd)[i], ";"))
+			if ((i == 0 || !ft_strcmp((*cmd)[i], "|")
+						|| !ft_strcmp((*cmd)[i], ";"))
+					&& ft_strcmp((*cmd)[i], "|") && ft_strcmp((*cmd)[i], ";")
+					&& ft_strcmp((*cmd)[i], ">") && ft_strcmp((*cmd)[i], "<")
+					&& ft_strcmp((*cmd)[i], "'") && ft_strcmp((*cmd)[i], "\""))
 			{
 				replaced |= replace_alias(env, cmd, i);
 			}
