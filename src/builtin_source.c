@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:24:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 15:49:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 18:03:12 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ int			builtin_source(t_env *env, char **datas, int len)
 	}
 	if ((fd = open(datas[1], O_RDONLY)) == -1)
 	{
-		if (errno == ENOENT)
-			return (return_error("no such file or directory", datas[1]));
-		else if (errno == EACCES)
-			return (return_error("you don't have permissions", datas[1]));
+		return (return_error("can't open", datas[1]));
 	}
 	while ((line = read_next_line(fd, &readed)) && readed > 0)
 	{

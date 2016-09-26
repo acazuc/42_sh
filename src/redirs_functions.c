@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 09:10:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 17:00:08 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 18:03:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,7 @@ int		redir_out_add_file(t_redir_manager *m, int fd, int append, char *file)
 		flags |= O_TRUNC;
 	if ((file_fd = open(file, flags, 0644)) == -1)
 	{
-		if (errno == EACCES)
-			ft_putstr_fd("cash: you don't have permissions: ", 2);
-		else if (errno == EISDIR)
-			ft_putstr_fd("cash: is a directory: ", 2);
-		else
-			ft_putstr_fd("cash: can't open: ", 2);
+		ft_putstr_fd("cash: can't open: ", 2);
 		ft_putendl_fd(file, 2);
 		return (0);
 	}
