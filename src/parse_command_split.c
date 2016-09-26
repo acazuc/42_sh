@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 10:47:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 13:16:26 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 19:02:10 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		push_simple(t_parser *p)
 static void		add_next_arg(t_parser *p)
 {
 	while (p->cmd[p->i] && (p->in_squote || p->in_dquote
-				|| ((p->cmd[p->i] != ' ' && p->cmd[p->i] != '\t')
+				|| ((!ft_isspace(p->cmd[p->i]))
 					|| (get_bs_nb_before(p->cmd, p->i) % 2))))
 	{
 		check_quotes(p);
@@ -74,7 +74,7 @@ char			**parse_command_split(char *cmd)
 	init(&p, cmd);
 	while (p.cmd[p.i])
 	{
-		if (p.cmd[p.i] == ' ')
+		if (ft_isspace(p.cmd[p.i]))
 			p.i++;
 		if (!cmd[p.i])
 			return (p.result);

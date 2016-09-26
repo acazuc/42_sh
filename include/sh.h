@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:26:34 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 15:29:28 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 19:01:32 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <fcntl.h>
 # include <errno.h>
 
-# include "../libft/includes/libft.h"
+# include "../libft/include/libft.h"
 # include "structs.h"
 # include "prototypes.h"
 

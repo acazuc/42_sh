@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 15:24:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 18:03:12 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 18:38:50 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int			builtin_source(t_env *env, char **datas, int len)
 	while ((line = read_next_line(fd, &readed)) && readed > 0)
 	{
 		command_execute(env, line);
+		free(line);
 	}
 	close(fd);
 	return (1);

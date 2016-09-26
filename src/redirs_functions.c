@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 09:10:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 18:03:38 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 19:45:33 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int		redir_add(t_redir_manager *m, int fd_in, int fd_out, int from_file)
 {
 	if (!m->has_changed[fd_in])
 	{
-		if (dup2(fd_in, m->old_fd[fd_in]) == -1)
+		if ((m->old_fd[fd_in] = dup(fd_in)) == -1)
 			return (0);
 		m->has_changed[fd_in] = 1;
 	}
 	if (!from_file && !m->has_changed[fd_out])
 	{
-		if (dup2(fd_out, m->old_fd[fd_out]) == -1)
+		if ((m->old_fd[fd_out] = dup(fd_out)) == -1)
 			return (0);
 		m->has_changed[fd_out] = 1;
 	}
@@ -39,7 +39,7 @@ int		redir_close(t_redir_manager *m, int fd)
 	{
 		if (!m->has_changed[fd])
 		{
-			if (dup2(fd, m->old_fd[fd]) == -1)
+			if ((m->old_fd[fd] = dup(fd)) == -1)
 				return (0);
 			m->has_changed[fd] = 1;
 		}

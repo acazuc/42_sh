@@ -13,7 +13,7 @@
      INPUT
 ===============
 
-<[fd]				Redirection fd to 0
+< [file]			Redirect file to 0
 --------
 [fd1]<&[fd2]		Redirect fd2 into fd1
 --------

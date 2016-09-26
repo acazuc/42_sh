@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 14:28:37 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 14:35:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 19:51:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				command_split_redirs_out(t_redir_manager *m, char **cmd
 		fd = cmd[*i][j++] - '0';
 	if (cmd[*i][j] == '>' && cmd[*i][j + 1] == '>')
 		append = 1;
-	j++;
+	j += append ? 2 : 1;
 	if (cmd[*i][j] == '&' && cmd[*i][j + 1] == '-')
 	{
 		if (!redir_close(m, fd))
