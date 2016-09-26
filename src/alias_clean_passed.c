@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alias_free.c                                       :+:      :+:    :+:   */
+/*   alias_clean_passed.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/24 17:55:57 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 16:38:49 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/26 17:13:13 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/26 17:13:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	alias_free(t_alias_list *alias)
+void		alias_clean_passed(t_env *env)
 {
-	int		i;
+	t_alias_list	*lst;
 
-	i = 0;
-	while (alias->alias.cmd[i])
+	lst = env->aliases;
+	while (lst)
 	{
-		free(alias->alias.cmd[i]);
-		++i;
+		lst->alias.passed = 0;
+		lst = lst->next;
 	}
-	free(alias->alias.alias);
-	free(alias->alias.cmd);
-	free(alias);
 }

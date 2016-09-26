@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/26 15:28:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 15:42:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 16:38:16 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ struct							s_env
 struct							s_alias
 {
 	char						*alias;
-	char						*cmd;
+	char						**cmd;
+	int							passed;
 };
 
 struct							s_alias_list

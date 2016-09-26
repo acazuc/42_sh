@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 16:13:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 23:12:58 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 16:38:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	alias_set(t_env *env, char *alias, char *cmd)
 	{
 		if (!ft_strcmp(lst->alias.alias, alias))
 		{
-			lst->alias.cmd = cmd;
+			cmd = ft_strtrim_free(cmd);
+			cmd = parse_command_short(cmd);
+			lst->alias.cmd = parse_command_split(cmd);
 			return ;
 		}
 		lst = lst->next;

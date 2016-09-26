@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/26 15:55:11 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/26 17:13:56 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS_NAME = main.c \
 			alias_free.c \
 			alias_set.c \
 			alias_exists.c \
+			alias_clean_passed.c \
 			command_split_push.c \
 			command_split_clear.c \
 			command_split_semicolon.c \
@@ -83,6 +84,7 @@ SRCS_NAME = main.c \
 			command_execute.c \
 			processes_wait.c \
 			env_push_process.c \
+			command_replace_alias.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

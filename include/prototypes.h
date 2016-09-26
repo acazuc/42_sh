@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 15:54:53 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 17:17:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		alias_remove(t_env *env, char *alias);
 void	alias_free(t_alias_list *alias);
 int		alias_exists(t_env *env, char *alias);
 void	alias_set(t_env *env, char *alias, char *cmd);
+void	alias_clean_passed(t_env *env);
 void	command_split_push(char ***sub, char *add);
 void	command_split_clear(char ***sub);
 void	command_split_semicolon(t_env *env, char **cmd);
@@ -83,5 +84,6 @@ void	redir_reset(t_redir_manager *m);
 void	command_execute(t_env *env, char *line);
 void	processes_wait(t_env *env);
 void	env_push_process(t_env *env, pid_t pid, char **cmd);
+void	command_replace_alias(t_env *env, char ***cmd);
 
 #endif

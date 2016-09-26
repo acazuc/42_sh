@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 18:03:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 23:11:48 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 17:20:05 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void		print_alias_escaped(char *str)
 static void		print_aliases(t_env *env)
 {
 	t_alias_list	*lst;
+	int				i;
 
 	lst = env->aliases;
 	while (lst)
@@ -69,7 +70,14 @@ static void		print_aliases(t_env *env)
 		ft_putchar('"');
 		print_alias_escaped(lst->alias.alias);
 		ft_putstr("\"=\"");
-		print_alias_escaped(lst->alias.cmd);
+		i = 0;
+		while (lst->alias.cmd[i])
+		{
+			print_alias_escaped(lst->alias.cmd[i]);
+			if (lst->alias.cmd[i + 1])
+				ft_putchar(' ');
+			++i;
+		}
 		ft_putstr("\"\n");
 		lst = lst->next;
 	}
