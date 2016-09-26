@@ -6,19 +6,15 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:20:01 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 16:40:13 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 15:54:53 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROTOTYPES_H
 # define PROTOTYPES_H
 
-# include "alias_list.h"
-# include "parser.h"
-# include "env.h"
-
 void	error_quit(char *message, char *file, int line);
-void	signal_handler(int status);
+void	signal_handler(int status, char *cmd);
 int		builtins(t_env *env, char **datas);
 int		builtin_cd(t_env *env, char **datas, int len);
 int		builtin_echo(t_env *env, char **datas, int len);
@@ -85,5 +81,7 @@ int		redir_in_add_file(t_redir_manager *m, int fd, char *file);
 int		redir_out_add_file(t_redir_manager *m, int fd, int append, char *file);
 void	redir_reset(t_redir_manager *m);
 void	command_execute(t_env *env, char *line);
+void	processes_wait(t_env *env);
+void	env_push_process(t_env *env, pid_t pid, char **cmd);
 
 #endif

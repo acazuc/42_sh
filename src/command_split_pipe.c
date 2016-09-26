@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 14:47:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 14:22:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 15:33:31 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			command_split_pipe(t_env *env, char **cmd)
 	sub[0] = NULL;
 	while (cmd[i])
 	{
-		if (!(ft_strcmp(cmd[i], "|")))
+		if (!ft_strcmp(cmd[i], "|"))
 		{
 			command_run_piped(env, sub, was_pipe ? PIPE_IO : PIPE_O);
 			was_pipe = 1;
@@ -38,4 +38,5 @@ void			command_split_pipe(t_env *env, char **cmd)
 	command_run_piped(env, sub, was_pipe ? PIPE_I : PIPE_NO);
 	free(sub);
 	free(cmd);
+	processes_wait(env);
 }

@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/22 17:03:04 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/26 15:55:11 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,8 @@ SRCS_NAME = main.c \
 			command_check_redirs.c \
 			redirs_functions.c \
 			command_execute.c \
+			processes_wait.c \
+			env_push_process.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

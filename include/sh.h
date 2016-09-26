@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:26:34 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/16 11:12:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/26 15:29:28 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@
 # define PIPE_O 2
 # define PIPE_IO 3
 
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <signal.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <errno.h>
+
 # include "../libft/includes/libft.h"
-# include "cmd_hist.h"
-# include "redir_manager.h"
-# include "pipe_manager.h"
-# include "parser_bs.h"
-# include "line_parser.h"
+# include "structs.h"
 # include "prototypes.h"
-# include "includes.h"
-# include "parser.h"
-# include "env.h"
 
 # define ERROR(x) (error_quit(x, __FILE__, __LINE__))
 

@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_manager.h                                     :+:      :+:    :+:   */
+/*   processes_wait.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/06 09:48:02 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/06 09:59:24 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/26 15:32:56 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/26 15:54:34 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPE_MANAGER_H
-# define PIPE_MANAGER_H
+#include "sh.h"
 
-typedef struct		s_pipe_manager
+void	processes_wait(t_env *env)
 {
-	int				origin_stdin;
-	int				origin_stdout;
-	int				*pipe_in;
-	int				*pipe_out;
-	int				pipe_type;
-}					t_pipe_manager;
+	t_process_list	*lst;
+	int				status;
 
-#endif
+	while (env->processes)
+	{
+		waitpid(env->processes->process.pid, &status, 0);
+		signal_handler(status, env->processes->process.cmd);
+		free(env->processes->process.cmd);
+		lst = env->processes;
+		env->processes = lst->next;
+		free(lst);
+	}
+}
