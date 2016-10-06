@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:39:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 18:35:10 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/10/06 21:49:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	sigint_handler(int signal)
 	while (lst)
 	{
 		kill(lst->process.pid, SIGKILL);
-		ft_putchar('\n');
 		lst = lst->next;
 	}
+	ft_putchar('\n');
 	(void)signal;
 }

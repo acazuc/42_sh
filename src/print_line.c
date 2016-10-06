@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:16:12 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/22 15:10:22 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/10/06 21:44:24 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void				print_line(t_env *env)
 
 	host = get_host_name_before_point();
 	user = get_username(env);
-	ft_putstr("\033[1;37m[");
+	ft_putstr("\033[1;37m");
 	ft_putstr(user);
 	ft_putchar('@');
 	ft_putstr(host);
-	ft_putstr("] \033[1;31m");
+	ft_putstr(": \033[1;31m");
 	ft_putstr(env->cwd);
-	ft_putstr("\033[0;37m \033[1;37m»\033[0;37m ");
+	ft_putstr("\033[0;37m \033[1;37m$\033[0;0m ");
 	free(user);
 	free(host);
 }

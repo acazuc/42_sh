@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 15:54:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 18:03:24 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/10/06 21:55:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int			builtin_cd(t_env *env, char **datas, int len)
 	int		ret;
 
 	(void)len;
+	if (datas[1] && !ft_strcmp(datas[1], "."))
+		return (1);
 	ret = changedir(env, datas[1]);
 	if (ret == 1)
 	{
@@ -57,7 +59,7 @@ int			builtin_cd(t_env *env, char **datas, int len)
 		if (!(env->cwd = get_working_directory()))
 			ERROR("Failed to get current working directory");
 		if (!(env->cwd = get_home_with_tilde(env, env->cwd)))
-			ERROR("Failde to get current working directory with tilde");
+			ERROR("Failed to get current working directory with tilde");
 	}
 	return (ret);
 }
