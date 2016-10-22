@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 16:54:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/26 15:46:49 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/10/22 14:27:55 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,21 @@ static void		command_run_path(t_env *env, char **args)
 		if (!(paths = ft_strsplit(path, ':')))
 			ERROR("Failed to malloc path");
 		i = 0;
+		free(path);
 		while (paths[i])
 		{
 			tmp_command = ft_strjoin_free1(ft_strjoin_free1(paths[i], "/")
 					, args[0]);
 			if (!access(tmp_command, X_OK))
+			{
+				free(paths);
 				execve(tmp_command, args, env->ev);
+				return;
+			}
+			free(tmp_command);
 			i++;
 		}
+		free(paths);
 	}
 	print_error(args);
 }
@@ -83,4 +90,12 @@ void			command_run(t_env *env, char **args)
 			do_run(env, args);
 		}
 	}
+	char **tmp = args;
+	int i = 0;
+	while (tmp[i])
+	{
+		free(tmp[i]);
+		++i;
+	}
+	free(tmp);
 }
